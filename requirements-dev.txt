@@ -3,3 +3,4 @@ gradio>=6.17
 pytest>=8
 numpy
 Pillow
+json-repair

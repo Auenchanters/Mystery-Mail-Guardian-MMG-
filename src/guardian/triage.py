@@ -131,7 +131,14 @@ def parse_model_json(raw: str) -> dict | None:
         try:
             data = json.loads(repaired)
         except json.JSONDecodeError:
-            return None
+            # Last resort: json_repair fixes the long tail of LLM JSON slips
+            # (stray punctuation between fields, missing commas, etc.).
+            try:
+                from json_repair import repair_json
+
+                data = json.loads(repair_json(block))
+            except Exception:
+                return None
     return data if isinstance(data, dict) else None
 
 

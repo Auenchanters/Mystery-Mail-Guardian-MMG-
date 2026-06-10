@@ -54,6 +54,17 @@ class TestParseModelJson:
         data = triage.parse_model_json(raw)
         assert data is not None and "don't" in data["sender"]
 
+    def test_stray_period_between_fields_repaired(self):
+        # Regression: live model emitted '"...threats".' then the next key —
+        # a stray period instead of a comma. json_repair handles this tail.
+        raw = ('{"is_document": true, "explanation": {'
+               '"what_this_is": "a tax notice. be careful".\n'
+               '"key_facts": ["amount is $500"]}}')
+        data = triage.parse_model_json(raw)
+        assert data is not None
+        ex = triage.validate_extraction(data)
+        assert "$500" in ex.key_facts[0]
+
     def test_truncated_mid_string_salvaged(self):
         # Regression: generation cut off mid-explanation -> unterminated JSON.
         raw = '{"is_document": true, "amount": "$500", "explanation": "Be careful abo'

@@ -12,6 +12,7 @@ voxcpm
 soundfile
 numpy
 Pillow
+json-repair
 
 # Optional — FULL config only (GUARDIAN_CONFIG=full, Llama Champion badge):
 # llama-cpp-python  # MiniCPM4.1-8B GGUF via llama.cpp; CPU-side on ZeroGPU
