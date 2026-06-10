@@ -30,11 +30,18 @@ _Last updated: 2026-06-10_
 - Headroom still blocked on Windows (no wheel; needs global Rust) — unchanged.
 
 ## Next steps (human, per PROJECT.md §9)
-1. Create HF Space (ZeroGPU, Gradio SDK) under the hackathon org; push this repo.
-2. Run the three `checks/` scripts on the Space; decide lean vs full from output quality.
+1. ~~Create HF Space~~ DONE — deployed to build-small-hackathon/Mystery_Mail_Guardian
+   (ZeroGPU zero-a10g); GitHub repo Auenchanters/Mystery-Mail-Guardian-MMG- synced.
+   Remotes configured: `space` (HF) and `origin` (GitHub); push auth via cached HF
+   token / Windows credential manager. NOTE: Space has Dev Mode ON — pushes may not
+   redeploy; use factory restart (see BUILD_LOG) or turn Dev Mode off.
+2. `modal token new` (browser login, one time), then
+   `.venv\Scripts\modal.exe run modal_validate.py` → GPU validation report +
+   Hindi/English WAVs in modal_artifacts/ (uses the $250 Modal credits).
 3. Real-person testing, consent, demo video, social post; fill the three
-   `<!-- HUMAN -->` placeholders in README.md.
-4. Optional: publish BUILD_LOG.md as the Field Notes post.
+   `<!-- HUMAN -->` placeholders in README.md before June 15.
+4. Optional: publish BUILD_LOG.md as Field Notes; consider "Sharing is Caring" badge
+   (publish sanitized agent traces — review for secrets first).
 
 ## Commands used (key)
 - `uv pip install --python .venv\Scripts\python.exe -r requirements-dev.txt`

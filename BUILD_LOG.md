@@ -77,6 +77,25 @@ Hindi re-localizes the entire UI and the analysis. Found & fixed along the way: 
 moved `theme`/`css` from `Blocks()` to `launch()`; a duplicate-output bug in the
 language-change wiring.
 
+## 2026-06-10 (later) — Deployment + rules audit against the live event page
+
+- **Event-page deltas vs the original brief:** Off-Brand officially requires a custom
+  frontend via `gr.Server` (CSS theming alone doesn't count — we don't claim it);
+  there's a **Tiny Titan special award for ≤4B total params** (our 3.3B lean config
+  qualifies — another reason to ship lean); and a "Sharing is Caring" badge exists for
+  published agent traces.
+- **Deployed to the hackathon org Space** (build-small-hackathon/Mystery_Mail_Guardian,
+  ZeroGPU `zero-a10g`) and pushed the full repo to GitHub. Gotcha discovered: the Space
+  had **Dev Mode enabled**, so the container kept serving the old template after the
+  push — the repo sha updated but the running app didn't. Fixed with a factory restart
+  via the API (`POST .../restart?factory=true`).
+- **Modal credits put to honest use:** `modal_validate.py` runs the full pipeline
+  (synthetic normal bill + gift-card scam letter) and VoxCPM2 Hindi/English speech on a
+  Modal A10G — replacing "borrow a GPU box" for model validation. Build/test-time only;
+  the deployed runtime stays 100% local, so Off the Grid is intact. OpenAI Codex credits
+  deliberately unused: chasing that prize requires Codex-built commits and would dilute
+  the OpenBMB-central thesis (a trade the brief makes explicitly).
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go
