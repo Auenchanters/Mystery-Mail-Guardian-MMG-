@@ -24,5 +24,9 @@ if ($args.Count -ge 1 -and ($args[0] -eq 'install' -or $args[0] -eq 'init')) {
 }
 
 # Pin repo root and project-local data dir so the graph never leaks globally.
-& $exe @args --repo $root --data-dir (Join-Path $root '.crg')
+# PS 5.1 wraps native stderr (the tool's INFO lines) into NativeCommandError
+# records under ErrorActionPreference=Stop; relax around the native call and
+# merge streams so INFO output prints as plain text.
+$ErrorActionPreference = 'Continue'
+& $exe @args --repo $root --data-dir (Join-Path $root '.crg') 2>&1 | ForEach-Object { "$_" }
 exit $LASTEXITCODE
