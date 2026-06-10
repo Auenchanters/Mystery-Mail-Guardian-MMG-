@@ -1,0 +1,25 @@
+# Project-local tooling (do not commit)
+.venv/
+.crg/
+.tools/
+.headroom/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Env / secrets
+.env
+.env.*
+
+# Private research notes — keep out of the (eventually public) Space repo
+compass_artifact_*.md
+mystery-mail-guardian-BRIEF.md
+package-lock.json
+
+# Local preview config & generated audio from checks
+.claude/launch.json
+checks/*.wav
+
+# Local Claude Code settings
+.claude/

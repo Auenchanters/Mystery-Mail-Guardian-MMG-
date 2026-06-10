@@ -1,0 +1,17 @@
+# Mystery-Mail Guardian — Hugging Face Space (ZeroGPU) runtime dependencies.
+# Gradio itself is installed by the Space per sdk_version in README.md.
+# Off the Grid: none of these make network calls at inference time
+# (downloads happen once at build/startup from the HF Hub).
+
+spaces
+transformers[torch]>=5.7.0
+torchvision
+av
+accelerate
+voxcpm
+soundfile
+numpy
+Pillow
+
+# Optional — FULL config only (GUARDIAN_CONFIG=full, Llama Champion badge):
+# llama-cpp-python  # MiniCPM4.1-8B GGUF via llama.cpp; CPU-side on ZeroGPU

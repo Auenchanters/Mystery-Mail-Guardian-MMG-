@@ -1,0 +1,5 @@
+# Local development & tests (no model weights needed — tests run in mock mode).
+gradio>=6.17
+pytest>=8
+numpy
+Pillow
