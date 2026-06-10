@@ -21,7 +21,9 @@ _Last updated: 2026-06-10_
 - Project-local tooling (.venv, scripts/, code-review-graph) from previous session.
 
 ## In progress
-- Nothing mid-flight. Code complete pending GPU validation.
+- Nothing mid-flight. **Live Space verified end-to-end 2026-06-11**: scam letter
+  → warning card + reasons + safe steps + 19.7s VoxCPM2 speech, via
+  `checks/check_live_space.py` (PASS). Running build: commit 5256af1.
 
 ## Blocked
 - **GPU validation needs the Space (or any CUDA box):** run `checks/check_extract.py`

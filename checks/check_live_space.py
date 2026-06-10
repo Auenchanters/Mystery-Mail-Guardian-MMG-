@@ -12,6 +12,9 @@ import os
 import sys
 import tempfile
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")  # Windows consoles default to cp1252
+
 from gradio_client import Client, handle_file
 from PIL import Image, ImageDraw
 

@@ -96,6 +96,36 @@ language-change wiring.
   deliberately unused: chasing that prize requires Codex-built commits and would dilute
   the OpenBMB-central thesis (a trade the brief makes explicitly).
 
+## 2026-06-11 — Live-fire debugging: small models write creative JSON
+
+Ran the deployed Space against a synthetic gift-card scam letter via
+`checks/check_live_space.py` (real ZeroGPU inference). Three rounds of fixes,
+each found by reading the Space's own logs:
+
+1. **Invalid escape** — the model wrote `don\'t` inside a JSON string (`\'` is
+   not legal JSON). Fixed with targeted escape repair.
+2. **Truncated JSON** — generation hit the token cap mid-explanation, leaving
+   the object unterminated. Fixed by salvage-closing open strings/brackets,
+   raising the token budget, and demanding a compact explanation object.
+3. **Stray punctuation** — next run produced `"...threats".` (period instead
+   of comma between fields). Stopped playing regex whack-a-mole and added
+   `json-repair` (tiny, offline) as the final parse fallback.
+
+**The safety layer earned its keep in live fire:** for the scam letter the
+model suggested *"check with the tax bureau and ensure you pay soon"* — unsafe
+advice. Because it arrived in the wrong shape it was discarded, and the
+composed result showed the safe fallback step + the always-appended
+verification advice instead. The scammer's 1-800 number appeared nowhere.
+
+**Final live result (PASS):** warning card with 4 reasons (3 model + 1
+heuristic), key facts ($500, 24 hours, gift cards) extracted from the photo,
+19.7s of 48kHz VoxCPM2 speech. Total GPU time per analysis: well inside the
+120s budget.
+
+Also learned: ZeroGPU repacks ~8GB of cuda tensors at startup ("ZeroGPU
+tensors packing") and pushes don't always trigger rebuilds — the API's
+`restart?factory=true` does, reliably.
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go
