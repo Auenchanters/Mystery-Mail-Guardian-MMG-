@@ -84,6 +84,7 @@ the 32B cap. The MiniCPM family is the heart of the app in both configs.
 ## Hackathon constraints — status
 
 - ✅ **≤ 32B total params** — 3.3B deployed (printed in logs at startup; guard refuses to boot over cap)
+- ✅ **Tiny Titan (≤ 4B)** — the deployed lean config totals 3.3B parameters
 - ✅ **Gradio app on a HF Space** (ZeroGPU, request-driven, `@spaces.GPU` per call)
 - ✅ **Off the Grid** — zero cloud APIs at runtime; model weights download once from the HF Hub at build
 - ✅ **OpenBMB-central** — MiniCPM-V 4.6 is the engine; VoxCPM2 the voice; all models are OpenBMB
