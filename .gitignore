@@ -20,6 +20,7 @@ package-lock.json
 # Local preview config & generated audio from checks
 .claude/launch.json
 checks/*.wav
+modal_artifacts/
 
 # Local Claude Code settings
 .claude/

@@ -80,6 +80,10 @@ the 32B cap. The MiniCPM family is the heart of the app in both configs.
 - **Tests** (66, offline): `pip install -r requirements-dev.txt && pytest tests`.
 - **Model isolation checks** (GPU): `python checks/check_extract.py letter.jpg`,
   `python checks/check_reason.py`, `python checks/check_speak.py hi`.
+- **GPU validation on Modal:** model validation for this project runs on Modal GPUs —
+  `modal run modal_validate.py` exercises the full pipeline (normal bill + scam letter)
+  and VoxCPM2 speech on an A10G, writing transcripts and audio to `modal_artifacts/`.
+  This is build/test-time only; the deployed app's runtime remains 100% local (Off the Grid).
 
 ## Hackathon constraints — status
 
