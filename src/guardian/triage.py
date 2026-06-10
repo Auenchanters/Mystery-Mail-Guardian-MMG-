@@ -114,8 +114,11 @@ def parse_model_json(raw: str) -> dict | None:
     try:
         data = json.loads(block)
     except json.JSONDecodeError:
-        try:  # common model slip: trailing commas
-            data = json.loads(re.sub(r",\s*([}\]])", r"\1", block))
+        # Common small-model slips: trailing commas, invalid escapes like \'
+        repaired = re.sub(r",\s*([}\]])", r"\1", block)
+        repaired = re.sub(r'\\([^"\\/bfnrtu])', r"\1", repaired)
+        try:
+            data = json.loads(repaired)
         except json.JSONDecodeError:
             return None
     return data if isinstance(data, dict) else None
@@ -144,7 +147,10 @@ def validate_extraction(data: dict) -> Extraction:
                 ScamSignal(id=sig["id"], evidence=str(sig.get("evidence", "")).strip())
             )
     explanation = data.get("explanation") or {}
-    if isinstance(explanation, dict):
+    if isinstance(explanation, str):
+        # Model collapsed the explanation object into prose — keep what we can.
+        ex.what_this_is = explanation.strip()
+    elif isinstance(explanation, dict):
         ex.what_this_is = str(explanation.get("what_this_is", "") or "").strip()
         ex.key_facts = _as_str_list(explanation.get("key_facts"), 4)
         ex.worry_reasons = _as_str_list(explanation.get("worry_reasons"), 6)

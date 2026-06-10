@@ -48,6 +48,17 @@ class TestParseModelJson:
     def test_garbage_returns_none(self):
         assert triage.parse_model_json("I cannot read this image, sorry.") is None
 
+    def test_invalid_escape_repaired(self):
+        # Regression: live MiniCPM-V output contained \' (invalid JSON escape).
+        raw = r'{"is_document": true, "sender": "they say you don\'t have time"}'
+        data = triage.parse_model_json(raw)
+        assert data is not None and "don't" in data["sender"]
+
+    def test_valid_escapes_preserved(self):
+        raw = '{"sender": "Line\\nBreak \\"quoted\\" \\\\slash"}'
+        data = triage.parse_model_json(raw)
+        assert data["sender"] == 'Line\nBreak "quoted" \\slash'
+
     def test_empty_returns_none(self):
         assert triage.parse_model_json("") is None
 
@@ -73,6 +84,14 @@ class TestValidateExtraction:
     def test_null_strings_become_none(self):
         ex = triage.validate_extraction(_full_payload(amount="null", deadline=None))
         assert ex.amount is None and ex.deadline is None
+
+    def test_explanation_as_string_kept(self):
+        # Regression: live model collapsed the explanation object into prose.
+        ex = triage.validate_extraction(
+            _full_payload(explanation="This is a tax notice. Be careful.")
+        )
+        assert ex.what_this_is == "This is a tax notice. Be careful."
+        assert ex.what_to_do == []
 
     def test_list_limits_enforced(self):
         ex = triage.validate_extraction(

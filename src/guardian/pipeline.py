@@ -31,8 +31,27 @@ def _error(lang: str, key: str) -> AnalysisResult:
     return AnalysisResult(ok=False, lang=lang, error=ui_text.get(lang, key))
 
 
+def _ensure_explanation(ex: triage.Extraction, lang: str) -> None:
+    """If the model's explanation is missing or collapsed, synthesize a plain
+    one deterministically from the extracted facts — never show an empty card."""
+    if not ex.what_this_is:
+        label = ui_text.doc_type_label(ex.document_type, lang)
+        ex.what_this_is = ui_text.get(lang, "fallback_what").format(label=label)
+    if not ex.key_facts:
+        facts = []
+        for attr, key in (("sender", "fact_from"), ("what_they_want", "fact_want"),
+                          ("amount", "fact_amount"), ("deadline", "fact_deadline")):
+            value = getattr(ex, attr)
+            if value:
+                facts.append(f"{ui_text.get(lang, key)} {value}")
+        ex.key_facts = facts
+    if not ex.what_to_do:
+        ex.what_to_do = [ui_text.get(lang, "fallback_step")]
+
+
 def _compose(ex: triage.Extraction, lang: str) -> AnalysisResult:
     """Apply the safety layer and assemble the final result."""
+    _ensure_explanation(ex, lang)
     heuristic_text = " | ".join(
         filter(None, [ex.sender, ex.what_they_want, ex.requested_action,
                       *[s.evidence for s in ex.scam_signals]])
@@ -51,7 +70,7 @@ def _compose(ex: triage.Extraction, lang: str) -> AnalysisResult:
     actions = [a for a in (safety.sanitize_action_step(s) for s in ex.what_to_do) if a]
     actions.append(safety.verification_advice(lang))
 
-    what_this_is = safety.soften_verdicts(ex.what_this_is).strip() or ui_text.get(lang, "waiting")
+    what_this_is = safety.soften_verdicts(ex.what_this_is).strip()
     key_facts = [safety.soften_verdicts(f).strip() for f in ex.key_facts]
     headline = safety.worry_headline(level, lang)
 

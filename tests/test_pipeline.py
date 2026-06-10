@@ -72,6 +72,25 @@ class TestCompose:
             result = pipeline._compose(self._scammy_extraction(), lang)
             assert result.actions[-1] == ui_text.get(lang, "verify")
 
+    def test_missing_explanation_synthesized(self):
+        # Regression: model returned facts but no explanation object — the card
+        # must still show a synthesized summary, never an empty/placeholder one.
+        ex = triage.Extraction(document_type="government_tax", sender="Tax Office",
+                               amount="$500", deadline="24 hours")
+        ex.scam_signals = [triage.ScamSignal("threat_or_arrest", "arrest threat"),
+                           triage.ScamSignal("urgency", "24 hours")]
+        result = pipeline._compose(ex, "en")
+        assert "tax office" in result.what_this_is.lower()
+        assert any("$500" in f for f in result.key_facts)
+        assert result.worry_level == "warning"
+        assert len(result.actions) >= 2  # fallback step + verification advice
+
+    def test_missing_explanation_synthesized_hindi(self):
+        ex = triage.Extraction(document_type="utility_bill", sender="City Power")
+        result = pipeline._compose(ex, "hi")
+        assert "बिल" in result.what_this_is
+        assert result.actions[0] == pipeline.ui_text.get("hi", "fallback_step")
+
     def test_normal_bill_stays_low_but_never_safe(self):
         ex = triage.Extraction(document_type="utility_bill", sender="City Power")
         ex.what_this_is = "This is an electricity bill."

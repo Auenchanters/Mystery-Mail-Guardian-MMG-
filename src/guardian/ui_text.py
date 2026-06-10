@@ -30,6 +30,12 @@ STRINGS: dict[str, dict[str, str]] = {
         "err_model": "Something went wrong while reading the letter. Please try once more.",
         "err_no_speech": "Read a letter first, then I can read the result aloud.",
         "waiting": "Your explanation will appear here.",
+        "fallback_what": "This looks like {label}.",
+        "fact_from": "From:",
+        "fact_want": "What they want:",
+        "fact_amount": "Amount:",
+        "fact_deadline": "Deadline:",
+        "fallback_step": "Show this letter to a family member or someone you trust.",
     },
     "hi": {
         "title": "📬 Mystery-Mail Guardian",
@@ -55,6 +61,12 @@ STRINGS: dict[str, dict[str, str]] = {
         "err_model": "चिट्ठी पढ़ते समय कुछ गड़बड़ हो गई। कृपया एक बार फिर कोशिश करें।",
         "err_no_speech": "पहले कोई चिट्ठी पढ़वाएँ, फिर मैं नतीजा आवाज़ में सुना सकता हूँ।",
         "waiting": "आपकी चिट्ठी की जानकारी यहाँ दिखेगी।",
+        "fallback_what": "यह {label} लगती है।",
+        "fact_from": "किसने भेजा:",
+        "fact_want": "वे क्या चाहते हैं:",
+        "fact_amount": "रक़म:",
+        "fact_deadline": "आख़िरी तारीख़:",
+        "fallback_step": "यह चिट्ठी परिवार के किसी सदस्य या भरोसेमंद व्यक्ति को दिखाएँ।",
     },
     "es": {
         "title": "📬 Mystery-Mail Guardian",
@@ -80,8 +92,50 @@ STRINGS: dict[str, dict[str, str]] = {
         "err_model": "Algo salió mal al leer la carta. Inténtelo una vez más.",
         "err_no_speech": "Primero lea una carta; después puedo leerle el resultado en voz alta.",
         "waiting": "Su explicación aparecerá aquí.",
+        "fallback_what": "Esto parece {label}.",
+        "fact_from": "De:",
+        "fact_want": "Qué piden:",
+        "fact_amount": "Monto:",
+        "fact_deadline": "Fecha límite:",
+        "fallback_step": "Muestre esta carta a un familiar o a alguien de confianza.",
     },
 }
+
+# Localized short labels for triage.DOC_TYPES, used when the model's own
+# explanation is missing/unusable and we synthesize one deterministically.
+DOC_TYPE_LABELS: dict[str, dict[str, str]] = {
+    "utility_bill": {"en": "an electricity, water, or utility bill",
+                     "hi": "बिजली, पानी या किसी सेवा का बिल",
+                     "es": "una factura de luz, agua u otro servicio"},
+    "bank": {"en": "a letter from a bank", "hi": "बैंक की चिट्ठी",
+             "es": "una carta de un banco"},
+    "government_tax": {"en": "a letter from the government or tax office",
+                       "hi": "सरकार या टैक्स दफ़्तर की चिट्ठी",
+                       "es": "una carta del gobierno o de la oficina de impuestos"},
+    "medical": {"en": "a medical letter", "hi": "इलाज से जुड़ी चिट्ठी",
+                "es": "una carta médica"},
+    "insurance": {"en": "an insurance letter", "hi": "बीमे की चिट्ठी",
+                  "es": "una carta del seguro"},
+    "subscription": {"en": "a subscription or membership letter",
+                     "hi": "किसी सदस्यता या सेवा की चिट्ठी",
+                     "es": "una carta de suscripción o membresía"},
+    "charity": {"en": "a donation request", "hi": "दान माँगने वाली चिट्ठी",
+                "es": "una solicitud de donación"},
+    "marketing": {"en": "an advertisement", "hi": "एक विज्ञापन", "es": "publicidad"},
+    "suspected_scam": {"en": "a letter that looks like it could be a scam",
+                       "hi": "धोखाधड़ी जैसी दिखने वाली चिट्ठी",
+                       "es": "una carta que podría ser una estafa"},
+    "personal": {"en": "a personal letter", "hi": "निजी चिट्ठी",
+                 "es": "una carta personal"},
+    "other": {"en": "an official-looking letter",
+              "hi": "सरकारी जैसी दिखने वाली चिट्ठी",
+              "es": "una carta de aspecto oficial"},
+}
+
+
+def doc_type_label(doc_type: str, lang: str) -> str:
+    labels = DOC_TYPE_LABELS.get(doc_type, DOC_TYPE_LABELS["other"])
+    return labels.get(lang, labels["en"])
 
 # Localized labels for the scam-signal taxonomy in triage.SIGNAL_IDS.
 SIGNAL_LABELS: dict[str, dict[str, str]] = {
