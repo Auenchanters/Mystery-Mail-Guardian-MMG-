@@ -33,6 +33,9 @@ Answer with ONE JSON object only — no markdown, no commentary — using exactl
 Allowed scam_signal ids (use only these, only when the document genuinely shows the signal):
 {signal_ids}
 
+IMPORTANT: "explanation" must be a JSON object with exactly the four keys shown — never a plain \
+string. Keep every sentence short; the whole answer must stay compact.
+
 Safety rules you MUST follow:
 - NEVER declare the letter definitely safe or definitely a scam. Use cautious wording like "this looks like" and "be careful".
 - Do NOT include phone numbers, links, or email addresses from the letter in "what_to_do".

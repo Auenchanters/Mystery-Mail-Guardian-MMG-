@@ -74,11 +74,15 @@ _FENCE_RE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
 
 
 def _first_json_object(text: str) -> str | None:
-    """Return the first balanced {...} block, tolerating prose around it."""
+    """Return the first balanced {...} block, tolerating prose around it.
+
+    If generation was cut off mid-object (small models do this), salvage by
+    closing the open string and any unclosed brackets — partial facts beat an
+    error card."""
     start = text.find("{")
     if start == -1:
         return None
-    depth = 0
+    closers: list[str] = []
     in_string = False
     escaped = False
     for i in range(start, len(text)):
@@ -93,12 +97,19 @@ def _first_json_object(text: str) -> str | None:
         elif ch == '"':
             in_string = True
         elif ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
+            closers.append("}")
+        elif ch == "[":
+            closers.append("]")
+        elif ch in "}]":
+            if closers and closers[-1] == ch:
+                closers.pop()
+            if not closers:
                 return text[start : i + 1]
-    return None
+    salvaged = text[start:].rstrip()
+    if in_string:
+        salvaged += '"'
+    salvaged = re.sub(r"[,:]\s*$", "", salvaged)
+    return salvaged + "".join(reversed(closers))
 
 
 def parse_model_json(raw: str) -> dict | None:

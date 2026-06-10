@@ -54,6 +54,22 @@ class TestParseModelJson:
         data = triage.parse_model_json(raw)
         assert data is not None and "don't" in data["sender"]
 
+    def test_truncated_mid_string_salvaged(self):
+        # Regression: generation cut off mid-explanation -> unterminated JSON.
+        raw = '{"is_document": true, "amount": "$500", "explanation": "Be careful abo'
+        data = triage.parse_model_json(raw)
+        assert data is not None and data["amount"] == "$500"
+
+    def test_truncated_mid_structure_salvaged(self):
+        raw = '{"is_document": true, "scam_signals": [{"id": "urgency", "evidence": "act now"}'
+        data = triage.parse_model_json(raw)
+        assert data["scam_signals"][0]["id"] == "urgency"
+
+    def test_truncated_after_comma_salvaged(self):
+        raw = '{"is_document": true, "sender": "City Power",'
+        data = triage.parse_model_json(raw)
+        assert data["sender"] == "City Power"
+
     def test_valid_escapes_preserved(self):
         raw = '{"sender": "Line\\nBreak \\"quoted\\" \\\\slash"}'
         data = triage.parse_model_json(raw)

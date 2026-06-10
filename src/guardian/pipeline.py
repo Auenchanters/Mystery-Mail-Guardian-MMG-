@@ -59,12 +59,13 @@ def _compose(ex: triage.Extraction, lang: str) -> AnalysisResult:
     signals = triage.merge_signals(ex.scam_signals, triage.run_heuristics(heuristic_text))
     level = triage.worry_level(ex.document_type, signals)
 
-    # Reasons: model's localized sentences (softened); any heuristic-only
-    # signals the model missed get their localized taxonomy label appended.
+    # Reasons: model's localized sentences (softened); any signal not covered
+    # by a model sentence gets its localized taxonomy label appended. If the
+    # model wrote no reason sentences at all, every signal gets a label.
     reasons = [safety.sanitize_reason(r) for r in ex.worry_reasons if r.strip()]
-    model_ids = {s.id for s in ex.scam_signals}
+    covered_ids = {s.id for s in ex.scam_signals} if reasons else set()
     reasons += [
-        ui_text.signal_label(s.id, lang) for s in signals if s.id not in model_ids
+        ui_text.signal_label(s.id, lang) for s in signals if s.id not in covered_ids
     ]
 
     actions = [a for a in (safety.sanitize_action_step(s) for s in ex.what_to_do) if a]
@@ -104,7 +105,7 @@ def analyze(image, lang: str) -> AnalysisResult:
         return _error(lang, "err_model")
     data = triage.parse_model_json(raw)
     if data is None:
-        print(f"[guardian] unparseable model output: {raw[:500]!r}")
+        print(f"[guardian] unparseable model output ({len(raw)} chars): {raw!r}")
         return _error(lang, "err_model")
     ex = triage.validate_extraction(data)
     if not ex.is_document:

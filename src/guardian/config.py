@@ -65,7 +65,7 @@ DEFAULT_LANGUAGE = "English"
 PROMPT_LANGUAGE_NAMES = {"en": "English", "hi": "Hindi", "es": "Spanish"}
 
 # --- Generation / quota tuning ---------------------------------------------
-MAX_NEW_TOKENS = 1024          # vision model output budget (JSON + trilingual-ready text)
+MAX_NEW_TOKENS = 1600          # vision model output budget (JSON + explanation text)
 TTS_MAX_CHARS = 700            # cap spoken text to respect the ZeroGPU quota
 GPU_DURATION_ANALYZE = 120     # seconds; one document analysis pass
 GPU_DURATION_SPEAK = 90        # seconds; one TTS pass

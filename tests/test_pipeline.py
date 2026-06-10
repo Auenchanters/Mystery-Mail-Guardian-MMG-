@@ -84,6 +84,8 @@ class TestCompose:
         assert any("$500" in f for f in result.key_facts)
         assert result.worry_level == "warning"
         assert len(result.actions) >= 2  # fallback step + verification advice
+        # No model-written reasons -> every signal must surface as a label.
+        assert len(result.worry_reasons) >= 2
 
     def test_missing_explanation_synthesized_hindi(self):
         ex = triage.Extraction(document_type="utility_bill", sender="City Power")
