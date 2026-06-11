@@ -54,15 +54,16 @@ def assert_param_budget() -> float:
 
 
 # --- Languages -------------------------------------------------------------
-# Display label -> ISO code. All three are in VoxCPM2's supported-language list.
+# Display label -> ISO code. All four are in VoxCPM2's supported-language list.
 LANGUAGES = {
     "English": "en",
     "हिन्दी (Hindi)": "hi",
     "Español (Spanish)": "es",
+    "日本語 (Japanese)": "ja",
 }
 DEFAULT_LANGUAGE = "English"
 
-PROMPT_LANGUAGE_NAMES = {"en": "English", "hi": "Hindi", "es": "Spanish"}
+PROMPT_LANGUAGE_NAMES = {"en": "English", "hi": "Hindi", "es": "Spanish", "ja": "Japanese"}
 
 # --- Generation / quota tuning ---------------------------------------------
 MAX_NEW_TOKENS = 1600          # vision model output budget (JSON + explanation text)

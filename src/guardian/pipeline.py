@@ -139,6 +139,13 @@ _MOCK = {
         "steps": ["Revise que el nombre en la factura sea el suyo.",
                   "Pague como paga normalmente su factura de electricidad."],
     },
+    "ja": {
+        "what": "これはCity Power Companyからの電気料金の請求書です。",
+        "facts": ["差出人: City Power Company", "金額: $84.20",
+                  "期限: 2026年6月28日", "毎月の料金の支払いを求めています。"],
+        "steps": ["請求書の名前がご自分のものか確かめてください。",
+                  "いつもどおりの方法で電気料金を払ってください。"],
+    },
 }
 
 

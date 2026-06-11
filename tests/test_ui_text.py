@@ -1,6 +1,13 @@
-"""Localization completeness: every key in every language, every signal labeled."""
+"""Localization completeness: every key in every language, every label localized."""
 
 from guardian import triage, ui_text
+
+LANGS = ("en", "hi", "es", "ja")
+
+
+def test_all_required_languages_present():
+    for lang in LANGS:
+        assert lang in ui_text.STRINGS, f"missing language dict: {lang}"
 
 
 def test_all_languages_have_all_keys():
@@ -12,8 +19,15 @@ def test_all_languages_have_all_keys():
 def test_every_signal_id_labeled_in_every_language():
     for signal_id in triage.SIGNAL_IDS:
         assert signal_id in ui_text.SIGNAL_LABELS, f"missing labels for {signal_id}"
-        for lang in ("en", "hi", "es"):
+        for lang in LANGS:
             assert ui_text.SIGNAL_LABELS[signal_id][lang].strip()
+
+
+def test_every_doc_type_labeled_in_every_language():
+    for doc_type in triage.DOC_TYPES:
+        assert doc_type in ui_text.DOC_TYPE_LABELS, f"missing labels for {doc_type}"
+        for lang in LANGS:
+            assert ui_text.DOC_TYPE_LABELS[doc_type][lang].strip()
 
 
 def test_no_empty_strings():
