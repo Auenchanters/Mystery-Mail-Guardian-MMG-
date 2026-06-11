@@ -15,6 +15,7 @@ tags:
   - sponsor:modal
   - achievement:offgrid
   - achievement:fieldnotes
+  - achievement:offbrand
   - build-small-hackathon
   - minicpm
   - voxcpm
@@ -26,7 +27,7 @@ tags:
 
 **Photograph a confusing letter, bill, or form. The app reads it _locally_, explains in plain
 language what it is, cautiously flags scam warning signs (with reasons, never verdicts), says
-what to actually do next, and reads the summary aloud — in English, Hindi, or Spanish.**
+what to actually do next, and reads the summary aloud — in English, Hindi, Spanish, or Japanese.**
 
 > 🔒 **The privacy promise:** *Your documents never leave this device. Everything runs on small
 > models, locally.* Financial, legal, and medical letters are exactly the documents people
@@ -81,13 +82,26 @@ the 32B cap. The MiniCPM family is the heart of the app in both configs.
 - **This Space:** upload or photograph a letter, pick a language, press "Read my letter."
 - **Locally:** `pip install -r requirements.txt && python app.py` (GPU recommended).
 - **UI development without weights:** `GUARDIAN_MOCK=1 python app.py`.
-- **Tests** (66, offline): `pip install -r requirements-dev.txt && pytest tests`.
+- **Tests** (85, offline — includes WCAG AA contrast enforcement): `pip install -r requirements-dev.txt && pytest tests`.
 - **Model isolation checks** (GPU): `python checks/check_extract.py letter.jpg`,
   `python checks/check_reason.py`, `python checks/check_speak.py hi`.
 - **GPU validation on Modal:** model validation for this project runs on Modal GPUs —
   `modal run modal_validate.py` exercises the full pipeline (normal bill + scam letter)
   and VoxCPM2 speech on an A10G, writing transcripts and audio to `modal_artifacts/`.
   This is build/test-time only; the deployed app's runtime remains 100% local (Off the Grid).
+
+## Design — the Kitchen-Table Post Office (Off-Brand entry)
+
+The UI is hand-built past the stock Gradio look: a forced-dark **"midnight study
+desk"** palette with letters as lamp-lit paper sheets, a **postage-stamp verdict
+badge** (perforated edge, inline SVG), a **wax-seal privacy badge** carrying the
+soul of the project, postmark-ring step numbers, and one-tap segmented language
+buttons — no flags, no dropdown. Typography is **Atkinson Hyperlegible** (designed
+by the Braille Institute for low-vision readers — an elder-readability font in an
+elder-readability app) with Noto Sans Devanagari; both are **vendored into the
+repo**, so the app makes zero font/CDN requests at runtime (Off the Grid stays
+intact). Every text/background pair is enforced against **WCAG AA by unit tests**;
+animations sit behind `prefers-reduced-motion`; tap targets are ≥48px.
 
 ## Hackathon constraints — status
 

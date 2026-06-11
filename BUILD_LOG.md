@@ -126,6 +126,52 @@ Also learned: ZeroGPU repacks ~8GB of cuda tensors at startup ("ZeroGPU
 tensors packing") and pushes don't always trigger rebuilds — the API's
 `restart?factory=true` does, reliably.
 
+## 2026-06-11 (later) — Kitchen-Table Post Office: the UI redesign ships
+
+Executed docs/superpowers/plans/2026-06-11-ui-redesign.md end-to-end (Tasks 4–12
+plus 7b), TDD throughout: 66 → **85 offline tests**, all green.
+
+### What shipped
+
+- **Japanese (ja) as a fourth language** — full `ui_text` dict (polite です/ます,
+  short sentences), all signal/doc-type labels, mock result, prompt name. JP text
+  renders via the OS-native stack (Hiragino/Yu Gothic/Meiryo) — a deliberate
+  deviation from the plan's "vendor NotoSansJP": CJK woff2 runs to megabytes and
+  every target OS ships an excellent native JP font (documented in
+  assets/fonts/LICENSES.md).
+- **The skin** (assets/guardian.css + guardian/theme.py): forced-dark midnight
+  study desk, letter-sheet cards with deckle edges and semantic left borders,
+  wax-seal privacy badge, envelope SVG wordmark, postage-stamp verdict badge
+  (perforated edge + 3 hand-drawn SVG icons), postmark step rings, segmented
+  language buttons (2×2 on phones), envelope-flap analyzing loader with
+  localized "Reading your letter…" via gr.Progress.
+- **One-tap examples**: synthetic bill + scam letters (assets/samples/, rendered
+  by the now-shared guardian/samples.py — modal_validate.py imports it).
+  `cache_examples=False` so build never burns GPU.
+- **`?lang=hi|es|ja` deep-link** for the demo video; `?autorun` is mock-gated so
+  it can never trigger a live GPU run.
+
+### Gradio 6.17.3 field notes (verified against the installed package, not memory)
+
+1. `launch(css_paths=…)` **inlines** the CSS into the page — relative `url()`
+   breaks; fonts must go through `/gradio_api/file=` + `allowed_paths`.
+2. `launch(js=…)` is accepted but **not executed on page load** — a `head=`
+   `<script>` is the reliable path.
+3. The busy component gets `.pending` on its inner container (`.html-container`),
+   not `.generating` on the block — loader CSS targets that.
+4. `gr.Progress()` as a default arg is a safe no-op when the handler is called
+   outside an event (tests call handlers directly).
+
+### Accessibility audit (mock app, all PASS)
+
+WCAG AA contrast enforced by tests for BOTH palettes; keyboard order =
+language → upload → examples → analyze → read-aloud, visible 3px focus ring;
+380×800 = single column, no horizontal scroll, 73px segments / 71px+ buttons;
+forced dark verified under a light-scheme OS; Devanagari fully covered by
+vendored Noto (fonts.check); zero console errors. Screenshots in docs/ui/
+(captured via scripts/shoot_ui.py — headless Edge over CDP, because the
+preview screenshot tool kept timing out).
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go
