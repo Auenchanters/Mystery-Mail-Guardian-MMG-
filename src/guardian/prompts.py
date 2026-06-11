@@ -24,7 +24,7 @@ Answer with ONE JSON object only — no markdown, no commentary — using exactl
   ],
   "explanation": {{
     "what_this_is": "1-2 short sentences in {language}, using words a 10-year-old understands",
-    "key_facts": ["up to 4 very short facts in {language}: who sent it, what they want, amount, deadline"],
+    "key_facts": ["up to 4 very short facts in {language}, each containing real values read from the document (actual names, amounts, dates)"],
     "worry_reasons": ["each scam signal explained in one short {language} sentence; empty list if none"],
     "what_to_do": ["2 to 4 short, safe, concrete steps in {language}"]
   }}
@@ -35,6 +35,9 @@ Allowed scam_signal ids (use only these, only when the document genuinely shows 
 
 IMPORTANT: "explanation" must be a JSON object with exactly the four keys shown — never a plain \
 string. Keep every sentence short; the whole answer must stay compact.
+
+Copy real values from the document (actual names, amounts, dates). NEVER repeat this schema's \
+field names or descriptions as answers. If something is not in the document, use null or [].
 
 Safety rules you MUST follow:
 - NEVER declare the letter definitely safe or definitely a scam. Use cautious wording like "this looks like" and "be careful".

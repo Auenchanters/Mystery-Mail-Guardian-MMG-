@@ -142,10 +142,28 @@ def parse_model_json(raw: str) -> dict | None:
     return data if isinstance(data, dict) else None
 
 
+# Small models sometimes parrot the prompt schema's field descriptions back
+# as "facts" (seen live 2026-06-11: "who sent it", "money mentioned", …).
+# Normalized full-string matches only — real letter facts never look like this.
+_PROMPT_ECHOES = {
+    "who sent it", "what they want", "what they want from you", "sender",
+    "amount", "deadline", "money mentioned", "any money amount mentioned",
+    "any date or deadline mentioned", "what to do", "key facts",
+    "one short sentence", "what the letter asks the reader to do",
+    "short quote or fact from the document", "up to 4 very short facts",
+    "what this is", "worry reasons", "scam signals", "requested action",
+}
+
+
+def _is_prompt_echo(text: str) -> bool:
+    return re.sub(r"[^\w\s]", "", text).strip().lower() in _PROMPT_ECHOES
+
+
 def _as_str_list(value, limit: int) -> list[str]:
     if not isinstance(value, list):
         return []
-    return [str(v).strip() for v in value if str(v).strip()][:limit]
+    items = [str(v).strip() for v in value if str(v).strip()]
+    return [v for v in items if not _is_prompt_echo(v)][:limit]
 
 
 def validate_extraction(data: dict) -> Extraction:

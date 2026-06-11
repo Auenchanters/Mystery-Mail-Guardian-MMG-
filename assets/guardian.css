@@ -183,6 +183,7 @@
 /* --- Analyzing state: envelope flap opens over the first result block -------
    Gradio 6 marks the busy component's inner container with `.pending`. */
 .out-what .html-container.pending { position: relative; min-height: 110px; }
+.out-what .html-container.pending .guardian-card { visibility: hidden; }  /* stale card */
 .out-what .html-container.pending::after {   /* envelope body */
   content: ""; position: absolute; top: 40px; left: calc(50% - 27px);
   width: 54px; height: 36px; background: var(--sheet);

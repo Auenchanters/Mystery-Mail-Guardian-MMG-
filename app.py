@@ -205,14 +205,21 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
         on_analyze,
         inputs=[image, language],
         outputs=[out_what, out_worry, out_todo, speak_state, audio, audio_group],
+        show_progress_on=out_what,  # ONE overlay, not one per output component
     )
-    read_btn.click(on_speak, inputs=[speak_state, language], outputs=[audio, audio_group])
+    read_btn.click(
+        on_speak,
+        inputs=[speak_state, language],
+        outputs=[audio, audio_group],
+        show_progress_on=read_btn,  # audio sheet is hidden until speech exists
+    )
     language.change(
         on_language_change,
         inputs=[language],
         outputs=[header, image, analyze_btn, read_btn, audio,
                  out_what, out_worry, out_todo, speak_state, footer, audio_group,
                  steps],
+        show_progress="hidden",  # instant relabel; 12 overlays would flash
     )
 
 # ?lang=hi|es|ja deep-link (demo video + screenshots); ?autorun=1|2 is

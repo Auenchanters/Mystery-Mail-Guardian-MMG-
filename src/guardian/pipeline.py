@@ -54,6 +54,7 @@ def _compose(ex: triage.Extraction, lang: str) -> AnalysisResult:
     _ensure_explanation(ex, lang)
     heuristic_text = " | ".join(
         filter(None, [ex.sender, ex.what_they_want, ex.requested_action,
+                      ex.what_this_is, *ex.key_facts,
                       *[s.evidence for s in ex.scam_signals]])
     )
     signals = triage.merge_signals(ex.scam_signals, triage.run_heuristics(heuristic_text))

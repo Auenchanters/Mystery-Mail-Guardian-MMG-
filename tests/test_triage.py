@@ -127,6 +127,28 @@ class TestValidateExtraction:
         )
         assert len(ex.key_facts) == 4 and len(ex.what_to_do) == 4
 
+    def test_prompt_echo_facts_dropped(self):
+        # Regression (live, 06-11): the model parroted the schema's field
+        # descriptions back as "facts" instead of extracting real values.
+        ex = triage.validate_extraction(
+            _full_payload(explanation={
+                "key_facts": ["who sent it", "What they want", "money mentioned",
+                              "From: City Power Company"],
+                "what_to_do": ["what to do", "Pay the way you normally pay."],
+            })
+        )
+        assert ex.key_facts == ["From: City Power Company"]
+        assert ex.what_to_do == ["Pay the way you normally pay."]
+
+    def test_all_echo_facts_leave_empty_list(self):
+        # All-echo lists must end up empty so the deterministic fallback
+        # synthesis kicks in instead of rendering placeholder bullets.
+        ex = triage.validate_extraction(
+            _full_payload(explanation={"key_facts": ["amount", "deadline:",
+                                                     "Key facts", "sender"]})
+        )
+        assert ex.key_facts == []
+
 
 class TestHeuristics:
     def test_gift_card_detected(self):
