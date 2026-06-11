@@ -123,6 +123,17 @@ class TestRender:
         assert worry_html == "" and todo_html == ""
 
     def test_placeholder_renders_all_langs(self):
-        for lang in ("en", "hi", "es"):
+        for lang in ("en", "hi", "es", "ja"):
             what_html, _, _ = render.render_placeholder(lang)
             assert ui_text.get(lang, "waiting") in what_html
+
+    def test_worry_card_has_stamp_badge(self):
+        result = pipeline.analyze(object(), "en")
+        _, worry_html, _ = render.render_result(result)
+        assert 'class="stamp stamp-low"' in worry_html
+        assert "<svg" in worry_html  # inline icon, no external asset
+
+    def test_stamp_levels_match(self):
+        ex = triage.Extraction(document_type="suspected_scam")
+        _, worry_html, _ = render.render_result(pipeline._compose(ex, "en"))
+        assert "stamp-warning" in worry_html

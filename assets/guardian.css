@@ -86,6 +86,22 @@
 .card-todo    { border-left-color: var(--postal-blue);
                 background: color-mix(in srgb, var(--postal-blue) 7%, var(--sheet)); }
 
+/* --- Postage-stamp verdict badge ------------------------------------------- */
+.stamp {
+  width: 92px; height: 92px; padding: 12px;
+  float: right; margin: 2px 0 10px 16px;
+  background: var(--sheet);
+  color: var(--seal-green);
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  outline: 3px dashed currentColor;  /* perforated-edge suggestion */
+  outline-offset: 3px;
+  transform: rotate(2.5deg);         /* hand-placed */
+}
+.stamp svg { width: 100%; height: 100%; display: block; }
+.stamp-caution { color: var(--amber); }
+.stamp-warning { color: var(--alert-red); }
+
 /* --- Buttons --------------------------------------------------------------- */
 .big-button {
   min-height: 64px;
@@ -130,7 +146,7 @@
     animation: none !important;
     transition: none !important;
   }
-  .guardian-card { transform: none !important; }
+  .guardian-card, .stamp { transform: none !important; }
   .big-button:hover, .big-button:focus-visible { transform: none; }
 }
 
@@ -141,6 +157,7 @@
   .privacy-banner { font-size: 16px; padding: 10px 16px; }
   .guardian-card { font-size: 18px; padding: 18px 16px 14px; }
   .guardian-card h2 { font-size: 21px; }
+  .stamp { width: 72px; height: 72px; padding: 9px; }
   .big-button { width: 100%; }
 }
 
