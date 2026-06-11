@@ -167,6 +167,13 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
                 label=ui_text.get(_DEFAULT_LANG, "upload_label"),
                 elem_classes=["upload-zone"],
             )
+            examples = gr.Examples(
+                examples=[["assets/samples/bill.png"], ["assets/samples/scam.png"]],
+                inputs=[image],
+                label=ui_text.get(_DEFAULT_LANG, "samples_label"),
+                cache_examples=False,  # never burn GPU quota at build time
+                elem_id="sample-letters",
+            )
             analyze_btn = gr.Button(
                 ui_text.get(_DEFAULT_LANG, "analyze_btn"),
                 variant="primary",

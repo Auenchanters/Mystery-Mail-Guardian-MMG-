@@ -16,8 +16,14 @@ Artifacts (transcripts + WAVs) are written back to ./modal_artifacts/.
 from __future__ import annotations
 
 import json
+import os
+import sys
 
 import modal
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
+
+from guardian.samples import NORMAL_BILL, SCAM_LETTER, render_letter  # noqa: E402
 
 app = modal.App("mystery-mail-guardian-validation")
 
@@ -29,39 +35,6 @@ image = (
     )
     .add_local_dir("src", "/root/src")
 )
-
-NORMAL_BILL = [
-    "CITY POWER COMPANY",
-    "Electricity bill — Account 4471-220",
-    "Billing period: May 2026",
-    "Amount due: $84.20",
-    "Due date: June 28, 2026",
-    "Pay online, by mail, or at any branch.",
-    "Questions? See the number on your account card.",
-]
-
-SCAM_LETTER = [
-    "TAX ENFORCEMENT BUREAU — FINAL NOTICE",
-    "You owe a penalty of $500.",
-    "You must pay WITHIN 24 HOURS or you will be",
-    "ARRESTED. Pay ONLY with Google Play gift cards.",
-    "Call 1-800-555-0199 immediately with the codes.",
-    "Do not contact your bank or the tax office.",
-]
-
-
-def _render_letter(lines: list[str]):
-    """Render text as a letter-like photo (white page, black print)."""
-    from PIL import Image, ImageDraw
-
-    img = Image.new("RGB", (900, 1100), "white")
-    draw = ImageDraw.Draw(img)
-    y = 80
-    for line in lines:
-        draw.text((70, y), line, fill="black")
-        y += 60
-    return img
-
 
 @app.function(gpu="A10G", image=image, timeout=1800)
 def validate() -> dict:
@@ -82,7 +55,7 @@ def validate() -> dict:
         ("scam_letter", SCAM_LETTER, "warning"),
     ]:
         t0 = time.time()
-        result = pipeline.analyze(_render_letter(lines), "en")
+        result = pipeline.analyze(render_letter(lines), "en")
         report["analyses"][name] = {
             "ok": result.ok,
             "seconds": round(time.time() - t0, 1),
