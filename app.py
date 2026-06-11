@@ -215,12 +215,56 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
                  steps],
     )
 
+# ?lang=hi|es|ja deep-link (demo video + screenshots); ?autorun=1|2 is
+# mock-only so it can never trigger a real GPU run on the Space.
+_AUTORUN_JS = """
+  const ex = q.get('autorun');
+  if (ex) {
+    retry(() => {
+      const btns = document.querySelectorAll('#sample-letters button');
+      if (btns.length < 2) return false;
+      btns[ex === '2' ? 1 : 0].click(); return true;
+    });
+    retry(() => {
+      if (!document.querySelector('.upload-zone img')) return false;
+      document.querySelector('button.big-button').click(); return true;
+    });
+  }
+"""
+
+_DEEPLINK_JS = """
+() => {
+  const q = new URLSearchParams(location.search);
+  const names = {en: 'English', hi: '\\u0939\\u093f\\u0928\\u094d\\u0926\\u0940',
+                 es: 'Espa\\u00f1ol', ja: '\\u65e5\\u672c\\u8a9e'};
+  const lang = names[(q.get('lang') || '').toLowerCase()];
+  const retry = (fn, n = 25) => {
+    if (fn()) return;
+    if (n > 0) setTimeout(() => retry(fn, n - 1), 300);
+  };
+  if (lang) retry(() => {
+    const l = [...document.querySelectorAll('#language-seg label')]
+      .find(e => e.textContent.includes(lang));
+    if (!l) return false;
+    const i = l.querySelector('input');
+    if (i && !i.checked) i.click();
+    return true;
+  });
+__AUTORUN__
+}
+""".replace("__AUTORUN__", _AUTORUN_JS if config.MOCK else "")
+
+# launch(js=...) is accepted but not executed on page load in Gradio 6.17.3
+# (verified in-browser), so the deep-link rides in <head> instead.
+_HEAD_HTML = f"<script>({_DEEPLINK_JS})();</script>"
+
 if __name__ == "__main__":
-    # Gradio 6: theme/css are launch() parameters. css_paths is inlined by
-    # Gradio, so fonts resolve via /gradio_api/file= + allowed_paths.
+    # Gradio 6: theme/css/head are launch() parameters. css_paths is inlined
+    # by Gradio, so fonts resolve via /gradio_api/file= + allowed_paths.
     demo.launch(
         css=theme.css_variables(),
         css_paths=["assets/guardian.css"],
         theme=theme.build_theme(),
         allowed_paths=["assets"],
+        head=_HEAD_HTML,
     )
