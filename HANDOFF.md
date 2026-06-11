@@ -3,63 +3,69 @@
 > Read this at the start of every session. Update it at the end of every session.
 > Keep entries terse. Use `path:line` references, not pasted code.
 
-_Last updated: 2026-06-10_
+_Last updated: 2026-06-11 (UI-redesign session)_
 
 ## Completed
-- **Full Mystery-Mail Guardian app built end-to-end** (PROJECT.md §5–§7):
-  - Pipeline: `src/guardian/` — extract (MiniCPM-V 4.6) → triage → explain
-    (optional MiniCPM4.1-8B GGUF, `GUARDIAN_CONFIG=full`) → speak (VoxCPM2).
-  - Safety layer `src/guardian/safety.py`: template worry headlines, verdict
-    softening, contact-detail stripping, always-on verification advice.
-  - Trilingual UI (en/hi/es) in `app.py` + `src/guardian/ui_text.py`; ZeroGPU
-    `@spaces.GPU` wiring with local no-op shim; mock mode `GUARDIAN_MOCK=1`.
-  - 66 offline tests in `tests/` — all passing (`.venv\Scripts\python.exe -m pytest tests -q`).
-  - Browser-verified in mock mode: analyze, read-aloud, Hindi toggle all work.
-  - `README.md` = HF Space card (sdk gradio 6.17.3, py 3.12) with param table.
-  - Model facts verified vs live HF cards 2026-06-10 (see BUILD_LOG.md):
-    lean = 3.3B, full = 11.3B, cap 32B. Param guard: `src/guardian/config.py:assert_param_budget`.
-- Project-local tooling (.venv, scripts/, code-review-graph) from previous session.
+- **Kitchen-Table Post Office UI redesign SHIPPED + LIVE** (plan
+  [docs/superpowers/plans/2026-06-11-ui-redesign.md](docs/superpowers/plans/2026-06-11-ui-redesign.md),
+  Tasks 4–12 + 7b, all done). Live at sha c4b0fa5, stage RUNNING, Dev Mode off.
+  - **Japanese (ja) = 4th language**: full `ui_text` dicts, mock, prompts; JP uses
+    OS-native fonts (documented deviation, `assets/fonts/LICENSES.md`).
+  - Skin: `assets/guardian.css` + `src/guardian/theme.py` (forced dark both Gradio
+    slots); stamp verdict badge in `src/guardian/render.py`; segmented gr.Radio
+    `#language-seg`; steps strip; gr.Examples (`cache_examples=False`);
+    envelope loader on Gradio 6 `.pending`; `?lang=` deep-link via `head=`
+    (`launch(js=)` is dead in 6.17.3 — verified); `?autorun` is MOCK-GATED.
+  - **85 offline tests green** (was 66) incl. WCAG AA both palettes, ja parity.
+  - A11y audit PASS (keyboard order, 380px, reduced-motion, no console errors) —
+    details in BUILD_LOG 06-11 (later) entry, screenshots in `docs/ui/`.
+  - **Live checks PASS** on real ZeroGPU: `checks/check_live_space.py` and the new
+    rigorous `checks/check_live_letters.py` (bill→low, lottery→caution,
+    gift-card scam in ja→warning + 32.8s ja speech, noise→polite error;
+    verdict words and scammer contact details never leak).
+  - README: `achievement:offbrand` tag, 4-language claims, Off-Brand design section.
+  - **git-lfs migration**: HF rejects raw binaries — `*.png`/`*.woff2` now LFS,
+    history rewritten (force-pushed origin/main + space/main; old shas invalid).
+- Previous sessions: full pipeline + safety layer + trilingual base app, deploy,
+  live-fire JSON repairs (see BUILD_LOG).
 
 ## In progress
-- Nothing mid-flight. **Live Space verified end-to-end 2026-06-11**: scam letter
-  → warning card + reasons + safe steps + 19.7s VoxCPM2 speech, via
-  `checks/check_live_space.py` (PASS). Running build: commit 5256af1.
+- Nothing mid-flight. **UI FREEZE in effect (owner rule: 2026-06-13 EOD; frozen
+  early 06-11).** June 12–15 = demo video, social post, README placeholders only.
+
+## Known warts (acceptable, documented)
+- In ja runs the model sometimes writes key-fact bullets in English; all
+  safety-relevant text (headline, signal labels, advice) is template-localized so
+  the contract holds. Mock mode always returns the bill/low result regardless of
+  image (by design).
+- `preview_screenshot` MCP tool times out on this machine — use
+  `scripts/shoot_ui.py` (headless Edge over CDP) instead.
 
 ## Blocked
-- **GPU validation needs the Space (or any CUDA box):** run `checks/check_extract.py`
-  on real photographed letters, `checks/check_speak.py hi`, `checks/check_reason.py`.
-  No GPU on this Windows machine; weights too heavy to test locally.
-- Headroom still blocked on Windows (no wheel; needs global Rust) — unchanged.
+- GPU validation of `checks/check_extract.py` / `check_reason.py` on REAL
+  photographed letters still needs a human with real mail (consent + photos).
+- Headroom on Windows unchanged (no wheel; would need global Rust).
 
-## Next steps (human, per PROJECT.md §9)
-0. **UI redesign ready to build:** plan at
-   [docs/superpowers/plans/2026-06-11-ui-redesign.md](docs/superpowers/plans/2026-06-11-ui-redesign.md).
-   Decisions LOCKED 06-11: dark-first, no mascot, examples yes, gr.Server stretch only
-   if Tasks 1–9 done by build-day noon, **add Japanese (Task 7b)**. Includes "NEW
-   INTEL" min-max section from the organizers' field-guide (source mirrored in
-   `.fieldguide/`, gitignored). UI freeze June 13.
-   **Post-redesign:** add `achievement:offbrand` tag to README; consider
-   `achievement:sharing` (publish sanitized agent trace on Hub — needs owner consent).
-   ⚠️ Keep LEAN config deployed through judging — full config (8B) forfeits Tiny Titan.
-1. ~~Create HF Space~~ DONE — deployed to build-small-hackathon/Mystery_Mail_Guardian
-   (ZeroGPU zero-a10g); GitHub repo Auenchanters/Mystery-Mail-Guardian-MMG- synced.
-   Remotes configured: `space` (HF) and `origin` (GitHub); push auth via cached HF
-   token / Windows credential manager. NOTE: Space has Dev Mode ON — pushes may not
-   redeploy; use factory restart (see BUILD_LOG) or turn Dev Mode off.
-2. `modal token new` (browser login, one time), then
-   `.venv\Scripts\modal.exe run modal_validate.py` → GPU validation report +
-   Hindi/English WAVs in modal_artifacts/ (uses the $250 Modal credits).
-3. Real-person testing, consent, demo video, social post; fill the three
-   `<!-- HUMAN -->` placeholders in README.md before June 15.
-4. Optional: publish BUILD_LOG.md as Field Notes; consider "Sharing is Caring" badge
-   (publish sanitized agent traces — review for secrets first).
+## Next steps (human, per PROJECT.md §9 + field-guide intel)
+1. `modal token new` then `.venv\Scripts\modal.exe run modal_validate.py` —
+   Modal prize requires actually running it once before submission.
+2. Real-person testing + consent, demo video (use `?lang=hi|es|ja` deep-links;
+   beats list in plan "NEW INTEL" §6), social post, fill the three
+   `<!-- HUMAN -->` README placeholders before June 15.
+3. Optional 4th achievement: `achievement:sharing` (publish sanitized agent
+   trace as Hub dataset — needs owner consent + secret scrub).
+4. ⚠️ Keep LEAN config deployed through judging (full 8B forfeits Tiny Titan).
 
 ## Commands used (key)
-- `uv pip install --python .venv\Scripts\python.exe -r requirements-dev.txt`
-- `.venv\Scripts\python.exe -m pytest tests -q`  (66 passed)
-- `$env:GUARDIAN_MOCK="1"; .venv\Scripts\python.exe app.py`  (local UI on :7860)
+- `.venv\Scripts\python.exe -m pytest tests -q` (85 passed)
+- `.venv\Scripts\python.exe scripts\make_samples.py` (regen example PNGs)
+- `.venv\Scripts\python.exe scripts\shoot_ui.py <url> <out.png> [wait_s] [w] [h]`
+- `git push space master:main` then factory restart:
+  `POST .../api/spaces/build-small-hackathon/Mystery_Mail_Guardian/restart?factory=true`
+- `.venv\Scripts\python.exe checks\check_live_letters.py` (post-deploy suite)
 
-## Files touched
-- `app.py`, `src/guardian/*` (9 modules), `tests/*` (6 files), `checks/*` (3 scripts),
-  `requirements.txt`, `requirements-dev.txt`, `README.md`, `BUILD_LOG.md`,
-  `.gitignore`, `.gitattributes`, `HANDOFF.md`
+## Files touched (this session)
+- `src/guardian/{ui_text,config,pipeline,render,samples}.py`, `app.py`,
+  `assets/guardian.css`, `assets/samples/*`, `scripts/{make_samples,shoot_ui}.py`,
+  `modal_validate.py`, `checks/check_live_letters.py`, `tests/*` (3 files),
+  `docs/ui/*`, `README.md`, `BUILD_LOG.md`, `.gitattributes` (LFS), `HANDOFF.md`
