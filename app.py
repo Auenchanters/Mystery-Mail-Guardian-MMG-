@@ -67,8 +67,9 @@ def _lang_code(label: str) -> str:
     return config.LANGUAGES.get(label, "en")
 
 
-def on_analyze(image, lang_label: str):
+def on_analyze(image, lang_label: str, progress=gr.Progress()):
     lang = _lang_code(lang_label)
+    progress(0.1, desc=ui_text.get(lang, "analyzing"))
     result = gpu_analyze(image, lang)
     what_html, worry_html, todo_html = render.render_result(result)
     return (what_html, worry_html, todo_html, result.speak_text,
@@ -181,7 +182,7 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
             )
         with gr.Column(scale=6):
             placeholder_what, _, _ = render.render_placeholder(_DEFAULT_LANG)
-            out_what = gr.HTML(placeholder_what)
+            out_what = gr.HTML(placeholder_what, elem_classes=["out-what"])
             out_worry = gr.HTML("")
             out_todo = gr.HTML("")
             read_btn = gr.Button(

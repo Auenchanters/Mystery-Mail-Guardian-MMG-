@@ -180,6 +180,25 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
 }
 
+/* --- Analyzing state: envelope flap opens over the first result block -------
+   Gradio 6 marks the busy component's inner container with `.pending`. */
+.out-what .html-container.pending { position: relative; min-height: 110px; }
+.out-what .html-container.pending::after {   /* envelope body */
+  content: ""; position: absolute; top: 40px; left: calc(50% - 27px);
+  width: 54px; height: 36px; background: var(--sheet);
+  border: 3px solid var(--postal-blue); border-radius: 4px;
+}
+.out-what .html-container.pending::before {  /* flap, hinged at the top edge */
+  content: ""; position: absolute; top: 43px; left: calc(50% - 23px);
+  width: 46px; height: 22px; background: var(--postal-blue);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center; z-index: 1;
+  animation: flap-open 1.4s ease-in-out infinite alternate;
+}
+@keyframes flap-open { from { transform: rotateX(0deg); } to { transform: rotateX(140deg); } }
+/* Gradio's queue overlay carries the localized "Reading your letter…" text */
+.progress-text { color: var(--postal-blue) !important; font-size: 18px !important; }
+
 /* --- Motion (all gated behind prefers-reduced-motion) ---------------------- */
 @keyframes rise {
   from { opacity: 0; transform: translateY(14px); }
