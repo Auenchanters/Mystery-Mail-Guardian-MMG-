@@ -96,6 +96,15 @@ _SHIELD_SVG = """<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="tr
 </svg>"""
 
 
+def _steps_html(lang: str) -> str:
+    items = "".join(
+        f'<div class="step"><span class="step-ring">{i}</span>'
+        f'<span>{ui_text.get(lang, key)}</span></div>'
+        for i, key in ((1, "step1"), (2, "step2"), (3, "step3"))
+    )
+    return f'<div class="guardian-steps">{items}</div>'
+
+
 def _header_html(lang: str) -> str:
     return f"""
     <div class="guardian-header">
@@ -131,6 +140,7 @@ def on_language_change(lang_label: str):
         "",          # clear pending speech
         _footer_html(lang),
         gr.Group(visible=False),   # hide the (now empty) audio sheet
+        _steps_html(lang),
     )
 
 
@@ -146,6 +156,8 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
         label=ui_text.get(_DEFAULT_LANG, "language_label"),
         elem_id="language-seg",
     )
+
+    steps = gr.HTML(_steps_html(_DEFAULT_LANG))
 
     with gr.Row(equal_height=False):
         with gr.Column(scale=5):
@@ -191,7 +203,8 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
         on_language_change,
         inputs=[language],
         outputs=[header, image, analyze_btn, read_btn, audio,
-                 out_what, out_worry, out_todo, speak_state, footer, audio_group],
+                 out_what, out_worry, out_todo, speak_state, footer, audio_group,
+                 steps],
     )
 
 if __name__ == "__main__":

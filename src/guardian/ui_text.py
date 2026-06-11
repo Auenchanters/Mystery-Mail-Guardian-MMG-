@@ -36,6 +36,10 @@ STRINGS: dict[str, dict[str, str]] = {
         "fact_amount": "Amount:",
         "fact_deadline": "Deadline:",
         "fallback_step": "Show this letter to a family member or someone you trust.",
+        "step1": "Take a photo",
+        "step2": "I read it",
+        "step3": "Listen",
+        "samples_label": "Try an example letter",
     },
     "hi": {
         "title": "Mystery-Mail Guardian",
@@ -67,6 +71,10 @@ STRINGS: dict[str, dict[str, str]] = {
         "fact_amount": "रक़म:",
         "fact_deadline": "आख़िरी तारीख़:",
         "fallback_step": "यह चिट्ठी परिवार के किसी सदस्य या भरोसेमंद व्यक्ति को दिखाएँ।",
+        "step1": "फोटो लें",
+        "step2": "मैं पढ़ता हूँ",
+        "step3": "सुनिए",
+        "samples_label": "एक उदाहरण चिट्ठी आज़माएँ",
     },
     "es": {
         "title": "Mystery-Mail Guardian",
@@ -98,6 +106,10 @@ STRINGS: dict[str, dict[str, str]] = {
         "fact_amount": "Monto:",
         "fact_deadline": "Fecha límite:",
         "fallback_step": "Muestre esta carta a un familiar o a alguien de confianza.",
+        "step1": "Tome una foto",
+        "step2": "Yo la leo",
+        "step3": "Escuche",
+        "samples_label": "Pruebe una carta de ejemplo",
     },
     "ja": {
         "title": "Mystery-Mail Guardian",
@@ -129,6 +141,10 @@ STRINGS: dict[str, dict[str, str]] = {
         "fact_amount": "金額:",
         "fact_deadline": "期限:",
         "fallback_step": "この手紙を、ご家族や信頼できる人に見せてください。",
+        "step1": "写真を撮る",
+        "step2": "わたしが読む",
+        "step3": "声で聞く",
+        "samples_label": "見本の手紙で試す",
     },
 }
 

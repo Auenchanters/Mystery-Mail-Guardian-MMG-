@@ -51,6 +51,22 @@
 }
 .privacy-banner svg { flex: none; }
 
+/* --- 1·2·3 step strip (postmark rings) -------------------------------------- */
+.guardian-steps {
+  display: flex; justify-content: center; gap: 28px;
+  margin: 10px 0 4px; flex-wrap: wrap;
+}
+.guardian-steps .step {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 19px; font-weight: 700; color: var(--ink-soft);
+}
+.step-ring {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 999px;
+  border: 2.5px dashed var(--postal-blue);  /* postmark ring */
+  color: var(--postal-blue); font-size: 20px;
+}
+
 /* --- Segmented language control -------------------------------------------- */
 #language-seg { background: transparent; border: none; }
 #language-seg .wrap {           /* the row of options */

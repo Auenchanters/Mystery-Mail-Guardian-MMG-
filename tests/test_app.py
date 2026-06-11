@@ -50,7 +50,7 @@ def test_language_change_localizes_ui():
     updates = app.on_language_change("हिन्दी (Hindi)")
     header_html = updates[0]
     assert "चिट्ठी" in header_html  # tagline localized
-    assert len(updates) == 11  # + hidden audio group
+    assert len(updates) == 12  # + hidden audio group + steps strip
 
 
 def test_language_change_japanese_roundtrip():
