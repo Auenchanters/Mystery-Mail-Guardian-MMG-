@@ -35,6 +35,15 @@ def test_speak_callback_returns_audio():
     assert audio_group.constructor_args["visible"] is True
 
 
+def test_language_control_is_segmented_radio():
+    import app
+    import gradio as gr
+
+    assert isinstance(app.language, gr.Radio)
+    assert app.language.elem_id == "language-seg"
+    assert len(app.language.choices) == 4
+
+
 def test_language_change_localizes_ui():
     import app
 

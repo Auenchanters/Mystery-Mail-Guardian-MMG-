@@ -51,6 +51,38 @@
 }
 .privacy-banner svg { flex: none; }
 
+/* --- Segmented language control -------------------------------------------- */
+#language-seg { background: transparent; border: none; }
+#language-seg .wrap {           /* the row of options */
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+#language-seg label {           /* one segment */
+  display: flex; align-items: center; justify-content: center;
+  flex: 1 1 0; min-height: 56px; min-width: 150px;
+  background: var(--sheet);
+  border: 2px solid var(--postal-blue) !important;
+  border-radius: 12px;
+  color: var(--postal-blue);
+  font-size: 19px; font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+#language-seg label:hover { transform: translateY(-1px); }
+#language-seg label.selected {
+  background: var(--postal-blue);
+  color: var(--paper);
+}
+#language-seg input[type="radio"] {  /* keep focusable, hide the dot */
+  position: absolute; opacity: 0; width: 1px; height: 1px;
+}
+#language-seg label:has(input:focus-visible) {
+  outline: 3px solid var(--postal-blue); outline-offset: 2px;
+}
+@media (max-width: 560px) {
+  #language-seg .wrap { display: grid; grid-template-columns: 1fr 1fr; }  /* 2×2 */
+  #language-seg label { min-width: 0; }
+}
+
 /* --- Result cards as letter sheets ---------------------------------------- */
 .guardian-card {
   position: relative;

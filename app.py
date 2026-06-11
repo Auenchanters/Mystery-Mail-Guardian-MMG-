@@ -140,10 +140,11 @@ _DEFAULT_LANG = config.LANGUAGES[config.DEFAULT_LANGUAGE]
 with gr.Blocks(title="Mystery-Mail Guardian") as demo:
     header = gr.HTML(_header_html(_DEFAULT_LANG))
 
-    language = gr.Dropdown(
+    language = gr.Radio(
         choices=list(config.LANGUAGES),
         value=config.DEFAULT_LANGUAGE,
         label=ui_text.get(_DEFAULT_LANG, "language_label"),
+        elem_id="language-seg",
     )
 
     with gr.Row(equal_height=False):
