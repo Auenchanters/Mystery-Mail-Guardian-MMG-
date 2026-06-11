@@ -7,9 +7,9 @@ from __future__ import annotations
 
 STRINGS: dict[str, dict[str, str]] = {
     "en": {
-        "title": "📬 Mystery-Mail Guardian",
+        "title": "Mystery-Mail Guardian",
         "tagline": "Take a photo of a confusing letter. I will explain it in plain words.",
-        "privacy": "🔒 Your letter never leaves this device. Everything runs locally on small models.",
+        "privacy": "Your letter never leaves this device. Everything runs locally on small models.",
         "upload_label": "Take a photo of your letter",
         "language_label": "Language / भाषा / Idioma / 言語",
         "analyze_btn": "📖 Read my letter",
@@ -38,9 +38,9 @@ STRINGS: dict[str, dict[str, str]] = {
         "fallback_step": "Show this letter to a family member or someone you trust.",
     },
     "hi": {
-        "title": "📬 Mystery-Mail Guardian",
+        "title": "Mystery-Mail Guardian",
         "tagline": "किसी भी उलझाने वाली चिट्ठी की फोटो लें। मैं उसे आसान शब्दों में समझाऊँगा।",
-        "privacy": "🔒 आपकी चिट्ठी इस डिवाइस से बाहर नहीं जाती। सब कुछ छोटे मॉडलों पर, यहीं चलता है।",
+        "privacy": "आपकी चिट्ठी इस डिवाइस से बाहर नहीं जाती। सब कुछ छोटे मॉडलों पर, यहीं चलता है।",
         "upload_label": "अपनी चिट्ठी की फोटो लें",
         "language_label": "Language / भाषा / Idioma / 言語",
         "analyze_btn": "📖 मेरी चिट्ठी पढ़ो",
@@ -69,9 +69,9 @@ STRINGS: dict[str, dict[str, str]] = {
         "fallback_step": "यह चिट्ठी परिवार के किसी सदस्य या भरोसेमंद व्यक्ति को दिखाएँ।",
     },
     "es": {
-        "title": "📬 Mystery-Mail Guardian",
+        "title": "Mystery-Mail Guardian",
         "tagline": "Tome una foto de una carta confusa. Se la explico en palabras sencillas.",
-        "privacy": "🔒 Su carta nunca sale de este dispositivo. Todo funciona localmente con modelos pequeños.",
+        "privacy": "Su carta nunca sale de este dispositivo. Todo funciona localmente con modelos pequeños.",
         "upload_label": "Tome una foto de su carta",
         "language_label": "Language / भाषा / Idioma / 言語",
         "analyze_btn": "📖 Leer mi carta",
@@ -100,9 +100,9 @@ STRINGS: dict[str, dict[str, str]] = {
         "fallback_step": "Muestre esta carta a un familiar o a alguien de confianza.",
     },
     "ja": {
-        "title": "📬 Mystery-Mail Guardian",
+        "title": "Mystery-Mail Guardian",
         "tagline": "わかりにくい手紙の写真を撮ってください。やさしい言葉でご説明します。",
-        "privacy": "🔒 お手紙がこの機器の外に出ることはありません。すべて小さなモデルで、この場で動きます。",
+        "privacy": "お手紙がこの機器の外に出ることはありません。すべて小さなモデルで、この場で動きます。",
         "upload_label": "手紙の写真を撮ってください",
         "language_label": "Language / भाषा / Idioma / 言語",
         "analyze_btn": "📖 手紙を読んでもらう",

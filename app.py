@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "src
 
 import gradio as gr
 
-from guardian import config, pipeline, render, speak, ui_text
+from guardian import config, pipeline, render, speak, theme, ui_text
 
 # --- ZeroGPU compatibility ---------------------------------------------------
 # @spaces.GPU is effect-free off-Space per the ZeroGPU docs; this shim makes it
@@ -71,23 +71,37 @@ def on_analyze(image, lang_label: str):
     lang = _lang_code(lang_label)
     result = gpu_analyze(image, lang)
     what_html, worry_html, todo_html = render.render_result(result)
-    return what_html, worry_html, todo_html, result.speak_text, None
+    return (what_html, worry_html, todo_html, result.speak_text,
+            None, gr.Group(visible=False))
 
 
 def on_speak(speak_text: str, lang_label: str):
     lang = _lang_code(lang_label)
     if not speak_text:
         gr.Warning(ui_text.get(lang, "err_no_speech"))
-        return None
-    return gpu_speak(speak_text)
+        return None, gr.Group(visible=False)
+    return gpu_speak(speak_text), gr.Group(visible=True)
+
+
+# Inline SVG (vendored in code — no image files, no runtime fetches).
+_ENVELOPE_SVG = """<svg viewBox="0 0 64 48" width="56" height="42" aria-hidden="true" focusable="false">
+  <rect x="2" y="4" width="60" height="40" rx="3" fill="none" stroke="var(--postal-blue)" stroke-width="3"/>
+  <path d="M5 9 L32 30 L59 9" fill="none" stroke="var(--postal-red)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="47" y="10" width="9" height="7" fill="var(--postal-red)" opacity=".85"/>
+</svg>"""
+
+_SHIELD_SVG = """<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="currentColor">
+  <path d="M12 2l8 3v6c0 5.4-3.4 9.6-8 11-4.6-1.4-8-5.6-8-11V5z"/>
+  <path d="M8.6 11.6l2.4 2.4 4.4-4.6" fill="none" stroke="var(--seal-green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>"""
 
 
 def _header_html(lang: str) -> str:
     return f"""
     <div class="guardian-header">
-      <h1>{ui_text.get(lang, "title")}</h1>
+      <div class="wordmark">{_ENVELOPE_SVG}<h1>{ui_text.get(lang, "title")}</h1></div>
       <p class="tagline">{ui_text.get(lang, "tagline")}</p>
-      <p class="privacy-banner">{ui_text.get(lang, "privacy")}</p>
+      <p class="privacy-banner">{_SHIELD_SVG}<span>{ui_text.get(lang, "privacy")}</span></p>
     </div>"""
 
 
@@ -98,6 +112,7 @@ def _footer_html(lang: str) -> str:
       <p class="disclaimer">🤍 {ui_text.get(lang, "disclaimer")}</p>
       <p class="model-note">Off the Grid: 100% local inference · {models} ·
       total {config.total_params_b():.1f}B of 32B allowed</p>
+      <p class="colophon">Built with Gradio ❤️ · every model by OpenBMB</p>
     </div>"""
 
 
@@ -115,38 +130,11 @@ def on_language_change(lang_label: str):
         todo_html,
         "",          # clear pending speech
         _footer_html(lang),
+        gr.Group(visible=False),   # hide the (now empty) audio sheet
     )
 
 
-# --- Layout & styling (accessible: large type, big targets, high contrast) -----
-CSS = """
-.gradio-container { max-width: 980px !important; margin: 0 auto !important; }
-.guardian-header { text-align: center; padding: 8px 0 4px; }
-.guardian-header h1 { font-size: 2.4rem; margin-bottom: 4px; }
-.guardian-header .tagline { font-size: 1.35rem; margin: 4px 0; }
-.privacy-banner {
-  display: inline-block; font-size: 1.1rem; font-weight: 600;
-  background: rgba(46, 125, 50, 0.14); border: 2px solid rgba(46, 125, 50, 0.55);
-  border-radius: 12px; padding: 8px 16px; margin-top: 6px;
-}
-.guardian-card {
-  border-radius: 14px; padding: 16px 20px; margin: 10px 0;
-  font-size: 1.25rem; line-height: 1.65; border: 2px solid transparent;
-}
-.guardian-card h2 { font-size: 1.45rem; margin: 0 0 8px; }
-.guardian-card ul { margin: 6px 0 0 2px; padding-left: 24px; }
-.guardian-card li { margin: 5px 0; }
-.card-neutral { background: rgba(100, 130, 200, 0.10); border-color: rgba(100, 130, 200, 0.40); }
-.card-low     { background: rgba(46, 125, 50, 0.10);  border-color: rgba(46, 125, 50, 0.45); }
-.card-caution { background: rgba(230, 150, 0, 0.13);  border-color: rgba(230, 150, 0, 0.55); }
-.card-warning { background: rgba(198, 40, 40, 0.12);  border-color: rgba(198, 40, 40, 0.60); }
-.card-todo    { background: rgba(2, 119, 189, 0.10);  border-color: rgba(2, 119, 189, 0.45); }
-.big-button { min-height: 72px; font-size: 1.4rem !important; font-weight: 700; }
-.guardian-footer { text-align: center; font-size: 1.0rem; opacity: 0.85; padding-top: 10px; }
-.guardian-footer .disclaimer { font-size: 1.15rem; font-weight: 600; }
-label span { font-size: 1.1rem !important; }
-"""
-
+# --- Layout (all styling lives in assets/guardian.css + guardian/theme.py) -----
 _DEFAULT_LANG = config.LANGUAGES[config.DEFAULT_LANGUAGE]
 
 with gr.Blocks(title="Mystery-Mail Guardian") as demo:
@@ -164,6 +152,7 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
                 type="pil",
                 sources=["upload", "webcam"],
                 label=ui_text.get(_DEFAULT_LANG, "upload_label"),
+                elem_classes=["upload-zone"],
             )
             analyze_btn = gr.Button(
                 ui_text.get(_DEFAULT_LANG, "analyze_btn"),
@@ -180,12 +169,13 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
                 variant="secondary",
                 elem_classes=["big-button"],
             )
-            audio = gr.Audio(
-                label=ui_text.get(_DEFAULT_LANG, "audio_label"),
-                type="numpy",
-                autoplay=True,
-                interactive=False,
-            )
+            with gr.Group(visible=False, elem_classes=["audio-sheet"]) as audio_group:
+                audio = gr.Audio(
+                    label=ui_text.get(_DEFAULT_LANG, "audio_label"),
+                    type="numpy",
+                    autoplay=True,
+                    interactive=False,
+                )
 
     speak_state = gr.State("")
     footer = gr.HTML(_footer_html(_DEFAULT_LANG))
@@ -193,21 +183,22 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
     analyze_btn.click(
         on_analyze,
         inputs=[image, language],
-        outputs=[out_what, out_worry, out_todo, speak_state, audio],
+        outputs=[out_what, out_worry, out_todo, speak_state, audio, audio_group],
     )
-    read_btn.click(on_speak, inputs=[speak_state, language], outputs=[audio])
+    read_btn.click(on_speak, inputs=[speak_state, language], outputs=[audio, audio_group])
     language.change(
         on_language_change,
         inputs=[language],
         outputs=[header, image, analyze_btn, read_btn, audio,
-                 out_what, out_worry, out_todo, speak_state, footer],
+                 out_what, out_worry, out_todo, speak_state, footer, audio_group],
     )
 
 if __name__ == "__main__":
-    # Gradio 6: theme/css are launch() parameters.
+    # Gradio 6: theme/css are launch() parameters. css_paths is inlined by
+    # Gradio, so fonts resolve via /gradio_api/file= + allowed_paths.
     demo.launch(
-        css=CSS,
-        theme=gr.themes.Soft(
-            text_size=gr.themes.sizes.text_lg, radius_size=gr.themes.sizes.radius_lg
-        ),
+        css=theme.css_variables(),
+        css_paths=["assets/guardian.css"],
+        theme=theme.build_theme(),
+        allowed_paths=["assets"],
     )

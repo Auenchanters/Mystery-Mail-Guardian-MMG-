@@ -17,18 +17,22 @@ def test_app_builds_in_mock_mode():
 def test_analyze_callback_roundtrip():
     import app
 
-    what_html, worry_html, todo_html, speak_text, audio = app.on_analyze(object(), "English")
+    what_html, worry_html, todo_html, speak_text, audio, audio_group = app.on_analyze(
+        object(), "English"
+    )
     assert "electricity bill" in what_html
     assert "card-low" in worry_html
     assert "never use the contact details" in todo_html
     assert speak_text and audio is None
+    assert audio_group.constructor_args["visible"] is False
 
 
 def test_speak_callback_returns_audio():
     import app
 
-    sr, wav = app.on_speak("Hello, this is a test.", "English")
+    (sr, wav), audio_group = app.on_speak("Hello, this is a test.", "English")
     assert sr > 0 and len(wav) > 0
+    assert audio_group.constructor_args["visible"] is True
 
 
 def test_language_change_localizes_ui():
@@ -37,4 +41,17 @@ def test_language_change_localizes_ui():
     updates = app.on_language_change("हिन्दी (Hindi)")
     header_html = updates[0]
     assert "चिट्ठी" in header_html  # tagline localized
-    assert len(updates) == 10
+    assert len(updates) == 11  # + hidden audio group
+
+
+def test_language_change_japanese_roundtrip():
+    import app
+
+    updates = app.on_language_change("日本語 (Japanese)")
+    assert "手紙" in updates[0]  # tagline localized
+    what_html, worry_html, todo_html, speak_text, audio, audio_group = app.on_analyze(
+        object(), "日本語 (Japanese)"
+    )
+    assert "電気料金" in what_html
+    assert "card-low" in worry_html
+    assert "連絡先は使わないで" in todo_html

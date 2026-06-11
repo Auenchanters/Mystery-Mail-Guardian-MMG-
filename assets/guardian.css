@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Mystery-Mail Guardian — "Kitchen-Table Post Office" skin
+   --------------------------------------------------------------------------
+   The :root design tokens are injected ahead of this file by
+   src/guardian/theme.py:css_variables() (DARK-FIRST, forced palette).
+   Fonts are vendored repo files served through Gradio's file route — the
+   deployed app makes zero runtime network requests (Off-the-Grid).
+   ========================================================================== */
+
+/* --- Vendored fonts ------------------------------------------------------ */
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("/gradio_api/file=assets/fonts/AtkinsonHyperlegible-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("/gradio_api/file=assets/fonts/AtkinsonHyperlegible-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Noto Sans Devanagari"; src: url("/gradio_api/file=assets/fonts/NotoSansDevanagari-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Noto Sans Devanagari"; src: url("/gradio_api/file=assets/fonts/NotoSansDevanagari-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+/* --- Base ----------------------------------------------------------------- */
+.gradio-container {
+  max-width: 1020px !important;
+  margin: 0 auto !important;
+  background: var(--paper);
+  font-family: "Atkinson Hyperlegible", "Noto Sans Devanagari",
+               "Hiragino Sans", "Yu Gothic UI", Meiryo, system-ui, sans-serif !important;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.gradio-container *:focus-visible {
+  outline: 3px solid var(--postal-blue) !important;
+  outline-offset: 2px;
+}
+
+/* --- Header: envelope wordmark + wax-seal privacy badge ------------------- */
+.guardian-header { text-align: center; padding: 18px 0 6px; }
+.guardian-header .wordmark {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.guardian-header h1 {
+  font-size: 40px; margin: 0; color: var(--ink); letter-spacing: .02em;
+}
+.guardian-header .tagline {
+  font-size: 22px; color: var(--ink-soft); margin: 10px auto 16px; max-width: 640px;
+}
+.privacy-banner {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 18px; font-weight: 700; text-align: left;
+  color: var(--paper); background: var(--seal-green);
+  border-radius: 999px; padding: 12px 22px; margin: 2px auto 4px;
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--seal-green),
+              0 2px 8px rgba(0, 0, 0, .25);  /* embossed double ring */
+}
+.privacy-banner svg { flex: none; }
+
+/* --- Result cards as letter sheets ---------------------------------------- */
+.guardian-card {
+  position: relative;
+  background: var(--sheet);
+  border: 1px solid var(--line);
+  border-left-width: 8px;
+  border-radius: 4px;
+  padding: 22px 24px 18px;
+  margin: 14px 0;
+  font-size: 21px;
+  line-height: 1.6;
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .25);  /* paper on a table */
+}
+.guardian-card::before {  /* deckle top edge */
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px);
+  border-radius: 4px 4px 0 0;
+}
+.guardian-card h2 { font-size: 24px; margin: 0 0 10px; color: var(--ink); }
+.guardian-card ul { margin: 8px 0 0; padding-left: 26px; }
+.guardian-card li { margin: 6px 0; }
+.guardian-card p  { margin: 6px 0; }
+
+.card-neutral { border-left-color: var(--postal-blue);
+                transform: rotate(-0.4deg); }  /* hand-placed first sheet */
+.card-low     { border-left-color: var(--seal-green);
+                background: color-mix(in srgb, var(--seal-green) 7%, var(--sheet)); }
+.card-caution { border-left-color: var(--amber);
+                background: color-mix(in srgb, var(--amber) 8%, var(--sheet)); }
+.card-warning { border-left-color: var(--alert-red);
+                background: color-mix(in srgb, var(--alert-red) 9%, var(--sheet)); }
+.card-todo    { border-left-color: var(--postal-blue);
+                background: color-mix(in srgb, var(--postal-blue) 7%, var(--sheet)); }
+
+/* --- Buttons --------------------------------------------------------------- */
+.big-button {
+  min-height: 64px;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.big-button:hover, .big-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+}
+.big-button.secondary { border: 2px solid var(--postal-blue) !important; }
+
+/* --- Upload zone: an open envelope ---------------------------------------- */
+.upload-zone {
+  background: var(--sheet) !important;
+  border: 2px dashed var(--postal-blue) !important;
+  border-radius: 4px !important;
+}
+.upload-zone .wrap { font-size: 19px; color: var(--ink-soft); }
+
+/* --- Audio: a small letter sheet ------------------------------------------- */
+.audio-sheet {
+  background: var(--sheet) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+}
+
+/* --- Motion (all gated behind prefers-reduced-motion) ---------------------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.guardian-card { animation: rise .35s ease-out backwards; }
+.card-low, .card-caution, .card-warning { animation-delay: .12s; }  /* 2nd sheet */
+.card-todo { animation-delay: .24s; }                               /* 3rd sheet */
+
+@media (prefers-reduced-motion: reduce) {
+  .gradio-container *, .gradio-container *::before, .gradio-container *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .guardian-card { transform: none !important; }
+  .big-button:hover, .big-button:focus-visible { transform: none; }
+}
+
+/* --- Mobile (≤640px) -------------------------------------------------------- */
+@media (max-width: 640px) {
+  .guardian-header h1 { font-size: 30px; }
+  .guardian-header .tagline { font-size: 19px; }
+  .privacy-banner { font-size: 16px; padding: 10px 16px; }
+  .guardian-card { font-size: 18px; padding: 18px 16px 14px; }
+  .guardian-card h2 { font-size: 21px; }
+  .big-button { width: 100%; }
+}
+
+/* --- Footer colophon --------------------------------------------------------- */
+footer { display: none !important; }  /* Gradio's own footer; credit kept below */
+.guardian-footer {
+  text-align: center; font-size: 16px; color: var(--ink-soft);
+  border-top: 1px solid var(--line); margin-top: 22px; padding: 16px 0 10px;
+}
+.guardian-footer .disclaimer { font-size: 18px; font-weight: 700; color: var(--ink); }
+.guardian-footer .model-note {
+  font-variant-caps: all-small-caps; letter-spacing: .06em; margin: 6px 0 2px;
+}
+.guardian-footer .colophon { margin: 2px 0; }
