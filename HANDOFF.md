@@ -32,6 +32,13 @@ _Last updated: 2026-06-11 (UI-redesign session)_
 ## In progress
 - Nothing mid-flight. **UI FREEZE in effect (owner rule: 2026-06-13 EOD; frozen
   early 06-11).** June 12–15 = demo video, social post, README placeholders only.
+- **06-11 hotfix (owner-reported, live at 0b6d0b6):** stacked progress bars →
+  `show_progress_on=out_what`; model parroting prompt-schema text as "facts" →
+  echo filter in `triage._is_prompt_echo` + prompt hardening + heuristics now
+  also scan explanation text. Regression check: `checks/check_land_letter.py`
+  (PASS — real facts, no echoes). ⚠️ After any `git lfs migrate`, run
+  `git lfs checkout` — the working tree was left as pointer files (broke local
+  mock examples; live Space unaffected).
 
 ## Known warts (acceptable, documented)
 - In ja runs the model sometimes writes key-fact bullets in English; all
