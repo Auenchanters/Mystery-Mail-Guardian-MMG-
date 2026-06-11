@@ -172,6 +172,27 @@ vendored Noto (fonts.check); zero console errors. Screenshots in docs/ui/
 (captured via scripts/shoot_ui.py — headless Edge over CDP, because the
 preview screenshot tool kept timing out).
 
+## 2026-06-12 — The Modal matrix earns its keep on its first run
+
+Redeemed the sponsor credits and ran the new **GPU validation matrix on Modal**
+(`modal run modal_validate.py`, A10G): 10 analyses — four letter types
+including the real-world land-letter regression case, the gift-card scam in
+all four languages, and three degraded photos (blur / dim / rotation) — plus
+VoxCPM2 speech in en/hi/es/ja. All worry levels landed in their acceptable
+ranges; the model read the scam right through every degradation.
+
+**And the harness caught a real safety bug on run #1:** the lottery scammer's
+reply address (`claims@prize-winner-intl.example`) surfaced in the *key facts*
+card. Contact-detail stripping only covered action steps — the threat model
+("the letter wants you to use ITS contact details") applies to every card.
+Fixed in `safety.sanitize_fact`/`sanitize_reason` (strip + drop facts that
+were essentially nothing but the contact), TDD'd to 91 tests, redeployed.
+
+Timings worth keeping: first analysis 38s (model load), then ~7–9s per
+analysis; first speech 151s (load), then ~4s per language. Whole matrix ≈
+well under $1 of the $250 credits. Modal usage stays strictly build/test-time —
+the deployed runtime is still 100% local (Off the Grid intact).
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go

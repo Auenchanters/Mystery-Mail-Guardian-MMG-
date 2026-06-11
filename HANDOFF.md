@@ -54,8 +54,11 @@ _Last updated: 2026-06-11 (UI-redesign session)_
 - Headroom on Windows unchanged (no wheel; would need global Rust).
 
 ## Next steps (human, per PROJECT.md §9 + field-guide intel)
-1. `modal token new` then `.venv\Scripts\modal.exe run modal_validate.py` —
-   Modal prize requires actually running it once before submission.
+1. ~~Modal validation~~ DONE 2026-06-12: matrix ran twice on Modal (A10G).
+   Run #1 caught a real contact-leak bug (fixed, 91 tests); run #2 = GO
+   (10 analyses + 4 speech). Evidence: docs/modal-validation-report.json,
+   BUILD_LOG 06-12 entry, WAVs in modal_artifacts/ (local, gitignored).
+   Tip: prefix Modal CLI runs with `$env:PYTHONIOENCODING='utf-8'` on Windows.
 2. Real-person testing + consent, demo video (use `?lang=hi|es|ja` deep-links;
    beats list in plan "NEW INTEL" §6), social post, fill the three
    `<!-- HUMAN -->` README placeholders before June 15.

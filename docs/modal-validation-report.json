@@ -1,0 +1,322 @@
+{
+  "analyses": {
+    "normal_bill_en": {
+      "ok": true,
+      "seconds": 38.3,
+      "lang": "en",
+      "document_type": "utility_bill",
+      "worry_level": "low",
+      "acceptable_levels": [
+        "low"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This looks like an electricity, water, or utility bill.",
+      "key_facts": [
+        "there's an electricity bill",
+        "the amount is $84.20",
+        "the due date is June 28, 2026",
+        "you can pay online or by mail"
+      ],
+      "reasons": [],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    },
+    "gift_card_scam_en": {
+      "ok": true,
+      "seconds": 7.9,
+      "lang": "en",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This looks like a letter from the government or tax office.",
+      "key_facts": [
+        "a penalty of $500",
+        "must pay within 24 hours",
+        "only with Google Play gift cards",
+        "do not contact bank or tax office"
+      ],
+      "reasons": [
+        "arrest if not paid",
+        "pressure to act quickly",
+        "contacting bank is forbidden",
+        "It pushes you to act immediately",
+        "It asks for payment by gift card or cryptocurrency"
+      ],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    },
+    "lottery_scam_en": {
+      "ok": true,
+      "seconds": 8.0,
+      "lang": "en",
+      "document_type": "charity",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "caution",
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This is a charity letter for a prize. It asks to claim the prize with a fee. The amount is mentioned clearly.",
+      "key_facts": [
+        "a prize of $2,500,000",
+        "wire transfer is required",
+        "within 48 hours"
+      ],
+      "reasons": [
+        "It asks for a wire or money transfer",
+        "It promises a prize or deal that seems too good to be true",
+        "It uses fear or pressure so you do not stop to think"
+      ],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    },
+    "land_letter_en": {
+      "ok": true,
+      "seconds": 3.7,
+      "lang": "en",
+      "document_type": "marketing",
+      "worry_level": "low",
+      "acceptable_levels": [
+        "caution",
+        "low",
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This looks like an advertisement.",
+      "key_facts": [
+        "From: Abiodun Andrew Sunday, CEO",
+        "What they want: to search and cooperate for the land",
+        "Amount: N400,000,000.00"
+      ],
+      "reasons": [],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    },
+    "gift_card_scam_hi": {
+      "ok": true,
+      "seconds": 8.0,
+      "lang": "hi",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "यह सरकार या टैक्स दफ़्तर की चिट्ठी लगती है।",
+      "key_facts": [
+        "a penalty of $500",
+        "must pay within 24 hours",
+        "arrested if not paid",
+        "pay with gift cards"
+      ],
+      "reasons": [
+        "risk of arrest",
+        "need to pay quickly",
+        "contact your bank",
+        "यह तुरंत कुछ करने का दबाव डालती है",
+        "यह गिफ्ट कार्ड या क्रिप्टो से भुगतान माँगती है"
+      ],
+      "actions": [
+        "यह चिट्ठी परिवार के किसी सदस्य या भरोसेमंद व्यक्ति को दिखाएँ।",
+        "पैसे देने या जवाब देने से पहले: उस कंपनी या दफ़्तर से उसी नंबर या वेबसाइट पर बात करें जिसे आप पहले से जानते और भरोसा करते हैं — इस चिट्ठी में छपे नंबर या पते का इस्तेमाल न करें।"
+      ],
+      "error": ""
+    },
+    "gift_card_scam_es": {
+      "ok": true,
+      "seconds": 6.9,
+      "lang": "es",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "Esto parece una carta del gobierno o de la oficina de impuestos.",
+      "key_facts": [
+        "Qué piden: pay the penalty or avoid arrest",
+        "Monto: $500"
+      ],
+      "reasons": [
+        "Le presiona a actuar de inmediato",
+        "Amenaza con multas, arresto o cierre de su cuenta"
+      ],
+      "actions": [
+        "Muestre esta carta a un familiar o a alguien de confianza.",
+        "Antes de pagar o responder: contacte a la empresa u oficina por un teléfono o sitio web que usted ya conozca y en el que confíe — nunca use los datos de contacto impresos en esta carta."
+      ],
+      "error": ""
+    },
+    "gift_card_scam_ja": {
+      "ok": true,
+      "seconds": 6.4,
+      "lang": "ja",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "これは役所や税務署からの手紙のようです。",
+      "key_facts": [
+        "用件: pay the penalty within a set time",
+        "金額: $500"
+      ],
+      "reasons": [
+        "今すぐ行動するように急かしています",
+        "罰金や逮捕、口座の停止などで脅しています"
+      ],
+      "actions": [
+        "この手紙を、ご家族や信頼できる人に見せてください。",
+        "お金を払う前や返事をする前に:ご自分がもともと知っていて信頼できる電話番号やホームページから、その会社や役所に確かめてください。この手紙に印刷されている連絡先は使わないでください。"
+      ],
+      "error": ""
+    },
+    "scam_blurred": {
+      "ok": true,
+      "seconds": 8.4,
+      "lang": "en",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "caution",
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This looks like a letter from the government or tax office.",
+      "key_facts": [
+        "a penalty of $500",
+        "must pay within 24 hours",
+        "arrested if not paid",
+        "use Google Play gift cards"
+      ],
+      "reasons": [
+        "risk of arrest if not paid",
+        "pressure to pay quickly",
+        "no contact with bank or tax office",
+        "gift card payment only",
+        "It pushes you to act immediately",
+        "It asks for payment by gift card or cryptocurrency"
+      ],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    },
+    "scam_dim": {
+      "ok": true,
+      "seconds": 8.1,
+      "lang": "en",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "caution",
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This looks like a letter from the government or tax office.",
+      "key_facts": [
+        "a penalty of $500",
+        "must pay within 24 hours",
+        "only with Google Play gift cards",
+        "do not contact your bank"
+      ],
+      "reasons": [
+        "arrest if not paid",
+        "pressure to act quickly",
+        "contact your bank is forbidden",
+        "It pushes you to act immediately",
+        "It asks for payment by gift card or cryptocurrency"
+      ],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    },
+    "scam_rotated": {
+      "ok": true,
+      "seconds": 8.4,
+      "lang": "en",
+      "document_type": "government_tax",
+      "worry_level": "warning",
+      "acceptable_levels": [
+        "caution",
+        "warning"
+      ],
+      "level_matches": true,
+      "safety_violations": [],
+      "what_this_is": "This looks like a letter from the government or tax office.",
+      "key_facts": [
+        "a penalty of $500",
+        "must pay within 24 hours",
+        "only with Google Play gift cards",
+        "do not contact your bank"
+      ],
+      "reasons": [
+        "arrest if not paid",
+        "need to use gift cards",
+        "no bank contact allowed",
+        "urgent notice",
+        "It pushes you to act immediately",
+        "It asks for payment by gift card or cryptocurrency"
+      ],
+      "actions": [
+        "Show this letter to a family member or someone you trust.",
+        "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
+      ],
+      "error": ""
+    }
+  },
+  "speech": {
+    "en": {
+      "seconds": 124.4,
+      "sample_rate": 48000,
+      "audio_seconds": 5.9,
+      "saved_to": "modal_artifacts\\speech_en.wav"
+    },
+    "hi": {
+      "seconds": 4.4,
+      "sample_rate": 48000,
+      "audio_seconds": 5.9,
+      "saved_to": "modal_artifacts\\speech_hi.wav"
+    },
+    "es": {
+      "seconds": 3.9,
+      "sample_rate": 48000,
+      "audio_seconds": 5.3,
+      "saved_to": "modal_artifacts\\speech_es.wav"
+    },
+    "ja": {
+      "seconds": 4.4,
+      "sample_rate": 48000,
+      "audio_seconds": 5.9,
+      "saved_to": "modal_artifacts\\speech_ja.wav"
+    }
+  }
+}
