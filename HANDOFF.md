@@ -32,11 +32,15 @@ _Last updated: 2026-06-10_
 - Headroom still blocked on Windows (no wheel; needs global Rust) — unchanged.
 
 ## Next steps (human, per PROJECT.md §9)
-0. **UI redesign queued:** full implementation plan at
-   [docs/superpowers/plans/2026-06-11-ui-redesign.md](docs/superpowers/plans/2026-06-11-ui-redesign.md)
-   ("Kitchen-Table Post Office" — postal theme, Atkinson Hyperlegible, stamp verdict
-   badges, segmented language buttons, example letters). Answer the 5 "Open decisions"
-   at the bottom of the plan, then execute Tasks 0→12. UI freeze June 13.
+0. **UI redesign ready to build:** plan at
+   [docs/superpowers/plans/2026-06-11-ui-redesign.md](docs/superpowers/plans/2026-06-11-ui-redesign.md).
+   Decisions LOCKED 06-11: dark-first, no mascot, examples yes, gr.Server stretch only
+   if Tasks 1–9 done by build-day noon, **add Japanese (Task 7b)**. Includes "NEW
+   INTEL" min-max section from the organizers' field-guide (source mirrored in
+   `.fieldguide/`, gitignored). UI freeze June 13.
+   **Post-redesign:** add `achievement:offbrand` tag to README; consider
+   `achievement:sharing` (publish sanitized agent trace on Hub — needs owner consent).
+   ⚠️ Keep LEAN config deployed through judging — full config (8B) forfeits Tiny Titan.
 1. ~~Create HF Space~~ DONE — deployed to build-small-hackathon/Mystery_Mail_Guardian
    (ZeroGPU zero-a10g); GitHub repo Auenchanters/Mystery-Mail-Guardian-MMG- synced.
    Remotes configured: `space` (HF) and `origin` (GitHub); push auth via cached HF

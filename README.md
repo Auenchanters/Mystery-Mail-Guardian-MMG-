@@ -10,8 +10,12 @@ app_file: app.py
 license: apache-2.0
 short_description: Photograph a confusing letter — it explains it, locally.
 tags:
+  - track:backyard
+  - sponsor:openbmb
+  - sponsor:modal
+  - achievement:offgrid
+  - achievement:fieldnotes
   - build-small-hackathon
-  - backyard-ai
   - minicpm
   - voxcpm
   - privacy
@@ -45,7 +49,7 @@ vulnerable person, running fully on-device**. It never renders verdicts ("this i
 "this is safe") — it explains, lists concrete warning signs, and always points the person to
 verification channels they already trust.
 
-## Models — 3.3B total parameters (cap: 32B)
+## Models — every one is OpenBMB, 3.3B total (cap: each model < 32B; ours don't even sum to 4B)
 
 | Model | Params | Role | Runtime |
 |---|---|---|---|
@@ -94,6 +98,9 @@ the 32B cap. The MiniCPM family is the heart of the app in both configs.
 - ✅ **OpenBMB-central** — MiniCPM-V 4.6 is the engine; VoxCPM2 the voice; all models are OpenBMB
 - 🟡 **Llama Champion** — available via the documented `GUARDIAN_CONFIG=full` (llama.cpp GGUF)
 - ✅ **Cautious scam framing** — enforced in code (see `tests/test_safety.py`)
+
+> If this project helped or impressed you, a ❤️ on this Space means a lot — it's how
+> the Community Choice award is decided.
 
 ## Submission links
 

@@ -37,13 +37,16 @@ Claude preview tools for visual verification.
 
 ## Design concept — "The Kitchen-Table Post Office"
 
-The app should feel like a kind neighbor reading your mail with you at a sunny kitchen
-table, not like a developer dashboard. Default is a **warm paper-light** theme (elders
-read high-contrast-on-light better); dark mode supported via tokens.
+The app should feel like a kind neighbor reading your mail with you at a warm desk
+lamp, not like a developer dashboard. **DARK-FIRST (owner decision 06-11):** the dark
+column below is the default `:root` palette — "midnight study desk": deep warm browns,
+lamp-lit paper sheets, postal accents. The light column serves
+`@media (prefers-color-scheme: light)` users. Both palettes are enforced by the same
+WCAG test (Task 1); dark must pass first.
 
 ### Design tokens (exact values — single source of truth)
 
-| Token | Light | Dark | Used for |
+| Token | Light | Dark **(default)** | Used for |
 |---|---|---|---|
 | `--paper` | `#FAF4E8` | `#1E1B16` | page background (warm cream) |
 | `--sheet` | `#FFFDF7` | `#2A2620` | cards ("paper sheets") |
@@ -207,7 +210,12 @@ def contrast_ratio(fg: str, bg: str) -> float:
 ```python
 def build_theme():
     import gradio as gr
-    t = TOKENS["light"]
+    t = TOKENS["dark"]   # DARK-FIRST: set both base and *_dark theme properties —
+    # Gradio themes carry separate `<prop>` (light) and `<prop>_dark` values; assign
+    # TOKENS["light"] to the base props and TOKENS["dark"] to the `_dark` props, and
+    # force dark as default via `js=` snippet or `gr.themes` defaults (verify the
+    # Gradio 6.17 mechanism for default-dark in Task 0 — likely `?__theme=dark` or
+    # theme.set() dark props + <html class>).
     return gr.themes.Base(
         primary_hue=gr.themes.Color(  # postal red ramp; c500 = token
             c50="#FBEDE8", c100="#F6D8CE", c200="#EEB3A2", c300="#E38D75",
@@ -245,10 +253,11 @@ Write sections in this order, verifying in the browser after each (Task 11 comma
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("fonts/AtkinsonHyperlegible-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
 @font-face { font-family: "Noto Sans Devanagari"; src: url("fonts/NotoSansDevanagari-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Noto Sans Devanagari"; src: url("fonts/NotoSansDevanagari-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-:root { --paper:#FAF4E8; --sheet:#FFFDF7; --ink:#2B2A33; --ink-soft:#5A5550;
-        --postal-red:#C84B31; --postal-blue:#3D5A80; --seal-green:#3A7D44;
-        --amber:#B97700; --alert-red:#B3362B; --line:#E4D9C3; }
-@media (prefers-color-scheme: dark) { :root { /* dark tokens from theme.py table */ } }
+:root { /* DARK-FIRST (owner decision) */
+        --paper:#1E1B16; --sheet:#2A2620; --ink:#EDE6D6; --ink-soft:#B8AE9C;
+        --postal-red:#E07A5F; --postal-blue:#8EB1D9; --seal-green:#7BC88A;
+        --amber:#E8B339; --alert-red:#F08A80; --line:#3E382E; }
+@media (prefers-color-scheme: light) { :root { /* light tokens from theme.py table */ } }
 .gradio-container { max-width: 1020px !important; margin: 0 auto !important;
                     font-size: 19px; line-height: 1.6; }
 ```
@@ -455,14 +464,90 @@ Checklist — every item verified in the running mock app, results noted in BUIL
 | Scope creep past June 13 | Tasks ordered by visual impact: 1–5 are the look; 6–9 are delight; cut from 9 backwards if needed |
 | Space rebuild flakiness | Factory-restart procedure, never Dev Mode |
 
-## Open decisions — answer these before build starts
+## Decisions — LOCKED 2026-06-11 (owner's answers)
 
-1. **Light-first postal theme** (recommended, this plan) vs keeping dark-first?
-2. **Mascot** (small inline-SVG guardian owl on the header)? Recommend **no** — dignity
-   over cuteness; the stamps/seal carry the charm. Say yes only if you love it.
-3. **Example letters visible to judges** (Task 8)? Recommend **yes** — each judge click
-   costs ~30–60s of *their* ZeroGPU quota, not yours, and removes all friction.
-4. **Off-Brand stretch (`gr.Server`)**: attempt only if Tasks 1–9 deployed by June 13
-   noon? (Task 0 gathers the facts; default = skip.)
-5. Keep the three languages as-is, or swap Spanish for the real person's actual language
-   if it differs? (Strings are one file: `ui_text.py`.)
+1. **DARK-FIRST.** The dark token column becomes `:root`; light palette serves
+   `@media (prefers-color-scheme: light)`. Same postal motifs on "midnight study desk"
+   paper: `--paper #1E1B16`, sheets `#2A2620`, warm lamp-light accents. The WCAG test
+   in Task 1 already covers the dark palette as a first-class citizen — it is now the
+   primary palette and must pass first.
+2. **No mascot.** Stamps and the wax seal carry the charm.
+3. **Example letters: YES** (Task 8 as written, `cache_examples=False`).
+4. **`gr.Server` stretch: attempt only if Tasks 1–9 are deployed by build-day noon**
+   (owner wrote "June 11 noon"; interpret as noon on build day). NEW INTEL (below)
+   lowers the stakes: the Off-Brand badge is judged "best custom UI past the default
+   Gradio look" — `gr.Server` is a *hint*, not a requirement — so the redesign itself
+   competes for Off-Brand. The stretch is now purely an edge, not the entry ticket.
+5. **Languages: English + Hindi + Spanish + JAPANESE.** New Task 7b below.
+
+### Task 7b: Add Japanese (ja) as a fourth language
+
+**Files:** Modify `src/guardian/config.py`, `src/guardian/ui_text.py`, `src/guardian/pipeline.py` (mock dict), `assets/fonts/`, `assets/guardian.css`
+
+- [ ] **Step 1:** `config.py`: add `"日本語 (Japanese)": "ja"` to `LANGUAGES` and
+  `"ja": "Japanese"` to `PROMPT_LANGUAGE_NAMES`. (VoxCPM2 supports Japanese — it's in
+  the verified 30-language list; MiniCPM-V's Qwen3.5 base handles Japanese output.)
+- [ ] **Step 2:** `ui_text.py`: full `"ja"` dict in `STRINGS` + every entry in
+  `SIGNAL_LABELS` and `DOC_TYPE_LABELS`. Tone: polite です/ます, short sentences,
+  no katakana jargon. Existing parity tests (`test_all_languages_have_all_keys`,
+  `test_every_signal_id_labeled_in_every_language`) must be extended to include "ja"
+  in their language tuples FIRST so they fail, then translate until green.
+- [ ] **Step 3:** `pipeline.py`: add `"ja"` mock-result dict (electricity-bill example).
+- [ ] **Step 4:** vendor `NotoSansJP-{Regular,Bold}.woff2`, add @font-face + append
+  `"Noto Sans JP"` to the font stack (CSS + theme.py). Note: JP woff2 is the largest
+  (~1–2MB) — acceptable; it's a one-time repo asset, no runtime fetch.
+- [ ] **Step 5:** segmented control now has 4 segments — verify wrap at mobile width
+  (2×2 grid under 560px). `pytest tests -q` green; browser-verify a Japanese round trip.
+- [ ] **Step 6:** update README language claims (≥2 languages → four) + commit.
+
+---
+
+## NEW INTEL — field-guide extraction 2026-06-11 (min-max directives)
+
+Source: organizers' field-guide Space (rendered site + its source repo:
+`content.ts`, `readme.ts`, `details.md`, `faq.md`). Apply during build:
+
+1. **README tags are a HARD submission requirement (REQ-06)** in exact namespaced
+   form parsed by their tooling: `track:backyard`, `sponsor:openbmb`, `sponsor:modal`,
+   `achievement:offgrid`, `achievement:fieldnotes` — ✅ ADDED 2026-06-11.
+   **After this redesign ships, add `achievement:offbrand`.** Add `achievement:llama`
+   ONLY if the full config is ever the deployed runtime (it isn't — see #3).
+2. **Param cap is PER MODEL, not the sum** ("each one's total parameter count must
+   stay below the cap"). We're at 1.3B + 2B — irrelevant headroom, but README wording
+   updated to match their definition.
+3. **Tiny Titan ($1,500): "Models must be ≤ 4B parameters"** — each of ours qualifies.
+   ⚠️ Deploying the full config (8B reasoner) would FORFEIT Tiny Titan. Decision:
+   **lean config stays the deployed runtime through judging.** The llama/full-config
+   switch remains documented-but-off.
+4. **Off-Brand ($1,500)** = "best custom UI that pushes past the default Gradio look";
+   gr.Server is advisory. This redesign IS our Off-Brand entry. Judge-facing
+   distinctiveness matters: stamps, seal, paper texture, custom typography — visibly
+   not-Gradio in the first second.
+5. **Community Choice ($2,000/track) = most Space upvotes.** The social post and README
+   should explicitly invite a ❤️ on the Space. Add a small, dignified "If this helped,
+   leave a ❤️ on the Space" line to the README (not the elder-facing UI).
+6. **Best Demo ($1,000)**: "Storytelling counts as much as the build — no humility,
+   sell it." Demo-video beats to hand the human: (a) the real person using it on real
+   mail, (b) the scam letter catching fire in live demo, (c) "the safety layer threw
+   away the model's bad advice" story, (d) Atkinson Hyperlegible + elder-first design,
+   (e) "every model is OpenBMB, total 3.3B, fully local." Video may be uploaded
+   directly to the Space as a file (allowed per submit guide).
+7. **Bonus Quest Champion ($2,000) = most achievements met.** Current count: offgrid +
+   fieldnotes (2). Redesign adds offbrand (3). **Cheap 4th: `achievement:sharing`** —
+   "shared your agent trace on the Hub": publish a sanitized transcript/log of this
+   Claude-Code-driven build as a Hub dataset + tag it. Requires owner consent +
+   secret-scrub. Add as post-redesign task if time allows.
+8. **OpenBMB prize is judged per track** ($2.5k/$1.5k/$1k within Backyard AI alone) and
+   wants "the most interesting use of *their* models" — README now leads with "every
+   model is OpenBMB." Their own kit guide recommends exactly our pairing
+   (MiniCPM-V 4.6 for OCR/documents, VoxCPM2 for voice) — quote that alignment in the
+   Field Notes.
+9. **Modal prize criteria**: "development or runtime use + README note" — our
+   `modal_validate.py` validation harness counts as development use, README note ✅
+   exists, `sponsor:modal` tag ✅ added. **Owner must actually run it once before
+   submission** (`modal token new` → `modal run modal_validate.py`).
+10. **Demo video exists to outlive quota limits** — judges may not get a live GPU run;
+    the video must show the full flow end-to-end, including audio.
+11. Organizers' source docs confirm: no rule against custom CSS/themes; Docker allowed
+    but Gradio interface required (we're Gradio SDK — fine); 10-ZeroGPU-app limit per
+    user (we have 1).

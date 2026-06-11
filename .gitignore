@@ -22,5 +22,8 @@ package-lock.json
 checks/*.wav
 modal_artifacts/
 
+# Organizer field-guide source mirror (reference only, not ours to ship)
+.fieldguide/
+
 # Local Claude Code settings
 .claude/
