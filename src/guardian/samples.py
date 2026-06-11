@@ -26,6 +26,35 @@ SCAM_LETTER = [
     "Do not contact your bank or the tax office.",
 ]
 
+LOTTERY_LETTER = [
+    "INTERNATIONAL PRIZE COMMITTEE",
+    "CONGRATULATIONS! You have WON $2,500,000",
+    "in the Global Email Lottery you never entered.",
+    "To claim your prize, send a processing fee of $250",
+    "by wire transfer within 48 hours.",
+    "Reply only to: claims@prize-winner-intl.example",
+]
+
+# Reconstruction of a real-world letter that exposed the prompt-echo bug
+# (owner report, 2026-06-11) — kept as a permanent regression case.
+LAND_LETTER = [
+    "MAAS PLUS DESIGN ENGINEERING",
+    "Plot 572 AA1 Extension New Layout Pasali Kuje FCT Abuja",
+    "Attention: TO WHOM IT MAY CONCERN",
+    "LETTER OF LAND AUTHENTICATION",
+    "We write on behalf of our company who intend to liase with",
+    "the buyer and the seller of a property with plot No:",
+    "IJA/F06/3027, Kubuwa Abuja FCT, measuring approx 10.1 Ha.",
+    "The said land is authentic and correct, as stipulated in",
+    "the survey plan. The owner undertakes to sell the said plot",
+    "of Land at the sum of N400,000,000.00 (Four Hundred",
+    "Million Naira) only.",
+    "We humbly crave that you will give details commitment to",
+    "search and cooperate with our company for the acquisition",
+    "of the said land in due time.",
+    "Abiodun Andrew Sunday, CEO",
+]
+
 
 def _font(size: int):
     from PIL import ImageFont

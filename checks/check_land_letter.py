@@ -19,27 +19,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from gradio_client import Client, handle_file  # noqa: E402
 
-from guardian.samples import render_letter  # noqa: E402
+from guardian.samples import LAND_LETTER, render_letter  # noqa: E402
 
 SPACE = sys.argv[1] if len(sys.argv) > 1 else "build-small-hackathon/Mystery_Mail_Guardian"
-
-LAND_LETTER = [
-    "MAAS PLUS DESIGN ENGINEERING",
-    "Plot 572 AA1 Extension New Layout Pasali Kuje FCT Abuja",
-    "Attention: TO WHOM IT MAY CONCERN",
-    "LETTER OF LAND AUTHENTICATION",
-    "We write on behalf of our company who intend to liase with",
-    "the buyer and the seller of a property with plot No:",
-    "IJA/F06/3027, Kubuwa Abuja FCT, measuring approx 10.1 Ha.",
-    "The said land is authentic and correct, as stipulated in",
-    "the survey plan. The owner undertakes to sell the said plot",
-    "of Land at the sum of N400,000,000.00 (Four Hundred",
-    "Million Naira) only.",
-    "We humbly crave that you will give details commitment to",
-    "search and cooperate with our company for the acquisition",
-    "of the said land in due time.",
-    "Abiodun Andrew Sunday, CEO",
-]
 
 ECHOES = ("who sent it", "what they want", "money mentioned", "what to do",
           "key facts", "amount", "deadline")

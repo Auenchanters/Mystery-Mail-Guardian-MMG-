@@ -24,18 +24,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from gradio_client import Client, handle_file  # noqa: E402
 
-from guardian.samples import NORMAL_BILL, SCAM_LETTER, render_letter  # noqa: E402
+from guardian.samples import (  # noqa: E402
+    LOTTERY_LETTER, NORMAL_BILL, SCAM_LETTER, render_letter,
+)
 
 SPACE = sys.argv[1] if len(sys.argv) > 1 else "build-small-hackathon/Mystery_Mail_Guardian"
-
-LOTTERY_LETTER = [
-    "INTERNATIONAL PRIZE COMMITTEE",
-    "CONGRATULATIONS! You have WON $2,500,000",
-    "in the Global Email Lottery you never entered.",
-    "To claim your prize, send a processing fee of $250",
-    "by wire transfer within 48 hours.",
-    "Reply only to: claims@prize-winner-intl.example",
-]
 
 VERDICT_WORDS = ("this is a scam", "is safe", "definitely", "100%")
 
