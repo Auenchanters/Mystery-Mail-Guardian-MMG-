@@ -61,8 +61,22 @@ def strip_contact_details(text: str) -> str:
 
 
 # --- 3. Sanitizers for each result section -----------------------------------
+def _strip_or_drop(text: str) -> str:
+    """Strip contact details; if the text WAS essentially the contact detail
+    (fewer than 3 words survive), drop it entirely — '(reply to)' is not a
+    fact. Found live via the Modal matrix, 2026-06-11."""
+    stripped = strip_contact_details(text)
+    if stripped != text and len(stripped.split()) < 3:
+        return ""
+    return stripped
+
+
+def sanitize_fact(fact: str) -> str:
+    return soften_verdicts(_strip_or_drop(fact)).strip()
+
+
 def sanitize_reason(reason: str) -> str:
-    return soften_verdicts(reason).strip()
+    return soften_verdicts(_strip_or_drop(reason)).strip()
 
 
 def sanitize_action_step(step: str) -> str:

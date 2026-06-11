@@ -70,8 +70,9 @@ the 32B cap. The MiniCPM family is the heart of the app in both configs.
 2. **Safety layer** (`src/guardian/safety.py`) — its own module, by design:
    - verdict-sounding text is softened in code, not just in the prompt;
    - the "Should you worry?" headline is template-written by us, never by the model;
-   - phone numbers / links / emails from the letter are **stripped from the action steps** —
-     a scam letter's whole goal is to get you to use *its* contact details;
+   - phone numbers / links / emails from the letter are **stripped from every card**
+     (facts, reasons, and steps) — a scam letter's whole goal is to get you to use
+     *its* contact details;
    - independent-verification advice is always appended;
    - an independent heuristic scam-signal scan (gift cards, OTP requests, urgency, threats,
      lottery language…) double-checks the model.

@@ -63,7 +63,7 @@ def _compose(ex: triage.Extraction, lang: str) -> AnalysisResult:
     # Reasons: model's localized sentences (softened); any signal not covered
     # by a model sentence gets its localized taxonomy label appended. If the
     # model wrote no reason sentences at all, every signal gets a label.
-    reasons = [safety.sanitize_reason(r) for r in ex.worry_reasons if r.strip()]
+    reasons = [r for r in (safety.sanitize_reason(r) for r in ex.worry_reasons) if r]
     covered_ids = {s.id for s in ex.scam_signals} if reasons else set()
     reasons += [
         ui_text.signal_label(s.id, lang) for s in signals if s.id not in covered_ids
@@ -72,8 +72,10 @@ def _compose(ex: triage.Extraction, lang: str) -> AnalysisResult:
     actions = [a for a in (safety.sanitize_action_step(s) for s in ex.what_to_do) if a]
     actions.append(safety.verification_advice(lang))
 
-    what_this_is = safety.soften_verdicts(ex.what_this_is).strip()
-    key_facts = [safety.soften_verdicts(f).strip() for f in ex.key_facts]
+    what_this_is = safety.soften_verdicts(
+        safety.strip_contact_details(ex.what_this_is)
+    ).strip()
+    key_facts = [f for f in (safety.sanitize_fact(f) for f in ex.key_facts) if f]
     headline = safety.worry_headline(level, lang)
 
     speak_parts = [what_this_is, headline, *reasons[:2], *actions[:2]]

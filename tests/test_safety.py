@@ -85,3 +85,20 @@ class TestFraming:
     def test_disclaimer_exists_all_langs(self):
         for lang in ("en", "hi", "es"):
             assert len(safety.disclaimer(lang)) > 10
+
+
+class TestSanitizeFact:
+    # Regression (Modal matrix, 2026-06-11): the lottery scammer's reply
+    # address leaked through key_facts — stripping only covered action steps.
+    def test_fact_that_is_only_a_contact_is_dropped(self):
+        assert safety.sanitize_fact("reply to claims@prize-winner-intl.example") == ""
+
+    def test_contact_removed_from_informative_fact(self):
+        fact = safety.sanitize_fact("Call 1-800-555-0199 immediately with the card codes")
+        assert "555-0199" not in fact and "immediately" in fact
+
+    def test_clean_fact_untouched(self):
+        assert safety.sanitize_fact("Amount due: $84.20") == "Amount due: $84.20"
+
+    def test_reason_that_is_only_a_contact_is_dropped(self):
+        assert safety.sanitize_reason("see www.prize-winner-intl.example") == ""
