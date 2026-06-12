@@ -36,6 +36,8 @@ class GoldLetter:
     signal_ids: list[str] = field(default_factory=list)
     expected_level: str = "low"    # derived in __post_init__
     acceptable_levels: tuple[str, ...] = ()
+    font_names: tuple[str, ...] = ()  # script-capable fonts for non-Latin text
+    font_size: int = 34               # CJK needs smaller to fit the page width
 
     def __post_init__(self):
         signals = [triage.ScamSignal(id=s) for s in self.signal_ids]
@@ -163,8 +165,69 @@ def lookalike_ad(rng: random.Random) -> GoldLetter:
     )
 
 
+# --- Non-Latin letter text (OCR coverage; rendered with Windows system fonts)
+_HI_FONTS = ("Nirmala.ttc", "mangal.ttf", "NotoSansDevanagari-Regular.ttf")
+_JA_FONTS = ("YuGothM.ttc", "YuGothR.ttc", "msgothic.ttc", "meiryo.ttc")
+
+
+def hi_utility_bill(rng: random.Random) -> GoldLetter:
+    due = f"{rng.randint(1, 28)} जून 2026"
+    amt = f"₹{rng.randint(800, 4000)}"
+    return GoldLetter(
+        name="hi_utility_bill", document_type="utility_bill",
+        sender="सिटी पावर कंपनी", amount=amt, deadline=due, font_names=_HI_FONTS,
+        lines=["सिटी पावर कंपनी", f"बिजली का बिल — खाता {_acct(rng)}",
+               f"देय राशि: {amt}", f"आख़िरी तारीख़: {due}",
+               "ऑनलाइन या किसी भी शाखा में भुगतान करें।"],
+    )
+
+
+def hi_gift_card_scam(rng: random.Random) -> GoldLetter:
+    amt = f"₹{rng.randint(20, 90)},000"
+    return GoldLetter(
+        name="hi_gift_card_scam", document_type="suspected_scam",
+        sender="कर प्रवर्तन ब्यूरो", amount=amt, font_names=_HI_FONTS,
+        signal_ids=["urgency", "gift_card_or_crypto", "threat_or_arrest"],
+        lines=["कर प्रवर्तन ब्यूरो — अंतिम चेतावनी",
+               f"आप पर {amt} का जुर्माना बकाया है।",
+               "24 घंटे के भीतर भुगतान करें वरना गिरफ़्तारी होगी।",
+               "केवल गिफ्ट कार्ड से भुगतान करें।",
+               "तुरंत 1-800-555-0199 पर कोड बताएं।",
+               "अपने बैंक से संपर्क न करें।"],
+    )
+
+
+def ja_utility_bill(rng: random.Random) -> GoldLetter:
+    amt = f"{rng.randint(4, 12)},{rng.randint(100, 999)}円"
+    due = f"2026年6月{rng.randint(1, 28)}日"
+    return GoldLetter(
+        name="ja_utility_bill", document_type="utility_bill",
+        sender="シティ電力株式会社", amount=amt, deadline=due,
+        font_names=_JA_FONTS, font_size=28,
+        lines=["シティ電力株式会社", f"電気料金のご請求 — お客様番号 {_acct(rng)}",
+               f"ご請求額: {amt}", f"お支払い期限: {due}",
+               "コンビニ、銀行、またはオンラインでお支払いください。"],
+    )
+
+
+def ja_gift_card_scam(rng: random.Random) -> GoldLetter:
+    amt = f"{rng.randint(2, 9)}0,000円"
+    return GoldLetter(
+        name="ja_gift_card_scam", document_type="suspected_scam",
+        sender="税務執行局", amount=amt, font_names=_JA_FONTS, font_size=28,
+        signal_ids=["urgency", "gift_card_or_crypto", "threat_or_arrest"],
+        lines=["税務執行局 — 最終通告",
+               f"罰金 {amt}が未納です。",
+               "24時間以内に支払わなければ逮捕されます。",
+               "支払いはギフトカードのみ。",
+               "至急 1-800-555-0199 に電話してコードを伝えてください。",
+               "銀行や税務署には連絡しないでください。"],
+    )
+
+
 FACTORIES = [utility_bill, bank_notice, medical_reminder, charity_request,
-             gift_card_scam, lottery_scam, phishing_account, lookalike_ad]
+             gift_card_scam, lottery_scam, phishing_account, lookalike_ad,
+             hi_utility_bill, hi_gift_card_scam, ja_utility_bill, ja_gift_card_scam]
 
 DEGRADATIONS = ("clean", "clean", "clean", "blur", "dim", "rotate")  # 50/50-ish weighting
 
@@ -177,9 +240,10 @@ def render_gold(gold: GoldLetter, rng: random.Random, degrade: bool = True):
     """Letter image, optionally degraded like a casual elder phone photo."""
     from PIL import ImageEnhance, ImageFilter
 
-    from .samples import render_letter
+    from .samples import _DEFAULT_FONTS, render_letter
 
-    img = render_letter(gold.lines)
+    img = render_letter(gold.lines, font_size=gold.font_size,
+                        font_names=gold.font_names or _DEFAULT_FONTS)
     kind = rng.choice(DEGRADATIONS) if degrade else "clean"
     if kind == "blur":
         img = img.filter(ImageFilter.GaussianBlur(rng.uniform(1.0, 2.2)))

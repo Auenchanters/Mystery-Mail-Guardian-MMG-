@@ -58,7 +58,7 @@ links, or emails from the letter in what_to_do; null/[] when absent."""
 
 @app.function(gpu="A10G", image=image, timeout=3600,
               secrets=[modal.Secret.from_name("huggingface")])
-def evaluate() -> dict:
+def evaluate(only: str = "") -> dict:
     import sys
     import time
 
@@ -78,6 +78,8 @@ def evaluate() -> dict:
         "compact": COMPACT_PROMPT.replace(
             "%SIGNALS%", ",".join(f'"{s}"' for s in triage.SIGNAL_IDS)),
     }
+    if only:
+        variants = {only: variants[only]}
 
     report: dict = {"n_letters": len(rows), "variants": {}}
     for vname, prompt in variants.items():
@@ -155,8 +157,8 @@ def evaluate() -> dict:
 
 
 @app.local_entrypoint()
-def main():
-    report = evaluate.remote()
+def main(only: str = ""):
+    report = evaluate.remote(only)
     os.makedirs("modal_artifacts", exist_ok=True)
     with open(os.path.join("modal_artifacts", "eval_report.json"), "w",
               encoding="utf-8") as f:

@@ -56,10 +56,13 @@ LAND_LETTER = [
 ]
 
 
-def _font(size: int):
+_DEFAULT_FONTS = ("arial.ttf", "DejaVuSans.ttf")  # Windows dev box / Linux image
+
+
+def _font(size: int, names: tuple[str, ...] = _DEFAULT_FONTS):
     from PIL import ImageFont
 
-    for name in ("arial.ttf", "DejaVuSans.ttf"):  # Windows dev box / Linux image
+    for name in names:
         try:
             return ImageFont.truetype(name, size)
         except OSError:
@@ -68,13 +71,18 @@ def _font(size: int):
 
 
 def render_letter(lines: list[str], size: tuple[int, int] = (900, 1100),
-                  font_size: int = 34):
-    """Render text as a letter-like photo (white page, black print)."""
+                  font_size: int = 34,
+                  font_names: tuple[str, ...] = _DEFAULT_FONTS):
+    """Render text as a letter-like photo (white page, black print).
+
+    Non-Latin letters need a script-capable font (Arial/DejaVu have no
+    Devanagari or CJK glyphs) — pass e.g. ("Nirmala.ttf",) for Hindi or
+    ("YuGothM.ttc", "msgothic.ttc") for Japanese on Windows."""
     from PIL import Image, ImageDraw
 
     img = Image.new("RGB", size, "white")
     draw = ImageDraw.Draw(img)
-    font = _font(font_size)
+    font = _font(font_size, font_names)
     y = 80
     for line in lines:
         draw.text((70, y), line, fill="black", font=font)
