@@ -2,6 +2,24 @@
 
 Running log of decisions, dead ends, and learnings. This becomes the Field Notes blog post.
 
+## The story in five sentences (read this first)
+
+One real person can't always tell official mail from scam mail, and the
+letters involved — financial, legal, medical — are exactly the documents
+nobody should upload to a cloud API; so the privacy constraint *is* the
+product. Two small OpenBMB models (3.3B total, fully local) read the photo,
+explain it at a 10-year-old's reading level in four languages, and read it
+aloud. A **safety layer written in code, not prompts** guarantees what the
+model never can: no verdicts, no repeating the letter's own contact details,
+verification advice every single time — and it has discarded genuinely unsafe
+model advice in live fire. All GPU QA runs on **Modal** (synthetic-letter
+matrix, prompt A/Bs, robustness sweeps), and twice the harness caught real
+safety bugs before any judge or grandparent could; the same evals told us
+*not* to fine-tune — small models earn trust through guardrails and
+measurement, not through more training. Everything below is the unedited
+trail: dead ends, Gradio 6 archaeology, the day the model parroted our own
+schema back at us, and the eval that found Devanagari is where 1.3B stops.
+
 ## 2026-06-10 — Day 1+: verify, then build the whole pipeline
 
 ### Model facts verified against live HF cards (don't trust memory — good thing, too)

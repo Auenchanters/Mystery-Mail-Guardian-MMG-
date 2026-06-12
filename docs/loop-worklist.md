@@ -55,8 +55,9 @@
    380px = 2×2 grid no h-scroll, zero console errors. Note: ?autorun + ?lang
    race can hide read-aloud in SCREENSHOTS only (lang-change response lands
    after analyze); real sequential use verified correct — not a product bug.
-7. Field Notes polish: BUILD_LOG intro paragraph framing the whole build
-   story for judges (elder-first design → safety layer → Modal QA flywheel).
+7. ~~Field Notes framing~~ DONE 06-12: "The story in five sentences" intro
+   at the top of BUILD_LOG (privacy-is-the-product → safety in code →
+   Modal QA flywheel → evals said don't fine-tune).
 8. Prepare (do NOT publish) the `achievement:sharing` bundle: sanitized agent
    trace summary in docs/agent-trace-draft.md for owner review + consent.
 9. Demo-video kit: docs/demo-script.md with shot list (field-guide §6 beats),
