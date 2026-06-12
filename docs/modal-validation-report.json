@@ -2,7 +2,7 @@
   "analyses": {
     "normal_bill_en": {
       "ok": true,
-      "seconds": 36.6,
+      "seconds": 40.2,
       "lang": "en",
       "document_type": "utility_bill",
       "worry_level": "low",
@@ -13,10 +13,10 @@
       "safety_violations": [],
       "what_this_is": "This looks like an electricity, water, or utility bill.",
       "key_facts": [
-        "there's an electricity bill",
         "the amount is $84.20",
         "the due date is June 28, 2026",
-        "you can pay online or by mail"
+        "you can pay online or by mail",
+        "questions are on your account card"
       ],
       "reasons": [],
       "actions": [
@@ -27,7 +27,7 @@
     },
     "gift_card_scam_en": {
       "ok": true,
-      "seconds": 8.0,
+      "seconds": 8.2,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -40,13 +40,13 @@
       "key_facts": [
         "a penalty of $500",
         "must pay within 24 hours",
-        "only with Google Play gift cards",
-        "do not contact bank or tax office"
+        "can be arrested without payment",
+        "use Google Play gift cards"
       ],
       "reasons": [
-        "arrest if not paid",
-        "pressure to act quickly",
-        "contacting bank is forbidden",
+        "risk of arrest if not paid",
+        "pressure to pay quickly",
+        "contact bank or tax office",
         "It pushes you to act immediately",
         "It asks for payment by gift card or cryptocurrency"
       ],
@@ -58,7 +58,7 @@
     },
     "lottery_scam_en": {
       "ok": true,
-      "seconds": 8.1,
+      "seconds": 8.7,
       "lang": "en",
       "document_type": "charity",
       "worry_level": "warning",
@@ -68,13 +68,14 @@
       ],
       "level_matches": true,
       "safety_violations": [],
-      "what_this_is": "This is a charity letter for a prize. It asks to claim the prize with a fee. The amount is mentioned clearly.",
+      "what_this_is": "This is a charity letter for a prize. It tells you what to do to claim it",
       "key_facts": [
-        "a prize of $2,500,000",
-        "wire transfer is required",
+        "you have won $2,500,000",
+        "to claim, send a fee of $2",
         "within 48 hours"
       ],
       "reasons": [
+        "It pushes you to act immediately",
         "It asks for a wire or money transfer",
         "It promises a prize or deal that seems too good to be true",
         "It uses fear or pressure so you do not stop to think"
@@ -87,10 +88,10 @@
     },
     "land_letter_en": {
       "ok": true,
-      "seconds": 3.8,
+      "seconds": 7.0,
       "lang": "en",
       "document_type": "marketing",
-      "worry_level": "low",
+      "worry_level": "caution",
       "acceptable_levels": [
         "caution",
         "low",
@@ -100,11 +101,12 @@
       "safety_violations": [],
       "what_this_is": "This looks like an advertisement.",
       "key_facts": [
-        "From: Abiodun Andrew Sunday, CEO",
-        "What they want: to search and cooperate for the land",
-        "Amount: N400,000,000.00"
+        "it's a marketing letter",
+        "there's a land amount"
       ],
-      "reasons": [],
+      "reasons": [
+        "The sender's name and contact details do not match"
+      ],
       "actions": [
         "Show this letter to a family member or someone you trust.",
         "Before you pay or reply: contact the company or office through a phone number or website you already know and trust — never use the contact details printed in this letter."
@@ -113,7 +115,7 @@
     },
     "gift_card_scam_hi": {
       "ok": true,
-      "seconds": 8.2,
+      "seconds": 7.9,
       "lang": "hi",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -126,13 +128,12 @@
       "key_facts": [
         "a penalty of $500",
         "must pay within 24 hours",
-        "arrested if not paid",
-        "pay with gift cards"
+        "pay with gift cards",
+        "do not contact bank"
       ],
       "reasons": [
-        "risk of arrest",
-        "need to pay quickly",
-        "contact your bank",
+        "arrest threat",
+        "no way to contact bank",
         "यह तुरंत कुछ करने का दबाव डालती है",
         "यह गिफ्ट कार्ड या क्रिप्टो से भुगतान माँगती है"
       ],
@@ -144,7 +145,7 @@
     },
     "gift_card_scam_es": {
       "ok": true,
-      "seconds": 6.9,
+      "seconds": 6.6,
       "lang": "es",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -155,7 +156,7 @@
       "safety_violations": [],
       "what_this_is": "Esto parece una carta del gobierno o de la oficina de impuestos.",
       "key_facts": [
-        "Qué piden: pay the penalty or avoid arrest",
+        "Qué piden: pay the penalty within a set time",
         "Monto: $500"
       ],
       "reasons": [
@@ -170,7 +171,7 @@
     },
     "gift_card_scam_ja": {
       "ok": true,
-      "seconds": 6.5,
+      "seconds": 8.2,
       "lang": "ja",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -181,12 +182,17 @@
       "safety_violations": [],
       "what_this_is": "これは役所や税務署からの手紙のようです。",
       "key_facts": [
-        "用件: pay the penalty within a set time",
-        "金額: $500"
+        "a penalty of $500",
+        "must pay within 24 hours",
+        "arrested if not paid",
+        "use Google Play gift cards"
       ],
       "reasons": [
+        "risk of arrest",
+        "need to pay quickly",
+        "contact your bank",
         "今すぐ行動するように急かしています",
-        "罰金や逮捕、口座の停止などで脅しています"
+        "ギフトカードや暗号資産での支払いを求めています"
       ],
       "actions": [
         "この手紙を、ご家族や信頼できる人に見せてください。",
@@ -196,7 +202,7 @@
     },
     "scam_blurred": {
       "ok": true,
-      "seconds": 8.5,
+      "seconds": 8.0,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -206,7 +212,7 @@
       ],
       "level_matches": true,
       "safety_violations": [],
-      "what_this_is": "This looks like a letter from the government or tax office.",
+      "what_this_is": "this is a tax notice with a penalty and arrest threat",
       "key_facts": [
         "a penalty of $500",
         "must pay within 24 hours",
@@ -214,10 +220,8 @@
         "use Google Play gift cards"
       ],
       "reasons": [
-        "risk of arrest if not paid",
-        "pressure to pay quickly",
-        "no contact with bank or tax office",
-        "gift card payment only",
+        "threat of arrest",
+        "no contact with bank",
         "It pushes you to act immediately",
         "It asks for payment by gift card or cryptocurrency"
       ],
@@ -229,7 +233,7 @@
     },
     "scam_dim": {
       "ok": true,
-      "seconds": 8.3,
+      "seconds": 8.1,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -243,13 +247,11 @@
       "key_facts": [
         "a penalty of $500",
         "must pay within 24 hours",
-        "only with Google Play gift cards",
-        "do not contact your bank"
+        "only with Google Play gift cards"
       ],
       "reasons": [
         "arrest if not paid",
-        "pressure to act quickly",
-        "contact your bank is forbidden",
+        "contact your bank or tax office",
         "It pushes you to act immediately",
         "It asks for payment by gift card or cryptocurrency"
       ],
@@ -261,7 +263,7 @@
     },
     "scam_rotated": {
       "ok": true,
-      "seconds": 8.7,
+      "seconds": 8.3,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -271,7 +273,7 @@
       ],
       "level_matches": true,
       "safety_violations": [],
-      "what_this_is": "This looks like a letter from the government or tax office.",
+      "what_this_is": "this is a tax notice with a penalty and payment deadline",
       "key_facts": [
         "a penalty of $500",
         "must pay within 24 hours",
@@ -281,8 +283,7 @@
       "reasons": [
         "arrest if not paid",
         "need to use gift cards",
-        "no bank contact allowed",
-        "urgent notice",
+        "avoid bank contact",
         "It pushes you to act immediately",
         "It asks for payment by gift card or cryptocurrency"
       ],
@@ -295,15 +296,15 @@
   },
   "speech": {
     "en": {
-      "seconds": 123.7,
+      "seconds": 149.3,
       "sample_rate": 48000,
-      "audio_seconds": 6.2,
+      "audio_seconds": 7.7,
       "saved_to": "modal_artifacts\\speech_en.wav"
     },
     "hi": {
-      "seconds": 5.8,
+      "seconds": 4.7,
       "sample_rate": 48000,
-      "audio_seconds": 7.7,
+      "audio_seconds": 6.2,
       "saved_to": "modal_artifacts\\speech_hi.wav"
     },
     "es": {
@@ -313,9 +314,9 @@
       "saved_to": "modal_artifacts\\speech_es.wav"
     },
     "ja": {
-      "seconds": 5.8,
+      "seconds": 4.7,
       "sample_rate": 48000,
-      "audio_seconds": 7.7,
+      "audio_seconds": 6.2,
       "saved_to": "modal_artifacts\\speech_ja.wav"
     }
   }
