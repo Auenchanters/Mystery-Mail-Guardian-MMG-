@@ -255,6 +255,24 @@ user-facing output, and a model swap two days before judging is risk with
 no payoff. The SFT dataset (images + gold JSON targets) is generated and
 ready if post-hackathon training is wanted.
 
+## 2026-06-12 (night) — We tried to break it with bad photos. We couldn't.
+
+Robustness eval v2 (`modal_robust.py`): one scam + one bill through SIX
+degradation kinds at three intensities each — Gaussian blur to 4.5px, dimming
+to 15% brightness, rotation to 35°, perspective warp, a hard shadow band
+covering half the page, sensor noise at σ=48 — 38 images, outcome-scored
+(an honest "retake the photo" refusal counts as a pass; a wrong "low" on a
+scam fails). **Result: 38/38 honest outcomes.** The scam letter stayed
+*warning* and the bill stayed *low* through every single condition.
+
+So the honest "breaking point" of MiniCPM-V 4.6 on letters isn't photo
+quality — at these severities it reads English print through anything an
+elder's shaky phone hand can realistically produce. The real limit, found a
+few hours earlier, is **script**: Devanagari letters are under-read (documented
+in README limitations), Japanese is readable and now guarded by
+original-script quoting + multilingual heuristics. Photo-guidance for the
+README: none needed. The model out-toughed our test.
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go

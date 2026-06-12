@@ -1,0 +1,344 @@
+[
+  {
+    "file": "scam_clean_0.png",
+    "tag": "scam",
+    "kind": "clean",
+    "level": 0,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_blur_1.png",
+    "tag": "scam",
+    "kind": "blur",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_blur_2.png",
+    "tag": "scam",
+    "kind": "blur",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_blur_3.png",
+    "tag": "scam",
+    "kind": "blur",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_dim_1.png",
+    "tag": "scam",
+    "kind": "dim",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_dim_2.png",
+    "tag": "scam",
+    "kind": "dim",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_dim_3.png",
+    "tag": "scam",
+    "kind": "dim",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_rotate_1.png",
+    "tag": "scam",
+    "kind": "rotate",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_rotate_2.png",
+    "tag": "scam",
+    "kind": "rotate",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_rotate_3.png",
+    "tag": "scam",
+    "kind": "rotate",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_perspective_1.png",
+    "tag": "scam",
+    "kind": "perspective",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_perspective_2.png",
+    "tag": "scam",
+    "kind": "perspective",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_perspective_3.png",
+    "tag": "scam",
+    "kind": "perspective",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_shadow_1.png",
+    "tag": "scam",
+    "kind": "shadow",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_shadow_2.png",
+    "tag": "scam",
+    "kind": "shadow",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_shadow_3.png",
+    "tag": "scam",
+    "kind": "shadow",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_noise_1.png",
+    "tag": "scam",
+    "kind": "noise",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_noise_2.png",
+    "tag": "scam",
+    "kind": "noise",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "scam_noise_3.png",
+    "tag": "scam",
+    "kind": "noise",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "warning",
+    "ok": true
+  },
+  {
+    "file": "bill_clean_0.png",
+    "tag": "bill",
+    "kind": "clean",
+    "level": 0,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_blur_1.png",
+    "tag": "bill",
+    "kind": "blur",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_blur_2.png",
+    "tag": "bill",
+    "kind": "blur",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_blur_3.png",
+    "tag": "bill",
+    "kind": "blur",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_dim_1.png",
+    "tag": "bill",
+    "kind": "dim",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_dim_2.png",
+    "tag": "bill",
+    "kind": "dim",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_dim_3.png",
+    "tag": "bill",
+    "kind": "dim",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_rotate_1.png",
+    "tag": "bill",
+    "kind": "rotate",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_rotate_2.png",
+    "tag": "bill",
+    "kind": "rotate",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_rotate_3.png",
+    "tag": "bill",
+    "kind": "rotate",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_perspective_1.png",
+    "tag": "bill",
+    "kind": "perspective",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_perspective_2.png",
+    "tag": "bill",
+    "kind": "perspective",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_perspective_3.png",
+    "tag": "bill",
+    "kind": "perspective",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_shadow_1.png",
+    "tag": "bill",
+    "kind": "shadow",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_shadow_2.png",
+    "tag": "bill",
+    "kind": "shadow",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_shadow_3.png",
+    "tag": "bill",
+    "kind": "shadow",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_noise_1.png",
+    "tag": "bill",
+    "kind": "noise",
+    "level": 1,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_noise_2.png",
+    "tag": "bill",
+    "kind": "noise",
+    "level": 2,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  },
+  {
+    "file": "bill_noise_3.png",
+    "tag": "bill",
+    "kind": "noise",
+    "level": 3,
+    "outcome": "analyzed",
+    "worry_level": "low",
+    "ok": true
+  }
+]

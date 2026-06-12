@@ -58,16 +58,16 @@
 7. ~~Field Notes framing~~ DONE 06-12: "The story in five sentences" intro
    at the top of BUILD_LOG (privacy-is-the-product → safety in code →
    Modal QA flywheel → evals said don't fine-tune).
-8. Prepare (do NOT publish) the `achievement:sharing` bundle: sanitized agent
-   trace summary in docs/agent-trace-draft.md for owner review + consent.
-9. Demo-video kit: docs/demo-script.md with shot list (field-guide §6 beats),
-   the ?lang= deep-links, mock autorun URLs, WAV file paths.
-10. Robustness eval v2: heavier degradations (perspective warp, shadows,
-    crumple noise) in letterforge; find the honest breaking point; document
-    "take photos in good light" guidance numbers.
-11. Stretch (only if all above done + >12h to deadline): LoRA SFT run on
-    Modal using dataset sft_targets — train + eval ONLY, never deploy
-    pre-judging; write up results either way.
+8. ~~Agent-trace bundle~~ DONE 06-12: docs/agent-trace-draft.md drafted,
+   consent-gated — OWNER must approve before any Hub publication.
+9. ~~Demo-video kit~~ DONE 06-12: docs/demo-script.md — five beats, assets
+   table, recording gotchas (warm-up run, easter-egg reveal order).
+10. ~~Robustness v2~~ DONE 06-12: **38/38 honest outcomes** across blur/dim/
+    rotate/perspective/shadow/noise ×3 intensities. No photo-quality breaking
+    point found; the real limit is script (Devanagari), already documented.
+11. IN PROGRESS 06-12: LoRA SFT experiment running on Modal (cookbook
+    ms-swift recipe, tuner_type=lora, frozen ViT, adapter → volume
+    guardian-lora). Train-only; NEVER deployed pre-judging.
 
 ## State notes (update every wake)
 - 06-12: loop started. Live Space healthy at 5e547aa-era build (sha 37be779
