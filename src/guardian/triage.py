@@ -200,21 +200,25 @@ def validate_extraction(data: dict) -> Extraction:
 _HEURISTICS: dict[str, re.Pattern[str]] = {
     "gift_card_or_crypto": re.compile(
         r"gift\s*card|itunes\s*card|google\s*play\s*card|steam\s*card|bitcoin|crypto|"
-        r"\bbtc\b|\busdt\b|प्रीपेड\s*कार्ड|tarjeta\s+de\s+regalo", re.I),
+        r"\bbtc\b|\busdt\b|प्रीपेड\s*कार्ड|गिफ्ट\s*कार्ड|tarjeta\s+de\s+regalo|"
+        r"ギフトカード|プリペイドカード", re.I),
     "wire_transfer": re.compile(
         r"wire\s+transfer|western\s*union|moneygram|money\s+transfer|untraceable|"
         r"transferencia\s+inmediata", re.I),
     "credentials_request": re.compile(
         r"\botp\b|one[- ]?time\s+pass(?:word|code)|password|\bpin\b|\bcvv\b|\bssn\b|"
-        r"social\s+security|aadhaar|pan\s+number|contraseñ|पासवर्ड", re.I),
+        r"social\s+security|aadhaar|pan\s+number|contraseñ|पासवर्ड|"
+        r"パスワード|暗証番号|ワンタイム", re.I),
     "urgency": re.compile(
         r"\burgent(?:ly)?\b|immediately|act\s+now|within\s+24\s+hours|final\s+notice|"
         r"last\s+chance|expires?\s+today|right\s+now|तुरंत|अंतिम\s+चेतावनी|"
-        r"urgente|inmediatamente|último\s+aviso", re.I),
+        r"urgente|inmediatamente|último\s+aviso|"
+        r"至急|直ちに|時間以内|最終通告", re.I),
     "threat_or_arrest": re.compile(
         r"\barrest(?:ed)?\b|lawsuit|legal\s+action|\bwarrant\b|prosecut|"
         r"account\s+(?:will\s+be\s+)?(?:closed|blocked|suspended|terminated)|"
-        r"गिरफ़्तार|क़ानूनी\s+कार्रवाई|demanda\s+legal|arresto", re.I),
+        r"गिरफ़्तार|क़ानूनी\s+कार्रवाई|demanda\s+legal|arresto|"
+        r"逮捕|口座.{0,4}(?:停止|凍結)|訴訟", re.I),
     "prize_too_good": re.compile(
         r"congratulations|you\s+(?:have\s+)?won|\bwinner\b|lottery|claim\s+your\s+prize|"
         r"free\s+gift|cash\s+prize|बधाई\s+हो|लॉटरी|इनाम|premio|lotería|ha\s+ganado", re.I),

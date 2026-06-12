@@ -168,6 +168,19 @@ class TestHeuristics:
         hits = {s.id for s in triage.run_heuristics("Congratulations! You have won the lottery")}
         assert "prize_too_good" in hits
 
+    def test_hindi_gift_card_detected(self):
+        # Modal ML-eval (06-12): hi/ja scam letters under-flagged — the
+        # heuristic taxonomy lacked Devanagari/Japanese scam vocabulary.
+        signals = triage.run_heuristics("केवल गिफ्ट कार्ड से भुगतान करें")
+        assert "gift_card_or_crypto" in [s.id for s in signals]
+
+    def test_japanese_scam_vocabulary_detected(self):
+        text = "至急ギフトカードで支払ってください。支払わなければ逮捕されます。"
+        ids = [s.id for s in triage.run_heuristics(text)]
+        assert "gift_card_or_crypto" in ids
+        assert "urgency" in ids
+        assert "threat_or_arrest" in ids
+
     def test_hindi_urgency_detected(self):
         hits = {s.id for s in triage.run_heuristics("तुरंत भुगतान करें")}
         assert "urgency" in hits
