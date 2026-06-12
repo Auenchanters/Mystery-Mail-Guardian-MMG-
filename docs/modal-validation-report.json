@@ -2,7 +2,7 @@
   "analyses": {
     "normal_bill_en": {
       "ok": true,
-      "seconds": 38.3,
+      "seconds": 36.6,
       "lang": "en",
       "document_type": "utility_bill",
       "worry_level": "low",
@@ -27,7 +27,7 @@
     },
     "gift_card_scam_en": {
       "ok": true,
-      "seconds": 7.9,
+      "seconds": 8.0,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -58,7 +58,7 @@
     },
     "lottery_scam_en": {
       "ok": true,
-      "seconds": 8.0,
+      "seconds": 8.1,
       "lang": "en",
       "document_type": "charity",
       "worry_level": "warning",
@@ -87,7 +87,7 @@
     },
     "land_letter_en": {
       "ok": true,
-      "seconds": 3.7,
+      "seconds": 3.8,
       "lang": "en",
       "document_type": "marketing",
       "worry_level": "low",
@@ -113,7 +113,7 @@
     },
     "gift_card_scam_hi": {
       "ok": true,
-      "seconds": 8.0,
+      "seconds": 8.2,
       "lang": "hi",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -170,7 +170,7 @@
     },
     "gift_card_scam_ja": {
       "ok": true,
-      "seconds": 6.4,
+      "seconds": 6.5,
       "lang": "ja",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -196,7 +196,7 @@
     },
     "scam_blurred": {
       "ok": true,
-      "seconds": 8.4,
+      "seconds": 8.5,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -229,7 +229,7 @@
     },
     "scam_dim": {
       "ok": true,
-      "seconds": 8.1,
+      "seconds": 8.3,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -261,7 +261,7 @@
     },
     "scam_rotated": {
       "ok": true,
-      "seconds": 8.4,
+      "seconds": 8.7,
       "lang": "en",
       "document_type": "government_tax",
       "worry_level": "warning",
@@ -295,27 +295,27 @@
   },
   "speech": {
     "en": {
-      "seconds": 124.4,
+      "seconds": 123.7,
       "sample_rate": 48000,
-      "audio_seconds": 5.9,
+      "audio_seconds": 6.2,
       "saved_to": "modal_artifacts\\speech_en.wav"
     },
     "hi": {
-      "seconds": 4.4,
+      "seconds": 5.8,
       "sample_rate": 48000,
-      "audio_seconds": 5.9,
+      "audio_seconds": 7.7,
       "saved_to": "modal_artifacts\\speech_hi.wav"
     },
     "es": {
-      "seconds": 3.9,
+      "seconds": 5.1,
       "sample_rate": 48000,
-      "audio_seconds": 5.3,
+      "audio_seconds": 6.7,
       "saved_to": "modal_artifacts\\speech_es.wav"
     },
     "ja": {
-      "seconds": 4.4,
+      "seconds": 5.8,
       "sample_rate": 48000,
-      "audio_seconds": 5.9,
+      "audio_seconds": 7.7,
       "saved_to": "modal_artifacts\\speech_ja.wav"
     }
   }

@@ -24,10 +24,13 @@
 
 ## Backlog (work top-down; mark DONE with date; add discoveries)
 1. ~~HF token for Modal containers (secret `huggingface`)~~ DONE 06-12.
-2. IN PROGRESS 06-12: re-run `modal_validate.py` — confirm phishing-severity
-   boost (worry_reasons now feed heuristics) still GO; record in BUILD_LOG.
-3. Extend `checks/check_live_space.py`-style live probe with a phishing
-   letter (expect warning) — cheap, one ZeroGPU call, run post-deploy only.
+2. ~~Re-run `modal_validate.py` post-boost~~ DONE 06-12: GO, all 10 levels
+   correct, lottery now reaches warning (was caution pre-boost). Evidence
+   refreshed in docs/modal-validation-report.json.
+3. ~~Phishing live probe~~ DONE 06-12: `checks/check_live_phishing.py` PASS —
+   caution + credentials signal, no link leak. Note: live run surfaced 1
+   signal → caution (matrix shows warning when model writes reasons; both
+   acceptable, gate is caution|warning).
 4. Eval v2 on Modal: add Hindi + Japanese letters to letterforge (the model
    reads EN letters; UI lang ≠ letter lang — test hi/ja LETTER TEXT too),
    regenerate dataset, re-run modal_eval, record per-language table.
@@ -53,3 +56,5 @@
 - 06-12: loop started. Live Space healthy at 5e547aa-era build (sha 37be779
   app + docs commits). 96 offline tests. Modal secret created. validate.py
   re-run kicked off this wake.
+- 06-12 wake 2: matrix GO (item 2), live phishing probe PASS (item 3).
+  Next: item 4 (hi/ja letter-text eval on Modal).
