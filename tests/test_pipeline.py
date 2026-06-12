@@ -133,6 +133,15 @@ class TestRender:
         assert 'class="stamp stamp-low"' in worry_html
         assert "<svg" in worry_html  # inline icon, no external asset
 
+    def test_worry_reasons_feed_the_heuristic_scan(self):
+        # Modal eval (06-12): phishing letters landed at caution because the
+        # model's reasons (which paraphrase the signals) were not scanned.
+        ex = triage.Extraction(document_type="bank")
+        ex.what_this_is = "A letter that says your account has a problem."
+        ex.worry_reasons = ["It asks for your password immediately."]
+        result = pipeline._compose(ex, "en")
+        assert result.worry_level == "warning"  # credentials + urgency >= 2
+
     def test_stamp_levels_match(self):
         ex = triage.Extraction(document_type="suspected_scam")
         _, worry_html, _ = render.render_result(pipeline._compose(ex, "en"))
