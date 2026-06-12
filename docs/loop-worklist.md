@@ -37,8 +37,13 @@
    Mitigation 1 shipped: Devanagari/JA scam vocabulary in heuristics (98
    tests). Mitigation 2 pending probe: modal_probe.py dumps raw extractions
    → next wake decides (readable=false guard? README honesty line? both?).
-4b. ANALYZE modal_artifacts/ml_probe.json when probe completes; then update
-   README "Honest limitations" with the non-Latin letter finding either way.
+4b. ~~Probe analysis + fix~~ DONE 06-12: prompt now demands original-script
+   quotes + readable=false over guessing. Result (sim over probe raws):
+   **ja scams low → warning (3/3), ja bills stay low; hi unchanged** —
+   Devanagari is the model's hard OCR limit, documented in README
+   "Honest limitations". scripts/sim_probe_levels.py = offline re-scorer.
+4c. DEPLOY GATE (next wake): modal_validate matrix with new prompt → GO →
+   factory restart Space → checks/check_live_space + check_live_phishing.
 5. README judge-pass: embed docs/ui screenshots (landing, result, softclub,
    mobile) into README with one-line captions; verify HF renders LFS images
    (if not, switch those to non-LFS or hosted paths — check on the Space page).

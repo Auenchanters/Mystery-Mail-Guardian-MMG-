@@ -127,6 +127,11 @@ animations sit behind `prefers-reduced-motion`; tap targets are ≥48px.
 ## Honest limitations
 
 - It can misread poor photos (it says so and asks for a better one).
+- It reads **English letters most reliably**. Japanese letters are read well
+  enough that the independent scam check still fires; Hindi (Devanagari)
+  letters can be under-read by the 1.3B vision model — measured on our Modal
+  eval set and documented in the Field Notes. One more reason every result,
+  always, says to verify before paying or replying.
 - It is not legal, medical, or financial advice — and tells the user that.
 - The scam check is a *cautious flag with reasons*, never a verdict. The UI carries a permanent
   reminder: *"I can make mistakes. For anything important, check with someone you trust."*
