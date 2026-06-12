@@ -65,9 +65,10 @@
 10. ~~Robustness v2~~ DONE 06-12: **38/38 honest outcomes** across blur/dim/
     rotate/perspective/shadow/noise ×3 intensities. No photo-quality breaking
     point found; the real limit is script (Devanagari), already documented.
-11. IN PROGRESS 06-12: LoRA SFT experiment running on Modal (cookbook
-    ms-swift recipe, tuner_type=lora, frozen ViT, adapter → volume
-    guardian-lora). Train-only; NEVER deployed pre-judging.
+11. ~~LoRA SFT experiment~~ DONE 06-12: loss 2.14→0.03, eval_loss 0.098,
+    token acc 98.8%, 5.4M trainable (0.41%), 5m44s/~$0.40 on A10G. Adapter
+    in volume `guardian-lora` (checkpoint-22). Train-only, NOT deployed —
+    swift-infer A/B vs base = post-hackathon. **BACKLOG COMPLETE (1–11).**
 
 ## State notes (update every wake)
 - 06-12: loop started. Live Space healthy at 5e547aa-era build (sha 37be779

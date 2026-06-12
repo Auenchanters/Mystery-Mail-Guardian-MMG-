@@ -273,6 +273,26 @@ in README limitations), Japanese is readable and now guarded by
 original-script quoting + multilingual heuristics. Photo-guidance for the
 README: none needed. The model out-toughed our test.
 
+## 2026-06-12 (late night) — The LoRA experiment: trained, measured, shelved on purpose
+
+Closed the loop on "train the model more": a full LoRA SFT pipeline for
+MiniCPM-V 4.6 on Modal, per the official cookbook recipe (ms-swift,
+`minicpmv4_6` template, frozen ViT). 96 synthetic letters with
+production-shaped gold JSON targets (`letterforge.sft_target`), 2 epochs,
+**5m44s on one A10G (~$0.40)**: train loss 2.14 → 0.03, held-out eval loss
+0.098, eval token accuracy **98.8%**, 5.4M trainable params (0.41% of 1.3B).
+Adapter persisted in the Modal volume `guardian-lora`.
+
+Read those numbers honestly: they prove the model learns OUR JSON dialect
+fluently — they do NOT prove better real-world letter understanding (that
+would need the swift-infer A/B against base on unseen letters, queued
+post-hackathon). And the deployment answer is unchanged: the production
+evals already show safety behavior at ceiling on the stock model, so the
+adapter stays in its volume through judging. The point was the flywheel:
+**dataset → train → adapter in 6 minutes for under half a dollar** — that's
+what "build small" makes possible. Reproduce with:
+`modal run modal_finetune.py`.
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go
