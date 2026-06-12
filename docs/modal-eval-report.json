@@ -1,0 +1,801 @@
+{
+  "n_letters": 48,
+  "variants": {
+    "production": {
+      "prompt_chars": 2634,
+      "parse_failures": 0,
+      "level_accuracy": 0.854,
+      "doc_type_accuracy": 0.417,
+      "scam_recall": 1.0,
+      "false_alarm_rate": 0.0,
+      "amount_hit_rate": 1.0,
+      "deadline_hit_rate": 1.0,
+      "mean_latency_s": 7.0,
+      "mean_output_chars": 639,
+      "per_case": [
+        {
+          "file": "letter_0000.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 6.8
+        },
+        {
+          "file": "letter_0001.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.6
+        },
+        {
+          "file": "letter_0002.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 8.1
+        },
+        {
+          "file": "letter_0003.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 7.4
+        },
+        {
+          "file": "letter_0004.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 7.7
+        },
+        {
+          "file": "letter_0005.png",
+          "name": "lottery_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "charity",
+          "seconds": 6.2
+        },
+        {
+          "file": "letter_0006.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 7.4
+        },
+        {
+          "file": "letter_0007.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 8.8
+        },
+        {
+          "file": "letter_0008.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.5
+        },
+        {
+          "file": "letter_0009.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.6
+        },
+        {
+          "file": "letter_0010.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.5
+        },
+        {
+          "file": "letter_0011.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 5.1
+        },
+        {
+          "file": "letter_0012.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.4
+        },
+        {
+          "file": "letter_0013.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.6
+        },
+        {
+          "file": "letter_0014.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "marketing",
+          "seconds": 8.2
+        },
+        {
+          "file": "letter_0015.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 8.3
+        },
+        {
+          "file": "letter_0016.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 9.4
+        },
+        {
+          "file": "letter_0017.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.4
+        },
+        {
+          "file": "letter_0018.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 9.4
+        },
+        {
+          "file": "letter_0019.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 8.2
+        },
+        {
+          "file": "letter_0020.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 8.7
+        },
+        {
+          "file": "letter_0021.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 8.2
+        },
+        {
+          "file": "letter_0022.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 6.1
+        },
+        {
+          "file": "letter_0023.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.8
+        },
+        {
+          "file": "letter_0024.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 8.7
+        },
+        {
+          "file": "letter_0025.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 8.2
+        },
+        {
+          "file": "letter_0026.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 8.0
+        },
+        {
+          "file": "letter_0027.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.6
+        },
+        {
+          "file": "letter_0028.png",
+          "name": "medical_reminder",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "medical",
+          "seconds": 6.0
+        },
+        {
+          "file": "letter_0029.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.5
+        },
+        {
+          "file": "letter_0030.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.7
+        },
+        {
+          "file": "letter_0031.png",
+          "name": "lottery_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "charity",
+          "seconds": 7.4
+        },
+        {
+          "file": "letter_0032.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "government_tax",
+          "seconds": 7.2
+        },
+        {
+          "file": "letter_0033.png",
+          "name": "medical_reminder",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "medical",
+          "seconds": 6.2
+        },
+        {
+          "file": "letter_0034.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 7.8
+        },
+        {
+          "file": "letter_0035.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.5
+        },
+        {
+          "file": "letter_0036.png",
+          "name": "medical_reminder",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "medical",
+          "seconds": 5.9
+        },
+        {
+          "file": "letter_0037.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.9
+        },
+        {
+          "file": "letter_0038.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 7.3
+        },
+        {
+          "file": "letter_0039.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.4
+        },
+        {
+          "file": "letter_0040.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.9
+        },
+        {
+          "file": "letter_0041.png",
+          "name": "lottery_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "charity",
+          "seconds": 7.3
+        },
+        {
+          "file": "letter_0042.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 8.9
+        },
+        {
+          "file": "letter_0043.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 8.6
+        },
+        {
+          "file": "letter_0044.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 6.1
+        },
+        {
+          "file": "letter_0045.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 7.1
+        },
+        {
+          "file": "letter_0046.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 9.4
+        },
+        {
+          "file": "letter_0047.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 8.3
+        }
+      ]
+    },
+    "compact": {
+      "prompt_chars": 1111,
+      "parse_failures": 0,
+      "level_accuracy": 0.708,
+      "doc_type_accuracy": 0.396,
+      "scam_recall": 1.0,
+      "false_alarm_rate": 0.0,
+      "amount_hit_rate": 1.0,
+      "deadline_hit_rate": 1.0,
+      "mean_latency_s": 5.83,
+      "mean_output_chars": 640,
+      "per_case": [
+        {
+          "file": "letter_0000.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 4.0
+        },
+        {
+          "file": "letter_0001.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.8
+        },
+        {
+          "file": "letter_0002.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 4.1
+        },
+        {
+          "file": "letter_0003.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 6.7
+        },
+        {
+          "file": "letter_0004.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 7.0
+        },
+        {
+          "file": "letter_0005.png",
+          "name": "lottery_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "charity",
+          "seconds": 5.0
+        },
+        {
+          "file": "letter_0006.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "government_tax",
+          "seconds": 6.9
+        },
+        {
+          "file": "letter_0007.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.1
+        },
+        {
+          "file": "letter_0008.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.6
+        },
+        {
+          "file": "letter_0009.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.1
+        },
+        {
+          "file": "letter_0010.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.3
+        },
+        {
+          "file": "letter_0011.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 5.4
+        },
+        {
+          "file": "letter_0012.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 4.0
+        },
+        {
+          "file": "letter_0013.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 6.1
+        },
+        {
+          "file": "letter_0014.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.3
+        },
+        {
+          "file": "letter_0015.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.7
+        },
+        {
+          "file": "letter_0016.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 6.3
+        },
+        {
+          "file": "letter_0017.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.8
+        },
+        {
+          "file": "letter_0018.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.0
+        },
+        {
+          "file": "letter_0019.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "government_tax",
+          "seconds": 6.1
+        },
+        {
+          "file": "letter_0020.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "government_tax",
+          "seconds": 6.8
+        },
+        {
+          "file": "letter_0021.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.3
+        },
+        {
+          "file": "letter_0022.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 6.5
+        },
+        {
+          "file": "letter_0023.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.5
+        },
+        {
+          "file": "letter_0024.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "personal",
+          "seconds": 6.8
+        },
+        {
+          "file": "letter_0025.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.2
+        },
+        {
+          "file": "letter_0026.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.6
+        },
+        {
+          "file": "letter_0027.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.0
+        },
+        {
+          "file": "letter_0028.png",
+          "name": "medical_reminder",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "medical",
+          "seconds": 5.2
+        },
+        {
+          "file": "letter_0029.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 5.7
+        },
+        {
+          "file": "letter_0030.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 3.8
+        },
+        {
+          "file": "letter_0031.png",
+          "name": "lottery_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "charity",
+          "seconds": 6.8
+        },
+        {
+          "file": "letter_0032.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "government_tax",
+          "seconds": 7.0
+        },
+        {
+          "file": "letter_0033.png",
+          "name": "medical_reminder",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "medical",
+          "seconds": 6.0
+        },
+        {
+          "file": "letter_0034.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.9
+        },
+        {
+          "file": "letter_0035.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 5.7
+        },
+        {
+          "file": "letter_0036.png",
+          "name": "medical_reminder",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "medical",
+          "seconds": 5.2
+        },
+        {
+          "file": "letter_0037.png",
+          "name": "charity_request",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "charity",
+          "seconds": 4.3
+        },
+        {
+          "file": "letter_0038.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 6.2
+        },
+        {
+          "file": "letter_0039.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "warning",
+          "doc_type": "bank",
+          "seconds": 5.4
+        },
+        {
+          "file": "letter_0040.png",
+          "name": "bank_notice",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "bank",
+          "seconds": 5.6
+        },
+        {
+          "file": "letter_0041.png",
+          "name": "lottery_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "charity",
+          "seconds": 3.5
+        },
+        {
+          "file": "letter_0042.png",
+          "name": "lookalike_ad",
+          "gold": "caution",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.6
+        },
+        {
+          "file": "letter_0043.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "government_tax",
+          "seconds": 6.7
+        },
+        {
+          "file": "letter_0044.png",
+          "name": "phishing_account",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "bank",
+          "seconds": 4.7
+        },
+        {
+          "file": "letter_0045.png",
+          "name": "utility_bill",
+          "gold": "low",
+          "level": "low",
+          "doc_type": "utility_bill",
+          "seconds": 7.8
+        },
+        {
+          "file": "letter_0046.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 6.9
+        },
+        {
+          "file": "letter_0047.png",
+          "name": "gift_card_scam",
+          "gold": "warning",
+          "level": "caution",
+          "doc_type": "personal",
+          "seconds": 5.8
+        }
+      ]
+    }
+  }
+}

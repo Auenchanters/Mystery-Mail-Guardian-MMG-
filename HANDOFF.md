@@ -30,8 +30,16 @@ _Last updated: 2026-06-11 (UI-redesign session)_
   live-fire JSON repairs (see BUILD_LOG).
 
 ## In progress
-- Nothing mid-flight. **UI FREEZE in effect (owner rule: 2026-06-13 EOD; frozen
-  early 06-11).** June 12–15 = demo video, social post, README placeholders only.
+- Nothing mid-flight. Live Space = sha 37be779 (owner re-opened the freeze on
+  06-12 for: Soft Club easter egg on 日本語, loader redesign, read-aloud
+  hidden until results, eval-driven heuristic boost). 96 offline tests.
+- **Gradio 6.17 JS execution map (hard-won, in BUILD_LOG 06-12):** only
+  `launch(head=…)` + `ssr_mode=False` reliably runs page-load JS on local AND
+  Space. `launch(js=…)` and js-only `demo.load` are dead letters.
+- **Modal program:** `modal_validate.py` (GO), `modal_eval.py` (prompt A/B,
+  48-letter labeled dataset via `scripts/make_dataset.py` + `guardian/
+  letterforge.py`). Eval verdict: keep production prompt; NO pre-deadline
+  fine-tune (evidence in BUILD_LOG); SFT dataset ready for post-hackathon.
 - **06-11 hotfix (owner-reported, live at 0b6d0b6):** stacked progress bars →
   `show_progress_on=out_what`; model parroting prompt-schema text as "facts" →
   echo filter in `triage._is_prompt_echo` + prompt hardening + heuristics now

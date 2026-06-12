@@ -193,6 +193,50 @@ analysis; first speech 151s (load), then ~4s per language. Whole matrix ≈
 well under $1 of the $250 credits. Modal usage stays strictly build/test-time —
 the deployed runtime is still 100% local (Off the Grid intact).
 
+## 2026-06-12 (later) — Soft Club easter egg, loader redesign, and the eval that said "don't fine-tune"
+
+**Gen X Soft Club easter egg:** selecting 日本語 swaps the whole app to a
+pastel Y2K dreamscape — third token palette in theme.py, held to the same
+WCAG-AA tests as the others ("an easter egg an elder cannot read is a bug").
+One class toggle re-maps our tokens AND Gradio's own theme variables (which
+Gradio re-declares at `:root.dark` with literal colors — found in-browser).
+Getting the toggle script to run took three attempts, all verified against
+rendered pages: `launch(js=…)` never executes in Gradio 6.17.3; a js-only
+`demo.load(…)` registers in the config but never runs; `launch(head=…)`
+works — but the Space's SSR drops it. Final: head script + `ssr_mode=False`.
+
+**Loader redesign + UX:** one progress overlay instead of one per output
+(`show_progress_on`), Gradio's generic bar/timer hidden behind the envelope
+flap + breathing localized text; read-aloud button now appears only after a
+successful analysis (a wrapper Group's visibility update gets stomped when
+its child is updated in the same event — switched to single-component
+button updates).
+
+**Modal eval program (the "train it more" answer):** built
+`guardian/letterforge.py` (8 parameterized letter factories, gold labels
+derived through triage itself, SFT-ready targets) + `scripts/make_dataset.py`
++ `modal_eval.py`. Ran 48 letters × 2 prompt variants on an A10G:
+
+| metric | production | compact |
+|---|---|---|
+| prompt chars | 2634 | 1111 |
+| level accuracy | **0.854** | 0.708 |
+| scam recall | **1.0** | **1.0** |
+| false alarms | **0.0** | **0.0** |
+| amount / deadline hits | 1.0 / 1.0 | 1.0 / 1.0 |
+| mean latency | 7.0s | 5.8s |
+
+Decisions the data made for us: (1) the compact prompt saves 58% of prompt
+tokens but costs 15 points of level accuracy — **keep the production
+prompt**; (2) every "miss" was a phishing scam at *caution* instead of
+*warning* — fixed by feeding the model's worry_reasons into the heuristic
+scan (offline-tested); (3) **no fine-tune before submission**: safety
+behavior is already perfect on the eval distribution (recall 1.0, zero
+false alarms), the weak metric (doc-type labeling, 0.42) barely touches
+user-facing output, and a model swap two days before judging is risk with
+no payoff. The SFT dataset (images + gold JSON targets) is generated and
+ready if post-hackathon training is wanted.
+
 ### Still ahead (humans + GPU required)
 
 1. Run the three `checks/` scripts on real photographed letters on the Space → go/no-go
