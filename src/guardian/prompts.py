@@ -39,6 +39,11 @@ string. Keep every sentence short; the whole answer must stay compact.
 Copy real values from the document (actual names, amounts, dates). NEVER repeat this schema's \
 field names or descriptions as answers. If something is not in the document, use null or [].
 
+If the document is not in English, still read it in its own language: copy the sender, amounts, \
+and the most important phrases EXACTLY as printed, in their original script, into "sender", \
+"requested_action", and scam_signal "evidence". If you cannot read the text confidently, \
+set readable=false instead of guessing.
+
 Safety rules you MUST follow:
 - NEVER declare the letter definitely safe or definitely a scam. Use cautious wording like "this looks like" and "be careful".
 - Do NOT include phone numbers, links, or email addresses from the letter in "what_to_do".
