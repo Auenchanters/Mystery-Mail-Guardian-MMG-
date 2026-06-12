@@ -298,8 +298,23 @@ def degrade_graded(img, kind: str, level: int):
 
 def sft_target(gold: GoldLetter) -> dict:
     """Gold JSON in the exact schema the analysis prompt demands — usable as
-    the assistant target for supervised fine-tuning."""
+    the assistant target for supervised fine-tuning (English explanations,
+    deterministic, production-shaped)."""
+    from . import ui_text
+
     signals = [{"id": s, "evidence": ""} for s in gold.signal_ids]
+    facts = [f"From: {gold.sender}"]
+    if gold.amount:
+        facts.append(f"Amount: {gold.amount}")
+    if gold.deadline:
+        facts.append(f"Deadline: {gold.deadline}")
+    label = ui_text.doc_type_label(gold.document_type, "en")
+    reasons = [ui_text.signal_label(s, "en") for s in gold.signal_ids]
+    steps = (["Do not pay or reply using anything printed in this letter.",
+              "Show this letter to someone you trust."]
+             if gold.signal_ids else
+             ["Check that the name on the letter is yours.",
+              "If you need to act, use the contact you already know and trust."])
     return {
         "is_document": True, "readable": True,
         "document_type": gold.document_type,
@@ -309,7 +324,9 @@ def sft_target(gold: GoldLetter) -> dict:
         "requested_action": None,
         "scam_signals": signals,
         "explanation": {
-            "what_this_is": "", "key_facts": [],
-            "worry_reasons": [], "what_to_do": [],
+            "what_this_is": f"This looks like {label}.",
+            "key_facts": facts,
+            "worry_reasons": reasons,
+            "what_to_do": steps,
         },
     }
