@@ -34,6 +34,31 @@ what to actually do next, and reads the summary aloud — in English, Hindi, Spa
 > (rightly) refuse to upload to a cloud API. The local-first constraint isn't a limitation here —
 > it **is** the product.
 
+## What it looks like
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://huggingface.co/spaces/build-small-hackathon/Mystery_Mail_Guardian/resolve/main/docs/ui/desktop-dark-en.png" alt="Landing page — midnight study desk theme" width="100%"/>
+      <sub><b>The kitchen-table post office</b> — wax-seal privacy promise, one-tap languages, 1·2·3 steps</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://huggingface.co/spaces/build-small-hackathon/Mystery_Mail_Guardian/resolve/main/docs/ui/result-en.png" alt="Analysis result — letter sheets with postage-stamp verdict" width="100%"/>
+      <sub><b>Letters as paper sheets</b> — postage-stamp verdict, reasons, safe next steps</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://huggingface.co/spaces/build-small-hackathon/Mystery_Mail_Guardian/resolve/main/docs/ui/softclub-live.png" alt="Gen X Soft Club easter egg on Japanese" width="100%"/>
+      <sub><b>The 日本語 easter egg</b> — Gen X Soft Club skin, same WCAG-AA contrast tests as every palette</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://huggingface.co/spaces/build-small-hackathon/Mystery_Mail_Guardian/resolve/main/docs/ui/mobile-en.png" alt="Mobile layout, 380px" width="55%"/>
+      <sub><b>Phone-first</b> — ≥48px targets, single column, no horizontal scroll at 380px</sub>
+    </td>
+  </tr>
+</table>
+
 ## Who this is for
 
 <!-- HUMAN: name the real person (with their consent) and describe their situation.

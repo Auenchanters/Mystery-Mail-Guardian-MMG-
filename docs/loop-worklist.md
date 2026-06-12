@@ -47,9 +47,9 @@
    99 tests) → re-gate GO → **live at f516a08**, both live probes PASS,
    phishing now rates WARNING live (was caution). Full chain shipped:
    original-script prompt + hi/ja scam vocabulary + paraphrase urgency.
-5. README judge-pass: embed docs/ui screenshots (landing, result, softclub,
-   mobile) into README with one-line captions; verify HF renders LFS images
-   (if not, switch those to non-LFS or hosted paths — check on the Space page).
+5. ~~README screenshot gallery~~ DONE 06-12: 2×2 gallery (landing, result,
+   softclub egg, mobile) with absolute HF resolve URLs — verified LFS
+   serves 200 image/png, renders on both HF card and GitHub.
 6. A11y re-audit of the softclub palette in the running app (focus rings,
    keyboard path, 380px) — same checklist as BUILD_LOG 06-11 audit.
 7. Field Notes polish: BUILD_LOG intro paragraph framing the whole build
