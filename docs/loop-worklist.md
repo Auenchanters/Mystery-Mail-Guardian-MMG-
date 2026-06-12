@@ -31,9 +31,14 @@
    caution + credentials signal, no link leak. Note: live run surfaced 1
    signal → caution (matrix shows warning when model writes reasons; both
    acceptable, gate is caution|warning).
-4. Eval v2 on Modal: add Hindi + Japanese letters to letterforge (the model
-   reads EN letters; UI lang ≠ letter lang — test hi/ja LETTER TEXT too),
-   regenerate dataset, re-run modal_eval, record per-language table.
+4. ~~Hi/ja letter-text eval~~ DONE 06-12: 64-letter run. **Finding: model
+   under-reads non-Latin letters** — hi/ja gift-card scams → "low" (hi even
+   classified "personal"); EN letters unchanged (scam recall 1.0 EN-only).
+   Mitigation 1 shipped: Devanagari/JA scam vocabulary in heuristics (98
+   tests). Mitigation 2 pending probe: modal_probe.py dumps raw extractions
+   → next wake decides (readable=false guard? README honesty line? both?).
+4b. ANALYZE modal_artifacts/ml_probe.json when probe completes; then update
+   README "Honest limitations" with the non-Latin letter finding either way.
 5. README judge-pass: embed docs/ui screenshots (landing, result, softclub,
    mobile) into README with one-line captions; verify HF renders LFS images
    (if not, switch those to non-LFS or hosted paths — check on the Space page).
