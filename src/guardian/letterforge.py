@@ -254,6 +254,48 @@ def render_gold(gold: GoldLetter, rng: random.Random, degrade: bool = True):
     return img, kind
 
 
+# --- Graded degradations (robustness eval v2: find the honest breaking point)
+def degrade_graded(img, kind: str, level: int):
+    """Apply degradation `kind` at intensity level 1..3 (3 = harshest)."""
+    import random as _random
+
+    from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
+
+    if kind == "blur":
+        return img.filter(ImageFilter.GaussianBlur((1.5, 3.0, 4.5)[level - 1]))
+    if kind == "dim":
+        return ImageEnhance.Brightness(img).enhance((0.5, 0.3, 0.15)[level - 1])
+    if kind == "rotate":
+        return img.rotate((10, 20, 35)[level - 1], expand=True, fillcolor="white")
+    if kind == "perspective":  # phone held at an angle
+        w, h = img.size
+        j = (0.04, 0.09, 0.16)[level - 1]
+        rng = _random.Random(level)
+        quad = [rng.uniform(0, j) * w, rng.uniform(0, j) * h,
+                rng.uniform(0, j) * w, h - rng.uniform(0, j) * h,
+                w - rng.uniform(0, j) * w, h - rng.uniform(0, j) * h,
+                w - rng.uniform(0, j) * w, rng.uniform(0, j) * h]
+        return img.transform((w, h), Image.QUAD, quad, fillcolor="white")
+    if kind == "shadow":  # hard shadow band across the page
+        overlay = Image.new("L", img.size, 255)
+        draw = ImageDraw.Draw(overlay)
+        w, h = img.size
+        band = (h // 4, h // 3, h // 2)[level - 1]
+        opacity = (190, 150, 110)[level - 1]
+        draw.rectangle([0, h // 3, w, h // 3 + band], fill=opacity)
+        return Image.composite(img, Image.new("RGB", img.size, "black"),
+                               overlay.point(lambda p: p))
+    if kind == "noise":  # sensor grain / crumple texture
+        import numpy as np
+
+        arr = np.asarray(img).astype("int16")
+        sigma = (12, 28, 48)[level - 1]
+        rng = np.random.default_rng(level)
+        noisy = arr + rng.normal(0, sigma, arr.shape)
+        return Image.fromarray(noisy.clip(0, 255).astype("uint8"))
+    raise ValueError(kind)
+
+
 def sft_target(gold: GoldLetter) -> dict:
     """Gold JSON in the exact schema the analysis prompt demands — usable as
     the assistant target for supervised fine-tuning."""
