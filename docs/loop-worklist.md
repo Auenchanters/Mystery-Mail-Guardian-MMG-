@@ -50,8 +50,11 @@
 5. ~~README screenshot gallery~~ DONE 06-12: 2×2 gallery (landing, result,
    softclub egg, mobile) with absolute HF resolve URLs — verified LFS
    serves 200 image/png, renders on both HF card and GitHub.
-6. A11y re-audit of the softclub palette in the running app (focus rings,
-   keyboard path, 380px) — same checklist as BUILD_LOG 06-11 audit.
+6. ~~Soft Club a11y re-audit~~ DONE 06-12, all PASS: card ink resolves to
+   softclub #393153 (var-scope fix holds), stamp recolors, segments 72px,
+   380px = 2×2 grid no h-scroll, zero console errors. Note: ?autorun + ?lang
+   race can hide read-aloud in SCREENSHOTS only (lang-change response lands
+   after analyze); real sequential use verified correct — not a product bug.
 7. Field Notes polish: BUILD_LOG intro paragraph framing the whole build
    story for judges (elder-first design → safety layer → Modal QA flywheel).
 8. Prepare (do NOT publish) the `achievement:sharing` bundle: sanitized agent
