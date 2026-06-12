@@ -94,7 +94,8 @@ def _degrade(img, kind: str):
     raise ValueError(kind)
 
 
-@app.function(gpu="A10G", image=image, timeout=3600)
+@app.function(gpu="A10G", image=image, timeout=3600,
+              secrets=[modal.Secret.from_name("huggingface")])
 def validate() -> dict:
     import base64
     import io

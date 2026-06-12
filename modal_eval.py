@@ -56,7 +56,8 @@ never declare it definitely a scam or definitely safe; no phone numbers, \
 links, or emails from the letter in what_to_do; null/[] when absent."""
 
 
-@app.function(gpu="A10G", image=image, timeout=3600)
+@app.function(gpu="A10G", image=image, timeout=3600,
+              secrets=[modal.Secret.from_name("huggingface")])
 def evaluate() -> dict:
     import sys
     import time
