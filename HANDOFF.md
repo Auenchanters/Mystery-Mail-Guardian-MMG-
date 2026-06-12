@@ -30,9 +30,13 @@ _Last updated: 2026-06-11 (UI-redesign session)_
   live-fire JSON repairs (see BUILD_LOG).
 
 ## In progress
-- Nothing mid-flight. Live Space = sha 37be779 (owner re-opened the freeze on
-  06-12 for: Soft Club easter egg on 日本語, loader redesign, read-aloud
-  hidden until results, eval-driven heuristic boost). 96 offline tests.
+- Nothing mid-flight. **Loop backlog 1–11 COMPLETE 06-12** (docs/loop-worklist.md
+  has the full annotated record). Live Space = sha f516a08 app code (later
+  pushes are docs/eval-only; no restart needed), both live probes PASS,
+  99 offline tests. Highlights: multilingual scam chain live (ja scams
+  warning; Devanagari documented as the honest limit), robustness 38/38,
+  README gallery + demo script + consent-gated agent-trace draft, LoRA
+  pipeline proven (adapter in Modal volume `guardian-lora`, NOT deployed).
 - **Gradio 6.17 JS execution map (hard-won, in BUILD_LOG 06-12):** only
   `launch(head=…)` + `ssr_mode=False` reliably runs page-load JS on local AND
   Space. `launch(js=…)` and js-only `demo.load` are dead letters.
