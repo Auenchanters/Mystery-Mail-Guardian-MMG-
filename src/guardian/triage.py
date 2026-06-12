@@ -210,9 +210,10 @@ _HEURISTICS: dict[str, re.Pattern[str]] = {
         r"social\s+security|aadhaar|pan\s+number|contraseñ|पासवर्ड|"
         r"パスワード|暗証番号|ワンタイム", re.I),
     "urgency": re.compile(
-        r"\burgent(?:ly)?\b|immediately|act\s+now|within\s+24\s+hours|final\s+notice|"
+        r"\burgent(?:ly)?\b|immediately|act\s+now|final\s+notice|"
+        r"within\s+\d+\s+hours|within\s+a\s+(?:set|short|limited)\s+time|"
         r"last\s+chance|expires?\s+today|right\s+now|तुरंत|अंतिम\s+चेतावनी|"
-        r"urgente|inmediatamente|último\s+aviso|"
+        r"urgente|inmediatamente|último\s+aviso|plazo\s+de\s+\d+\s+horas|"
         r"至急|直ちに|時間以内|最終通告", re.I),
     "threat_or_arrest": re.compile(
         r"\barrest(?:ed)?\b|lawsuit|legal\s+action|\bwarrant\b|prosecut|"

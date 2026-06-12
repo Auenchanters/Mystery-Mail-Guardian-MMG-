@@ -168,6 +168,14 @@ class TestHeuristics:
         hits = {s.id for s in triage.run_heuristics("Congratulations! You have won the lottery")}
         assert "prize_too_good" in hits
 
+    def test_deadline_pressure_paraphrases_detected(self):
+        # Deploy gate 06-12: the model paraphrased "within 24 hours" as
+        # "within a set time" and urgency missed — pattern was too literal.
+        for text in ("pay within 48 hours", "respond within a set time",
+                     "act within a short time", "pague en un plazo de 24 horas"):
+            ids = [s.id for s in triage.run_heuristics(text)]
+            assert "urgency" in ids, text
+
     def test_hindi_gift_card_detected(self):
         # Modal ML-eval (06-12): hi/ja scam letters under-flagged — the
         # heuristic taxonomy lacked Devanagari/Japanese scam vocabulary.
