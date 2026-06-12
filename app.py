@@ -250,9 +250,9 @@ _DEEPLINK_JS = """
   const names = {en: 'English', hi: '\\u0939\\u093f\\u0928\\u094d\\u0926\\u0940',
                  es: 'Espa\\u00f1ol', ja: '\\u65e5\\u672c\\u8a9e'};
   const lang = names[(q.get('lang') || '').toLowerCase()];
-  const retry = (fn, n = 25) => {
+  const retry = (fn, n = 60) => {  // ~30s budget: Space mounts slower than local
     if (fn()) return;
-    if (n > 0) setTimeout(() => retry(fn, n - 1), 300);
+    if (n > 0) setTimeout(() => retry(fn, n - 1), 500);
   };
   if (lang) retry(() => {
     const l = [...document.querySelectorAll('#language-seg label')]
