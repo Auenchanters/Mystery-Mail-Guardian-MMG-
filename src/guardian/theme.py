@@ -35,6 +35,18 @@ TOKENS = {
         "alert_red": "#B3362B",
         "line": "#E4D9C3",
     },
+    "softclub": {  # 日本語 easter egg — Gen X Soft Club: pastel Y2K dreamscape
+        "paper": "#E9E3F7",       # pale lavender sky
+        "sheet": "#F8F4FE",       # lilac-white gloss
+        "ink": "#393153",         # dusk purple
+        "ink_soft": "#5B5280",    # muted twilight
+        "postal_red": "#AD2D6C",  # city-pop rose
+        "postal_blue": "#3D55B0", # chrome blue
+        "seal_green": "#13735D",  # deep mint
+        "amber": "#8A6400",       # golden hour
+        "alert_red": "#BB3149",   # sunset alarm
+        "line": "#CFC4EE",
+    },
 }
 
 
@@ -50,11 +62,44 @@ def contrast_ratio(fg: str, bg: str) -> float:
     return (l1 + 0.05) / (l2 + 0.05)
 
 
+# Gradio reads its own CSS variables (set dark by build_theme); the easter egg
+# must re-map those too or Gradio chrome would stay midnight under the pastels.
+_GRADIO_SOFTCLUB = {
+    "body_background_fill": "#E9E3F7",
+    "block_background_fill": "#F8F4FE",
+    "block_border_color": "#CFC4EE",
+    "body_text_color": "#393153",
+    "body_text_color_subdued": "#5B5280",
+    "input_background_fill": "#FFFFFF",
+    "button_primary_background_fill": "#AD2D6C",
+    "button_primary_text_color": "#FFFFFF",
+    "button_secondary_background_fill": "#F8F4FE",
+    "button_secondary_text_color": "#3D55B0",
+    "block_shadow": "0 6px 26px rgba(150,120,210,.28)",
+}
+
+
+def _var_block(selector: str, palette: dict[str, str], important: bool = False) -> str:
+    bang = " !important" if important else ""
+    pairs = "".join(f"--{k.replace('_', '-')}:{v}{bang};" for k, v in palette.items())
+    return selector + "{" + pairs + "}"
+
+
+# Gradio re-declares its theme variables at `:root.dark, :root .dark` (literal
+# dark values), which both out-cascades and inner-shadows a plain html.softclub
+# override — so the easter egg re-maps on those scopes too, with !important.
+_SOFTCLUB_SCOPE = "html.softclub, html.softclub .dark, html.softclub .gradio-container"
+
+
 def css_variables() -> str:
-    """The :root block injected ahead of guardian.css (single source of truth)."""
-    t = TOKENS["dark"]
-    pairs = "".join(f"--{k.replace('_', '-')}:{v};" for k, v in t.items())
-    return ":root{" + pairs + "}"
+    """Token blocks injected ahead of guardian.css (single source of truth).
+
+    :root carries the default dark palette; the softclub scope re-maps the
+    same variables (ours AND Gradio's) for the 日本語 easter egg, so every
+    var()-driven style swaps in one class toggle."""
+    softclub = {**TOKENS["softclub"], **_GRADIO_SOFTCLUB}
+    return (_var_block(":root", TOKENS["dark"])
+            + _var_block(_SOFTCLUB_SCOPE, softclub, important=True))
 
 
 def build_theme():

@@ -73,7 +73,8 @@ def on_analyze(image, lang_label: str, progress=gr.Progress()):
     result = gpu_analyze(image, lang)
     what_html, worry_html, todo_html = render.render_result(result)
     return (what_html, worry_html, todo_html, result.speak_text,
-            None, gr.Group(visible=False))
+            None, gr.Group(visible=False),
+            gr.Button(visible=result.ok))  # read-aloud only once there is a result
 
 
 def on_speak(speak_text: str, lang_label: str):
@@ -133,7 +134,9 @@ def on_language_change(lang_label: str):
         _header_html(lang),
         gr.Image(label=ui_text.get(lang, "upload_label")),
         gr.Button(value=ui_text.get(lang, "analyze_btn")),
-        gr.Button(value=ui_text.get(lang, "read_aloud_btn")),
+        # relabel AND hide in one update — a separate Group toggle gets
+        # stomped when its child is updated in the same event (seen live)
+        gr.Button(value=ui_text.get(lang, "read_aloud_btn"), visible=False),
         gr.Audio(label=ui_text.get(lang, "audio_label"), value=None),
         what_html,
         worry_html,
@@ -189,6 +192,7 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
                 ui_text.get(_DEFAULT_LANG, "read_aloud_btn"),
                 variant="secondary",
                 elem_classes=["big-button"],
+                visible=False,  # appears once an analysis succeeds
             )
             with gr.Group(visible=False, elem_classes=["audio-sheet"]) as audio_group:
                 audio = gr.Audio(
@@ -204,7 +208,8 @@ with gr.Blocks(title="Mystery-Mail Guardian") as demo:
     analyze_btn.click(
         on_analyze,
         inputs=[image, language],
-        outputs=[out_what, out_worry, out_todo, speak_state, audio, audio_group],
+        outputs=[out_what, out_worry, out_todo, speak_state, audio, audio_group,
+                 read_btn],
         show_progress_on=out_what,  # ONE overlay, not one per output component
     )
     read_btn.click(
@@ -255,6 +260,21 @@ _DEEPLINK_JS = """
     if (!l) return false;
     const i = l.querySelector('input');
     if (i && !i.checked) i.click();
+    return true;
+  });
+  // Easter egg: 日本語 selected -> Gen X Soft Club skin (class swaps every
+  // CSS variable; palette is WCAG-AA-tested like the others).
+  const softclub = () => {
+    const sel = document.querySelector('#language-seg label.selected');
+    document.documentElement.classList.toggle(
+      'softclub', !!(sel && sel.textContent.includes('\\u65e5\\u672c\\u8a9e')));
+  };
+  retry(() => {
+    const root = document.querySelector('.gradio-container');
+    if (!root || !document.querySelector('#language-seg')) return false;
+    new MutationObserver(softclub).observe(
+      root, {subtree: true, attributes: true, attributeFilter: ['class']});
+    softclub();
     return true;
   });
 __AUTORUN__

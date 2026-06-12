@@ -27,10 +27,28 @@ def test_light_palette_meets_wcag_aa():
         assert ratio >= minimum, f"light {fg} on {bg}: {ratio:.2f} < {minimum}"
 
 
+def test_softclub_palette_meets_wcag_aa():
+    # The 日本語 easter-egg palette is held to the same standard — an easter
+    # egg that an elder cannot read is a bug, not a delight.
+    for fg, bg, minimum in AA_PAIRS:
+        ratio = contrast_ratio(TOKENS["softclub"][fg], TOKENS["softclub"][bg])
+        assert ratio >= minimum, f"softclub {fg} on {bg}: {ratio:.2f} < {minimum}"
+
+
 def test_contrast_math_sanity():
     assert abs(contrast_ratio("#FFFFFF", "#000000") - 21.0) < 0.01
     assert abs(contrast_ratio("#777777", "#777777") - 1.0) < 0.01
 
 
-def test_both_palettes_have_same_token_names():
-    assert set(TOKENS["dark"]) == set(TOKENS["light"])
+def test_all_palettes_have_same_token_names():
+    assert set(TOKENS["dark"]) == set(TOKENS["light"]) == set(TOKENS["softclub"])
+
+
+def test_css_variables_include_softclub_override_block():
+    from guardian.theme import css_variables
+
+    css = css_variables()
+    assert css.startswith(":root{")
+    assert "html.softclub" in css
+    # must out-cascade Gradio's own `:root.dark` variable re-declarations
+    assert "html.softclub .dark" in css and "!important" in css

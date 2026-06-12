@@ -17,14 +17,31 @@ def test_app_builds_in_mock_mode():
 def test_analyze_callback_roundtrip():
     import app
 
-    what_html, worry_html, todo_html, speak_text, audio, audio_group = app.on_analyze(
-        object(), "English"
+    what_html, worry_html, todo_html, speak_text, audio, audio_group, read_btn = (
+        app.on_analyze(object(), "English")
     )
     assert "electricity bill" in what_html
     assert "card-low" in worry_html
     assert "never use the contact details" in todo_html
     assert speak_text and audio is None
     assert audio_group.constructor_args["visible"] is False
+    assert read_btn.constructor_args["visible"] is True  # read-aloud appears
+
+
+def test_read_aloud_stays_hidden_on_error():
+    import app
+
+    *_, read_btn = app.on_analyze(None, "English")
+    assert read_btn.constructor_args["visible"] is False
+
+
+def test_language_change_hides_read_aloud_in_button_update():
+    import app
+
+    updates = app.on_language_change("Español (Spanish)")
+    read_btn_update = updates[3]
+    assert read_btn_update.constructor_args["visible"] is False
+    assert "voz alta" in read_btn_update.constructor_args["value"]
 
 
 def test_speak_callback_returns_audio():
@@ -58,7 +75,7 @@ def test_language_change_japanese_roundtrip():
 
     updates = app.on_language_change("日本語 (Japanese)")
     assert "手紙" in updates[0]  # tagline localized
-    what_html, worry_html, todo_html, speak_text, audio, audio_group = app.on_analyze(
+    what_html, worry_html, todo_html, speak_text, audio, *_ = app.on_analyze(
         object(), "日本語 (Japanese)"
     )
     assert "電気料金" in what_html

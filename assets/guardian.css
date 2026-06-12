@@ -180,25 +180,38 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
 }
 
-/* --- Analyzing state: envelope flap opens over the first result block -------
-   Gradio 6 marks the busy component's inner container with `.pending`. */
-.out-what .html-container.pending { position: relative; min-height: 110px; }
+/* --- Analyzing state: a letter being opened, not a generic progress bar -----
+   Gradio 6 marks the busy component's inner container with `.pending`; the
+   queue overlay (.wrap) carries the localized text. We hide Gradio's bar and
+   timer and let the envelope + pulsing text do the talking. */
+.out-what .html-container.pending { position: relative; min-height: 150px; }
 .out-what .html-container.pending .guardian-card { visibility: hidden; }  /* stale card */
 .out-what .html-container.pending::after {   /* envelope body */
-  content: ""; position: absolute; top: 40px; left: calc(50% - 27px);
-  width: 54px; height: 36px; background: var(--sheet);
-  border: 3px solid var(--postal-blue); border-radius: 4px;
+  content: ""; position: absolute; top: 26px; left: calc(50% - 36px);
+  width: 72px; height: 48px; background: var(--sheet);
+  border: 3px solid var(--postal-blue); border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
 }
 .out-what .html-container.pending::before {  /* flap, hinged at the top edge */
-  content: ""; position: absolute; top: 43px; left: calc(50% - 23px);
-  width: 46px; height: 22px; background: var(--postal-blue);
+  content: ""; position: absolute; top: 29px; left: calc(50% - 31px);
+  width: 62px; height: 30px; background: var(--postal-blue);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center; z-index: 1;
   animation: flap-open 1.4s ease-in-out infinite alternate;
 }
 @keyframes flap-open { from { transform: rotateX(0deg); } to { transform: rotateX(140deg); } }
-/* Gradio's queue overlay carries the localized "Reading your letter…" text */
-.progress-text { color: var(--postal-blue) !important; font-size: 18px !important; }
+.out-what .wrap .progress-level,
+.out-what .wrap .progress-bar-wrap,
+.out-what .wrap .meta-text { display: none !important; }  /* generic bar + timer */
+.out-what .wrap .progress-text {
+  margin-top: 96px;  /* sit below the envelope */
+  color: var(--postal-blue) !important;
+  font-size: 19px !important; font-weight: 700;
+  animation: text-breathe 1.6s ease-in-out infinite;
+}
+@keyframes text-breathe { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+/* speak button shows its own small wait state */
+.big-button .progress-text { color: var(--postal-blue) !important; }
 
 /* --- Motion (all gated behind prefers-reduced-motion) ---------------------- */
 @keyframes rise {
@@ -227,6 +240,51 @@
   .guardian-card h2 { font-size: 21px; }
   .stamp { width: 72px; height: 72px; padding: 9px; }
   .big-button { width: 100%; }
+}
+
+/* --- Example letters: bigger, friendlier targets ----------------------------- */
+#sample-letters button {
+  min-height: 96px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--sheet);
+}
+
+/* --- 日本語 easter egg: Gen X Soft Club --------------------------------------
+   html.softclub re-maps every CSS variable (see theme.css_variables); the
+   rules below add the dreamy flourishes the variables can't express. */
+.gradio-container, .guardian-card, .big-button, .privacy-banner, .stamp {
+  transition: background .45s ease, color .45s ease,
+              box-shadow .45s ease, border-color .45s ease;
+}
+html.softclub { background: #E9E3F7; }  /* no dark strip past the body */
+html.softclub body, .softclub .gradio-container {
+  background: linear-gradient(160deg, #F6E7F5 0%, #E6E4F9 45%, #DCEAF9 100%) fixed !important;
+}
+.softclub .gradio-container { color: var(--ink); }
+.softclub .guardian-card, .softclub .audio-sheet, .softclub .upload-zone {
+  border-radius: 18px !important;
+  box-shadow: 0 6px 26px rgba(150, 120, 210, .28);
+}
+.softclub .guardian-card::before { border-radius: 18px 18px 0 0; }
+.softclub .guardian-header h1 {  /* chrome gradient wordmark */
+  background: linear-gradient(92deg, #6A4FA3, #3D55B0 45%, #AD2D6C);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.softclub .wordmark::after {  /* a single dignified sparkle */
+  content: "✦"; color: #9F7FD1; font-size: 22px;
+  margin-left: 2px; align-self: flex-start;
+}
+.softclub .big-button { border-radius: 999px !important; }
+.softclub .big-button.primary {
+  background: linear-gradient(95deg, #AD2D6C, #7B4FB5) !important;
+  color: #FFFFFF !important;
+}
+.softclub .privacy-banner {
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--seal-green),
+              0 6px 22px rgba(150, 120, 210, .35);
+}
+.softclub #language-seg label.selected {
+  background: linear-gradient(95deg, #3D55B0, #6A4FA3); color: #FFFFFF;
 }
 
 /* --- Footer colophon --------------------------------------------------------- */
