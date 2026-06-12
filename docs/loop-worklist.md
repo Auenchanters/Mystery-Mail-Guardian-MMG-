@@ -42,8 +42,11 @@
    **ja scams low → warning (3/3), ja bills stay low; hi unchanged** —
    Devanagari is the model's hard OCR limit, documented in README
    "Honest limitations". scripts/sim_probe_levels.py = offline re-scorer.
-4c. DEPLOY GATE (next wake): modal_validate matrix with new prompt → GO →
-   factory restart Space → checks/check_live_space + check_live_phishing.
+4c. ~~Deploy gate~~ DONE 06-12: first gate NO-GO (es scam → caution via
+   "within a set time" paraphrase) → urgency pattern generalized (TDD,
+   99 tests) → re-gate GO → **live at f516a08**, both live probes PASS,
+   phishing now rates WARNING live (was caution). Full chain shipped:
+   original-script prompt + hi/ja scam vocabulary + paraphrase urgency.
 5. README judge-pass: embed docs/ui screenshots (landing, result, softclub,
    mobile) into README with one-line captions; verify HF renders LFS images
    (if not, switch those to non-LFS or hosted paths — check on the Space page).
@@ -68,3 +71,6 @@
   re-run kicked off this wake.
 - 06-12 wake 2: matrix GO (item 2), live phishing probe PASS (item 3).
   Next: item 4 (hi/ja letter-text eval on Modal).
+- 06-12 wakes 3–6: items 4/4b/4c complete — ML eval, probe, prompt fix,
+  multilingual heuristics, urgency paraphrases, gate cycle, LIVE deploy
+  f516a08. Next: item 5 (README screenshot gallery for judges).
