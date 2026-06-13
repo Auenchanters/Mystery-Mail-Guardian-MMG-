@@ -60,15 +60,6 @@ what to actually do next, and reads the summary aloud — in English, Hindi, Spa
   </tr>
 </table>
 
-## Who this is for
-
-<!-- HUMAN: name the real person (with their consent) and describe their situation.
-     Example: "Built for my grandmother, who reads Hindi comfortably but gets official
-     English-language letters she can't always tell apart from scam mail." -->
-Built for **[real person — name/relationship here]**, who struggles with official
-English-language mail, dense bureaucratic language, and telling real bills from scams.
-They used this app on their own real letters — see the demo video below.
-
 ## What this is NOT
 
 This is **not a generic OCR/document parser**. It is **scam-and-action triage for a specific
