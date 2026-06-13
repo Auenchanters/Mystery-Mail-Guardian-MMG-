@@ -147,7 +147,7 @@ animations sit behind `prefers-reduced-motion`; tap targets are ≥48px.
 
 <!-- HUMAN: fill these before submitting -->
 - 🎥 **Demo video (real person using it):** _link goes here_
-- 📣 **Social post:** _link goes here_
+- 📣 **Social post:** [LinkedIn](https://www.linkedin.com/posts/utkarsh-singh-yadav-2301412bb_ai-privacy-accessibility-share-7471619684967178240-1EoU/)
 - 📝 **Field Notes write-up:** [Building Mystery-Mail Guardian](https://huggingface.co/blog/build-small-hackathon/mystery-mail-guardian) (full story) · raw notes in [BUILD_LOG.md](BUILD_LOG.md)
 - 🤖 **Agent build trace (Sharing is Caring):** [build-small-hackathon/mystery-mail-guardian-agent-trace](https://huggingface.co/datasets/build-small-hackathon/mystery-mail-guardian-agent-trace)
 
