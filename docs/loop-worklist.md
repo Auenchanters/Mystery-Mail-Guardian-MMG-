@@ -58,8 +58,9 @@
 7. ~~Field Notes framing~~ DONE 06-12: "The story in five sentences" intro
    at the top of BUILD_LOG (privacy-is-the-product → safety in code →
    Modal QA flywheel → evals said don't fine-tune).
-8. ~~Agent-trace bundle~~ DONE 06-12: docs/agent-trace-draft.md drafted,
-   consent-gated — OWNER must approve before any Hub publication.
+8. ~~Agent-trace bundle~~ DONE 06-12 + **PUBLISHED** (owner approved): dataset
+   build-small-hackathon/mystery-mail-guardian-agent-trace, achievement:sharing
+   tag in README. 4th achievement secured. Secret-scanned before upload.
 9. ~~Demo-video kit~~ DONE 06-12: docs/demo-script.md — five beats, assets
    table, recording gotchas (warm-up run, easter-egg reveal order).
 10. ~~Robustness v2~~ DONE 06-12: **38/38 honest outcomes** across blur/dim/

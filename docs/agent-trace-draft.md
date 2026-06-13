@@ -1,9 +1,10 @@
-# Agent trace — Mystery-Mail Guardian (DRAFT, awaiting owner consent)
+# Agent trace — Mystery-Mail Guardian (PUBLISHED 2026-06-12, owner-approved)
 
-> **Status: NOT published.** This draft exists for the project owner to review.
-> Publishing it as a Hugging Face dataset (+ `achievement:sharing` tag in the
-> README) is a one-step action AFTER explicit owner approval in chat.
-> Sanitization checklist at the bottom must be re-verified at publish time.
+> **Status: PUBLISHED** with owner consent to
+> [build-small-hackathon/mystery-mail-guardian-agent-trace](https://huggingface.co/datasets/build-small-hackathon/mystery-mail-guardian-agent-trace).
+> `achievement:sharing` tag added to README. The published dataset card lives
+> in `dist/agent-trace/README.md`; this file is the working draft it was built
+> from. Sanitization was re-verified by automated secret scan before upload.
 
 ## What this is
 
@@ -66,5 +67,5 @@ the loop that ran it, and the evidence trail it left behind.
 - [x] No real personal data — every letter in datasets/examples is synthetic;
       phone numbers use the reserved 555-01XX range
 - [x] No private URLs or credentials in logs quoted here
-- [ ] Owner has read this draft and approves publication
-- [ ] `achievement:sharing` tag added to README only after upload
+- [x] Owner approved publication (chat, 2026-06-12)
+- [x] `achievement:sharing` tag added to README after upload

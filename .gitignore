@@ -28,3 +28,4 @@ modal_artifacts/
 # Local Claude Code settings
 .claude/
 dataset/
+dist/

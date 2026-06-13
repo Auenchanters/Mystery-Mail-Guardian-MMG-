@@ -16,6 +16,7 @@ tags:
   - achievement:offgrid
   - achievement:fieldnotes
   - achievement:offbrand
+  - achievement:sharing
   - build-small-hackathon
   - minicpm
   - voxcpm
@@ -148,6 +149,7 @@ animations sit behind `prefers-reduced-motion`; tap targets are ≥48px.
 - 🎥 **Demo video (real person using it):** _link goes here_
 - 📣 **Social post:** _link goes here_
 - 📝 **Field Notes write-up:** see [BUILD_LOG.md](BUILD_LOG.md) — _published link goes here_
+- 🤖 **Agent build trace (Sharing is Caring):** [build-small-hackathon/mystery-mail-guardian-agent-trace](https://huggingface.co/datasets/build-small-hackathon/mystery-mail-guardian-agent-trace)
 
 ## Honest limitations
 
